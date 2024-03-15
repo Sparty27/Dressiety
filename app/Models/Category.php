@@ -13,4 +13,19 @@ class Category extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'photoble');
+    }
+
+    public function photo()
+    {
+        return $this->morphOne(Photo::class, 'photoble');
+    }
 }
