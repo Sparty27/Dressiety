@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,19 @@ Route::prefix('/categories')->controller(CategoryController::class)->name('categ
     Route::post('/{category}', 'update')->name('update');
     Route::delete('/{category}', 'destroy')->name('destroy');
 });
+
+//Route::prefix('/products')->controller(ProductController::class)->name('products.')->group(function(){
+//    Route::get('/','index')->name('index');
+//    Route::get('/create','create')->name('create');
+//    Route::get('/{product}', 'show')->name('show');
+//    Route::post('/','store')->name('store');
+//    Route::get('/{product}/edit','edit')->name('edit');
+//    Route::post('/{product}', 'update')->name('update');
+//    Route::delete('/{product}','destroy')->name('destroy');
+//});
+
+Route::get('/', function () {
+    return view('admin.index');
+});
+
+Route::resource('products', ProductController::class);
