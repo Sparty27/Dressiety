@@ -14,4 +14,24 @@ class Product extends Model
         'name',
         'status'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function photos()
+    {
+        return $this->morphMany(Photo::class, 'photoble');
+    }
+
+    public function photo()
+    {
+        return $this->morphOne(Photo::class, 'photoble');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }
