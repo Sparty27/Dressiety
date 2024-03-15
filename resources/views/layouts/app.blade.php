@@ -9,6 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +20,25 @@
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="p-6">
-    @yield('content')
+<body>
+    <div>
+        <div class="bg-base-100 drawer lg:drawer-open">
+            <input id="drawer" type="checkbox" class="drawer-toggle">
+            <div class="drawer-content">
+                @include('parts.header')
+
+                <div class="px-6">
+                    @yield('breadcrumbs')
+                </div>
+
+                <div class="p-6 pb-16 grid gap-5">
+                    @yield('content')
+                </div>
+            </div>
+
+            @include('parts.sidebar')
+        </div>
+    </div>
+@vite(['resources/js/app.js'])
 </body>
 </html>
