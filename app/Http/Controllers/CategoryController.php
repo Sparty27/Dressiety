@@ -12,6 +12,10 @@ class CategoryController extends Controller
     {
         $categories = Category::get();
 
+//        dump(trans('pages.test'));
+//        app()->setLocale('uk');
+//        dump(trans('pages.test'));
+
         return view('categories.index', compact('categories'));
     }
 
