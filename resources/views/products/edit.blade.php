@@ -3,6 +3,7 @@
 @section('content')
     <form method="POST" action="{{route('products.update', $product)}}" class="max-w-xs border-[3px] border-blue-200 rounded-[15px] p-6">
         @csrf
+        @method('PUT')
         <label class="form-control w-full font-bold">Name</label>
         <input name="name" type="text" placeholder="Type here" value="{{ old('name', $product->name)}}" class="input w-full max-w-xs mt-6 border-2 border-gray-200" />
         <label class="form-control w-full mt-6 font-bold">Status</label>
