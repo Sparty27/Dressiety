@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +21,27 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'status' => fake()->boolean()
+            'status' => fake()->boolean(),
+            'category_id' => Category::inRandomOrder()->value('id'),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Product $product)
+        {
+            for($i = 0; $i < 3; $i++)
+            {
+                $product->photos()->create(
+                    [
+                        'url' => fake()->imageUrl(),
+                    ]
+                );
+            }
+
+            $product->tags()->sync(
+                Tag::inRandomOrder()->take(4)->pluck('id')->toArray()
+            );
+        });
     }
 }
