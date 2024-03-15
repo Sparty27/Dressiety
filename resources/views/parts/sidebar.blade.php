@@ -28,6 +28,13 @@
                     </span>
                     <span class="flex-1">{{ trans('pages.products.index') }}</span>
                 </a>
+            </li>            <li>
+                <a href="{{ route('tags.index') }}" class="flex gap-4 {{request()->routeIs('tags.*') ? 'active':''}}">
+                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
+                        <i class="ri-home-8-line"></i>
+                    </span>
+                    <span class="flex-1">{{ trans('pages.tags.index') }}</span>
+                </a>
             </li>
 {{--            <li>--}}
 {{--                <a href="https://remixicon.com/" target="_blank" class="flex gap-4">--}}
