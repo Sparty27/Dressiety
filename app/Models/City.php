@@ -12,5 +12,11 @@ class City extends Model
     protected $fillable = [
         'name',
         'ref',
+        'area_ref',
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_ref', 'ref');
+    }
 }

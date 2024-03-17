@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->uuid('ref')->index();
+            $table->foreignUuid('area_ref')->constrained('areas','ref')->onDelete('cascade');
             $table->timestamps();
         });
     }
