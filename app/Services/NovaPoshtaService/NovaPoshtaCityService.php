@@ -47,6 +47,7 @@ class NovaPoshtaCityService
                 ],
                 [
                     'name' => $city['Description'],
+                    'area_ref' => $city['Area'],
                 ]
             );
         }

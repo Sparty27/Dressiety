@@ -2,18 +2,17 @@
 
 namespace App\Console\Commands\NovaPoshtaService;
 
+use App\Services\NovaPoshtaService\NovaPoshtaAreaService;
 use Illuminate\Console\Command;
-use App\Jobs\NovaPoshta\UpdateCityJob;
-use App\Services\NovaPoshtaService\NovaPoshtaCityService;
 
-class UpdateCity extends Command
+class UpdateArea extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'np:update-city';
+    protected $signature = 'np:update-area';
 
     /**
      * The console command description.
@@ -25,11 +24,8 @@ class UpdateCity extends Command
     /**
      * Execute the console command.
      */
-    public function handle(NovaPoshtaCityService $service)
+    public function handle(NovaPoshtaAreaService $service)
     {
-        // UpdateCityJob::dispatch();
-
-        ini_set('memory_limit', '-1');
         $service->update();
     }
 }

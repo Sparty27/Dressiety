@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
-use App\Models\Category;
-use App\Services\NovaPoshtaService\Service;
-use Illuminate\Http\Request;
+use App\Models\City;
 use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
+use App\Services\NovaPoshtaService\Service;
+
 class ProductController extends Controller
 {
     public function index()
     {
-        $service = new Service();
-
-        dump($service->getCities());
-
         $products = Product::with('category','photo','category.photo')->get();
 
         return view('products.index', compact('products'));

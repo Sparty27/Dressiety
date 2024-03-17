@@ -3,13 +3,12 @@
 namespace App\Jobs\NovaPoshta;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Services\NovaPoshtaService\NovaPoshtaCityService;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
-class UpdateCityJob implements ShouldQueue
+class UpdateAreaJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -24,9 +23,8 @@ class UpdateCityJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(NovaPoshtaCityService $service): void
+    public function handle(): void
     {
-        ini_set('memory_limit', '-1');
-        $service->update();
+        //
     }
 }
