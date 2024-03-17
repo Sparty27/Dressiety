@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -11,7 +12,11 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        $city = City::first();
+
+        dump($city);
+
+        dd($city->area);
     }
 
     /**
