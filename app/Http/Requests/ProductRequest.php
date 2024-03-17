@@ -23,7 +23,8 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:12', 'min:2'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
+            'category_id' => ['exists:categories,id']
         ];
     }
 }

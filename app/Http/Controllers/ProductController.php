@@ -11,9 +11,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        // $service = new Service();
+        $service = new Service();
 
-        // dump($service->getCities());
+        dump($service->getCities());
 
         $products = Product::with('category','photo','category.photo')->get();
 
@@ -27,16 +27,20 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categories = Category::get();
+
+        return view('products.create', compact('categories'));
     }
 
     public function store(ProductRequest $request)
     {
         $data = $request->validated();
 
+        dump($data);
+
         Product::create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('products.index');
     }
 
     public function edit(Product $product)

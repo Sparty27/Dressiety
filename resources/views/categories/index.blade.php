@@ -14,6 +14,7 @@
 
 @section('content')
     <div class="overflow-x-auto">
+        <a href="{{ route('categories.create')}}" class="btn btn-primary mb-8">Create</a>
         <table class="table">
             <!-- head -->
             <thead>

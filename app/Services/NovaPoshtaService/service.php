@@ -13,11 +13,13 @@ class Service
             'calledMethod' => 'getCities',
             'methodProperties' => [
                 'Page' => 1,
-                'Limit' => 50
+                'Limit' => 300
             ]
         ]);
 
         $data = $response->json();
+
+        dd($data);
 
         return collect($data['data']);
     }

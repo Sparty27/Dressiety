@@ -13,6 +13,7 @@
 {{--        @endforeach--}}
 {{--    </div>--}}
     <div class="overflow-x-auto">
+        <a href="{{ route('products.create')}}" class="btn btn-primary mb-8">Create</a>
         <table class="table">
             <!-- head -->
             <thead>
@@ -22,7 +23,7 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Status</th>
-                <th>Created At</th>
+                <th>Created at</th>
                 <th></th>
             </tr>
             </thead>
@@ -38,9 +39,9 @@
 ])
                 </td>
                 <td>
-                    @include('parts.table.photo', ['url' => $product->photo->url,
+                    {{-- @include('parts.table.photo', ['url' => $product->photo->url,
 'alt' => $product->name
-])
+]) --}}
                 </td>
                 <td><a href="{{ route('products.show', compact('product')) }}">{{$product->name}}</a></td>
                 <td>{{$product->status}}</td>

@@ -3,15 +3,25 @@
 @section('content')
     <form method="POST" action="{{route('products.store')}}" class="max-w-xs border-[3px] border-blue-200 rounded-[15px] p-6">
         @csrf
-        <label class="form-control w-full font-bold">Name</label>
-        <input name="name" type="text" placeholder="Type here" value="{{ old('name')}}" class="input w-full max-w-xs mt-6 border-2 border-gray-200" />
-        <div class="form-control mt-6">
+        <label class="form-control w-full font-bold px-[4px]">Name</label>
+        <input name="name" type="text" placeholder="Type here" value="{{ old('name')}}" class="input w-full max-w-xs mt-3 border-2 border-gray-200" />
+        <div class="form-control mt-3">
             <label class="label cursor-pointer font-bold">
-                <span class="label-text">Status</span>
-                <input name="status" type="checkbox" class="toggle" checked />
+                <span class="">Status</span>
+                <input name="status" type="checkbox" class="toggle" value="1" checked />
             </label>
         </div>
-{{--        <div class="form-control">--}}
+        <label class="form-control w-full font-bold px-[4px] mt-3 mb-3">Category</label>
+        <select class="select select-bordered w-full max-w-xs" name="category_id">
+            {{-- <option disabled selected>Who shot first?</option> --}}
+            {{-- @for ($i = 0; $i < $categories->count(); $i++)
+                <option value="{{$categories[$i]->id}}">{{$categories[$i]->name}}</option>
+            @endfor --}}
+            @foreach ($categories as $key => $value)
+                <option value="{{$value->id}}"> {{$value->name}}</option>
+            @endforeach
+        </select>
+       {{-- <div class="form-control">--}}
 {{--            <label class="label cursor-pointer">--}}
 {{--                <span class="label-text">Sold</span>--}}
 {{--                <input type="radio" name="status" class="radio checked:bg-red-500" value="{{ old('status', 1) }}"/>--}}
@@ -27,7 +37,7 @@
 {{--            <option disabled selected>Who shot first?</option>--}}
 {{--            <option>Han Solo</option>--}}
 {{--            <option>Greedo</option>--}}
-{{--        </select>--}}
+{{--        </select> --}}
         <div class="mt-6 flex justify-between">
             <button class="btn btn-primary">Create</button>
             <a class="btn" href="{{route('products.index')}}">

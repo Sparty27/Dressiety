@@ -23,7 +23,7 @@ class TagRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:12|min:2',
-            'status' => 'boolean'
+            'status' => 'nullable|boolean'
         ];
     }
 }

@@ -27,8 +27,6 @@ class TagController extends Controller
     {
         $data = $request->validated();
 
-        $data['status'] = $request->input('status') ?? '0';
-
         Tag::create($data);
 
         return redirect()->route('tags.index');
