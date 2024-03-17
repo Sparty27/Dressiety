@@ -5,21 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class City extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'status'
+        'ref',
     ];
-
-    protected $attributes = [
-        'status' => false
-    ];
-
-    public function tags()
-    {
-        return $this->belongsToMany(Product::class);
-    }
 }
