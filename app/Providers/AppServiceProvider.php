@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\BasketService\BasketService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +15,8 @@ class AppServiceProvider extends ServiceProvider
         if (!$this->app->environment('production')) {
             $this->app->register('App\Providers\FakerServiceProvider');
         }
+
+        $this->app->bind(BasketService::class);
     }
 
     /**

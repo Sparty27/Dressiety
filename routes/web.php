@@ -1,10 +1,17 @@
 <?php
 
+use App\Livewire\Counter;
+use App\Livewire\Shop;
+use App\Models\Product;
+use App\Models\BasketProduct;
+use App\Services\MonobankService\MonobankService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Services\BasketService\BasketService;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,4 +51,13 @@ Route::get('/', function () {
 Route::resource('products', ProductController::class);
 Route::resource('tags', TagController::class);
 
-Route::get('/test', [TestController::class, 'index'])->name('test.index');
+Route::get('/test', function(BasketService $service)
+{
+})->name('test.index');
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/counter', Counter::class);
+
+Route::get('/shop', Shop::class);
