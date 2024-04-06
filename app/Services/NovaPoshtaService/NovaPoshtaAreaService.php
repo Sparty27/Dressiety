@@ -11,7 +11,7 @@ class NovaPoshtaAreaService
 {
     public function get()
     {
-        $response = Http::post('https://api.novaposhta.ua/v2.0/json/', 
+        $response = Http::post('https://api.novaposhta.ua/v2.0/json/',
         [
             'modelName' => 'Address',
             'calledMethod' => 'getAreas',
@@ -41,7 +41,6 @@ class NovaPoshtaAreaService
                 ],
                 [
                     'name' => $area['Description'],
-                    'area_center_ref' => $area['AreasCenter'],
                 ]
             );
         }

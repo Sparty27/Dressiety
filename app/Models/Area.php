@@ -10,10 +10,9 @@ class Area extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 
+    protected $fillable = [
         'ref',
         'name',
-        'area_center_ref'
     ];
 
     public function product()

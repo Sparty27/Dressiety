@@ -3,18 +3,17 @@
 namespace App\Services\NovaPoshtaService;
 
 use Exception;
-use App\Models\City;
+use App\Models\Warehouse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
-use SebastianBergmann\Environment\Console;
 
-class NovaPoshtaCityService
+class NovaPoshtaWarehouseService
 {
     public function get($page)
     {
         $response = Http::post('https://api.novaposhta.ua/v2.0/json/',[
             'modelName' => 'Address',
-            'calledMethod' => 'getCities',
+            'calledMethod' => 'getWarehouses',
             'methodProperties' => [
                 'Page' => $page,
                 'Limit' => 300
@@ -38,19 +37,24 @@ class NovaPoshtaCityService
         return $response;
     }
 
-    public function set($cities)
+    public function set($warehouses)
     {
-        foreach($cities as $city)
+        foreach($warehouses as $warehouse)
         {
-            City::updateOrCreate(
-                [
-                    'ref' => $city['Ref'],
-                ],
-                [
-                    'name' => $city['Description'],
-                    'area_ref' => $city['Area'],
-                ]
-            );
+            try {
+                Warehouse::updateOrCreate(
+                    [
+                        'ref' => $warehouse['Ref'],
+                    ],
+                    [
+                        'name' => $warehouse['Description'],
+                        'city_ref' => $warehouse['CityRef'],
+                    ]
+                );
+            } catch (Exception $ex){
+                Log::error($ex->getMessage());
+            }
+
         }
     }
 
@@ -61,11 +65,11 @@ class NovaPoshtaCityService
             $page = 1;
             while(true)
             {
-                $cities = $this->get($page);
+                $warehouses = $this->get($page);
 
-                if ($cities === false) break;
+                if ($warehouses === false) break;
 
-                $this->set($cities);
+                $this->set($warehouses);
 
                 $page++;
             }

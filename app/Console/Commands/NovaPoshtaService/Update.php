@@ -2,18 +2,19 @@
 
 namespace App\Console\Commands\NovaPoshtaService;
 
-use Illuminate\Console\Command;
+use App\Jobs\NovaPoshta\UpdateAreaJob;
 use App\Jobs\NovaPoshta\UpdateCityJob;
-use App\Services\NovaPoshtaService\NovaPoshtaCityService;
+use App\Jobs\NovaPoshta\UpdateWarehouseJob;
+use Illuminate\Console\Command;
 
-class UpdateCity extends Command
+class Update extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'np:update-city';
+    protected $signature = 'np:update';
 
     /**
      * The console command description.
@@ -27,6 +28,8 @@ class UpdateCity extends Command
      */
     public function handle()
     {
+        UpdateAreaJob::dispatch();
         UpdateCityJob::dispatch();
+        UpdateWarehouseJob::dispatch();
     }
 }

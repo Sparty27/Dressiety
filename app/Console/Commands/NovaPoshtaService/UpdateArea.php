@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\NovaPoshtaService;
 
+use App\Jobs\NovaPoshta\UpdateAreaJob;
 use App\Services\NovaPoshtaService\NovaPoshtaAreaService;
 use Illuminate\Console\Command;
 
@@ -24,8 +25,8 @@ class UpdateArea extends Command
     /**
      * Execute the console command.
      */
-    public function handle(NovaPoshtaAreaService $service)
+    public function handle()
     {
-        $service->update();
+        UpdateAreaJob::dispatch();
     }
 }

@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
 
-        $schedule->command('np:update-city')->monthly();
+        $schedule->command('np:update')->monthly();
     }
 
     /**
