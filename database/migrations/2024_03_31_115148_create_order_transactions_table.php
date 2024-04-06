@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('order_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->uuid('ref')->index();
+            $table->foreignId('order_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('status');
+            $table->integer('sum');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('order_transactions');
     }
 };

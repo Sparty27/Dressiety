@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,11 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('areas', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->uuid('ref')->index();
-            $table->timestamps();
+        Schema::table('baskets', function (Blueprint $table) {
+            $table->foreignId('user_id')->after('session_id')->nullable()->constrained()->cascadeOnDelete();
         });
     }
 
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('areas');
+        Schema::table('baskets', function (Blueprint $table) {
+            $table->dropForeignIdFor(User::class);
+            $table->dropColumn('user_id');
+        });
     }
 };

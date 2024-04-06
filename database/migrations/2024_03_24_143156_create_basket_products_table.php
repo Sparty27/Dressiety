@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('basket_products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->uuid('ref')->index();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('basket_id')->constrained()->onDelete('cascade');
+            $table->unsignedInteger('count');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('areas');
+        Schema::dropIfExists('basket_products');
     }
 };

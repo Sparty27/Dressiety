@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('areas', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->uuid('ref')->index();
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->unsignedInteger('count')->after('status');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('areas');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('count');
+        });
     }
 };
