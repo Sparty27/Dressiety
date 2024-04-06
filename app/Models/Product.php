@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,9 @@ class Product extends Model
     protected $fillable = [
         'name',
         'status',
-        'category_id'
+        'category_id',
+        'count',
+        'price'
     ];
 
     public function category()
@@ -34,5 +37,13 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function price():Attribute
+    {
+        return Attribute::make(
+            get: fn(int $value) => (float)($value / 100),
+            set: fn(float $value) => (int)($value * 100)
+        );
     }
 }
