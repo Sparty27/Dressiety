@@ -18,6 +18,8 @@ class Shop extends Component
     public function addToBasket(Product $product)
     {
         basket()->set($product);
+
+        $this->dispatch('basketUpdated');
     }
 
     public function render()

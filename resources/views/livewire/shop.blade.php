@@ -1,7 +1,7 @@
-<div class="flex flex-wrap w-[1248px] mx-auto mt-5 gap-4">
+<div class="mx-auto mt-5 gap-4 grid max-[830px]:grid-cols-1 min-[830px]:grid-cols-2 xl:grid-cols-3">
     @foreach($products as $product)
-        <div class="card w-96 bg-base-100 shadow-xl">
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
+        <div class="card max-sm:w-full sm:w-96 bg-base-100 shadow-xl mx-auto">
+            <figure class=""><img src="{{ $product->photo->url }}" alt="Shoes" class="object-cover"/></figure>
             <div class="card-body">
                 <h2 class="card-title">{{ $product->name }}</h2>
                 <p>If a dog chews shoes whose shoes does he choose?</p>
