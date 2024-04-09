@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Counter;
+use App\Livewire\MakeOrder;
 use App\Livewire\Shop;
 use App\Models\Product;
 use App\Models\BasketProduct;
@@ -34,20 +35,6 @@ Route::prefix('/categories')->controller(CategoryController::class)->name('categ
     Route::delete('/{category}', 'destroy')->name('destroy');
 });
 
-//Route::prefix('/products')->controller(ProductController::class)->name('products.')->group(function(){
-//    Route::get('/','index')->name('index');
-//    Route::get('/create','create')->name('create');
-//    Route::get('/{product}', 'show')->name('show');
-//    Route::post('/','store')->name('store');
-//    Route::get('/{product}/edit','edit')->name('edit');
-//    Route::post('/{product}', 'update')->name('update');
-//    Route::delete('/{product}','destroy')->name('destroy');
-//});
-
-Route::get('/', function () {
-    return view('admin.index');
-});
-
 Route::resource('products', ProductController::class);
 Route::resource('tags', TagController::class);
 
@@ -56,8 +43,15 @@ Route::get('/test', function(BasketService $service)
 })->name('test.index');
 
 Auth::routes();
+
+Route::get('/', function () {
+    return view('admin.index');
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/counter', Counter::class);
 
 Route::get('/shop', Shop::class);
+
+Route::get('/order/make', MakeOrder::class)->name('order.make');

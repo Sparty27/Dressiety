@@ -21,7 +21,16 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        @livewire('header')
-        {{ $slot }}
+        <div class="drawer drawer-end">
+            <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content flex flex-col">
+                <!-- Navbar -->
+                @livewire('header')
+                <div class="p-3">
+                    {{ $slot }}
+                </div>
+            </div>
+            @livewire('basket')
+        </div>
     </body>
 </html>
