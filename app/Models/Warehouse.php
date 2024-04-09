@@ -14,4 +14,14 @@ class Warehouse extends Model
         'name',
         'city_ref',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_ref', 'ref');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'LIKE', $value.'%');
+    }
 }

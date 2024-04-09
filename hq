@@ -1,0 +1,245 @@
+[33mcommit d901c76d8ce5c6d67a54793c1efba197eebef378[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:39:18 2024 +0300
+
+    MonobankService, Add basket helper
+
+[33mcommit 24e6795bbb77228bcd3f00ec5f9a553003cdf8b9[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:38:33 2024 +0300
+
+    Add livewire components
+
+[33mcommit 641a26d2fb76edaff87d73a59bfbbf0a262ce498[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:37:58 2024 +0300
+
+    Basket service, job, model, factory
+
+[33mcommit 0aba7a50d1b9e16a4215b6d2a64a067be1374300[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:37:01 2024 +0300
+
+    Warehouse, Area, Cities services, jobs
+
+[33mcommit f92e44c1a4ab3ed903d2845392f972fc864c0296[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:35:15 2024 +0300
+
+    Add auth blade files, controllers
+
+[33mcommit d6e905969b5329cf8b7c1361c91aad2ffcbe458d[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:33:49 2024 +0300
+
+    Add some config and vendor blade files
+
+[33mcommit f975d82ea3f9e0a94cc3d9d65366c6f6ab72c2aa[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:31:31 2024 +0300
+
+    Add migrations and models
+
+[33mcommit 5e48a6a351cb16c108d87c906f3947ab63933953[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sat Apr 6 14:29:40 2024 +0300
+
+    Add some project configuration
+
+[33mcommit f3b5d312355b97429b3fe14b245abd4e6a536851[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 21:28:51 2024 +0200
+
+    Add new service for Area to get and push to db, add command and job for this
+
+[33mcommit 8750295a4f3b2a48a696bdd57caa540ff865f261[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 21:27:57 2024 +0200
+
+    Add test controller only for test
+
+[33mcommit 0db135eb445733947c3d0853110876c0a9a35da4[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 21:27:37 2024 +0200
+
+    Add relationship between City and Area, update migrations and model classes
+
+[33mcommit 66282c9607e0db8ff10f1b39a1ef86145ab44f2b[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:22:07 2024 +0200
+
+    Add schedule that calls NovaPoshtaCityJob monthly
+
+[33mcommit 70b3c0e59d2d597b8789fc7f2f8284f5566c7f6f[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:21:42 2024 +0200
+
+    Add job for cities table to get and set data
+
+[33mcommit 51fe72e55d233de642863d37d77895bb48e4f534[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:20:40 2024 +0200
+
+    Add command that uses NovaPoshtaCityService service
+
+[33mcommit 5b1040fc247a6fdc76d70e484591c5e331c1078d[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:20:07 2024 +0200
+
+    Add service to get citires data from Nova Poshta
+
+[33mcommit c914467522840f62e9dbfa23e3518b1fb0e71721[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:19:43 2024 +0200
+
+    Add CRUD for tags table
+
+[33mcommit ab21b184f451f5f7550365ad7b1d9a2db5a821d4[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:18:59 2024 +0200
+
+    Add migrations for cities, areas tables
+
+[33mcommit 06af2f125252360ff6fe85713626f471a0d6d0cc[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:18:27 2024 +0200
+
+    Update models
+
+[33mcommit 68c9683a8b0a0387e4155ed0edec8944bf9560be[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 17 19:18:05 2024 +0200
+
+    Add telescope
+
+[33mcommit 7ab4b1be7a3fa0da92783f115667f5b7283cefae[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 20:26:40 2024 +0200
+
+    Add type method PUT for controller could receive request
+
+[33mcommit be3942c665f381eb155aaa7a9cb82da25820d12f[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 20:25:01 2024 +0200
+
+    Add new section for Tags
+
+[33mcommit c722aa2dd75bf0c14784b3f4a270ac2e495f7443[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 20:24:29 2024 +0200
+
+    Add CRUD UI for Tag
+
+[33mcommit 80c81b34d9e178c6f6562658aebdcc3018bfef81[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 20:24:04 2024 +0200
+
+    Update ProductController to return index page after storing data
+
+[33mcommit 79f3913f006c9152653f652d1ca8493bac1e66c4[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 20:23:43 2024 +0200
+
+    Add controller for Tag. Add TagRequest with validation. Update pages.php for new Tag pages on English
+
+[33mcommit 151d8adcbcf60cfd196742b5335b5157054724bd[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 20:22:35 2024 +0200
+
+    Add crud routes for Tag model
+
+[33mcommit cc814e4b7110b9a44eab629be2b786ea1ef1fa66[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:47:33 2024 +0200
+
+    Add and update ui's components
+
+[33mcommit 98e974ddbf19c95dfb84f0b6e49f4818714c552d[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:47:12 2024 +0200
+
+    Add new service for NovaPoshta to get data
+
+[33mcommit 23bd8e88378b59c131b24c524f9b3a342a330d04[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:46:55 2024 +0200
+
+    Add and update providers for image faker
+
+[33mcommit d30f1b1e4ab5a043d43ae460fe0a5afa42a20511[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:46:30 2024 +0200
+
+    Update databaseseeder
+
+[33mcommit d2f1102bbcb2687c8463e06ef1606bd8d62edaa6[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:46:12 2024 +0200
+
+    Add controllers for Product and update Category controller. Add ProductRequest for validation
+
+[33mcommit 08a536e6e1fea44d5f3fb231901c6d24329b5403[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:45:32 2024 +0200
+
+    Add and update models
+
+[33mcommit 68cfcd3f1c61a2a1a5990c26fb686e856ff24d1d[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:45:08 2024 +0200
+
+    Add factories for Product, Tag, Category
+
+[33mcommit 006b6878dce93d40db09ca37a5d43d3bc036e649[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:44:26 2024 +0200
+
+    Create Product model
+
+[33mcommit ce71293471ff1ca91583a99d32edd5c89efa8975[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:43:56 2024 +0200
+
+    Add new routes for Product
+
+[33mcommit 0e3de1c7c39884edda85cfa7a1bc43ff9f10974b[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:42:14 2024 +0200
+
+    some configuration
+
+[33mcommit f10c419b5ce73b65cbfd6ac4a374029a4205e754[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Fri Mar 15 16:41:50 2024 +0200
+
+    Add migrations for Products, Photos, Tags, and Product-Tag pivot
+
+[33mcommit eaa4f6d975f8ddaed12e3f2b54017494e4f34e57[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Thu Mar 7 16:25:27 2024 +0200
+
+    Add ProductFactory and seed instances in DatabaseSeeder
+
+[33mcommit 8409af48a2d4b6f867e8cf2244f19f653cdb6b62[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Thu Mar 7 16:24:32 2024 +0200
+
+    Add ProductController
+
+[33mcommit 928f90dd364f4b0508b6ad2c89fd160b95dca7bc[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Thu Mar 7 16:24:04 2024 +0200
+
+    Add migration for Products table
+
+[33mcommit 4dab98d1a39927c24ce8cec82cc792182f85ccdb[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Thu Mar 7 16:23:40 2024 +0200
+
+    Add Product model
+
+[33mcommit 492361bee74eb9da04fb5fd0382789aff84ed201[m
+Author: Sparty27 <nyshchyi.nazar@gmail.com>
+Date:   Sun Mar 3 20:10:23 2024 +0200
+
+    First commit

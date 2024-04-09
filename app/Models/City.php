@@ -19,4 +19,14 @@ class City extends Model
     {
         return $this->belongsTo(Area::class, 'area_ref', 'ref');
     }
+
+    public function warehouses()
+    {
+        return $this->hasMany(Warehouse::class, 'city_ref', 'ref');
+    }
+
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'LIKE', $value.'%');
+    }
 }
