@@ -12,7 +12,7 @@ class CategoryController extends Controller
     {
         $categories = Category::get();
 
-        dd(basket(), basket());
+//        dd(basket(), basket());
 
 //        dd(auth()->id());
 

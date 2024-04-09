@@ -43,7 +43,7 @@ class BasketService
 
         $basket = $this->getToken();
 
-        if($product->count < $count && $count < 0)
+        if($product->count < $count || $count < 0)
         {
             return false;
         }
@@ -73,6 +73,12 @@ class BasketService
             return false;
         }
 
+        if($newCount == 0)
+        {
+            $this->remove($basketProduct);
+            return true;
+        }
+
         $basketProduct->update([
             'count' => $newCount,
         ]);
@@ -82,5 +88,37 @@ class BasketService
         ]);
 
         return $basketProduct;
+    }
+
+    public function remove(BasketProduct $basketProduct)
+    {
+        $product = $basketProduct->product;
+        $basketCount = $basketProduct->count;
+
+        $product->update([
+            'count' => $product->count + $basketCount,
+        ]);
+
+        $basketProduct->delete();
+    }
+
+    public function count()
+    {
+        return $this->get()->sum('count');
+    }
+
+    public function increment(BasketProduct $basketProduct)
+    {
+        $this->update($basketProduct, 1);
+    }
+
+    public function decrement(BasketProduct $basketProduct)
+    {
+        $this->update($basketProduct, -1);
+    }
+
+    public function total()
+    {
+        return $this->get()->sum('total');
     }
 }

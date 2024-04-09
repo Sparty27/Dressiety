@@ -26,9 +26,6 @@ class MonobankService
                         ]
                 ]);
 
-        dump($response);
-        dump($response->json());
-
         if($response->successful())
         {
             return $response->json();
@@ -45,13 +42,16 @@ class MonobankService
                     'invoiceId' => $invoiceId
                 ]);
 
-        dump($response);
-        dd($response->json());
+        if($response->successful())
+        {
+            return $response->json();
+        }
+
+        return false;
     }
 
     public function test()
     {
-        $data = $this->checkout();
 
     }
 }
