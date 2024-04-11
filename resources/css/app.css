@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html:has(.drawer-toggle:checked) {
+    scrollbar-gutter: unset;
+}
+
+@media screen and (max-width: 460px) {
+    .table :where(th,td) {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .table :where(th,td) {
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+}
