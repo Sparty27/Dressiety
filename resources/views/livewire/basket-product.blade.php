@@ -1,34 +1,40 @@
 <tr>
-    <th>
+    <td>
         <div class="avatar">
             <div class="w-12 rounded-xl">
                 <img src="{{ $basketProduct->product->photo->url }}" />
             </div>
         </div>
-    </th>
-    <td>
-        {{ $basketProduct->product->name }}
     </td>
     <td>
-        <div class="flex align-items-center">
-            <button class="btn btn-circle" wire:click="decrement">
-                -
-            </button>
+        <span class="font-medium">
+            {{ $basketProduct->product->name }}
+        </span>
+    </td>
+    <td>
+        <div class="flex items-center justify-between gap-1">
+            <div>
+                <button class="w-6 h-6 shadow-md rounded-full m-auto hover:bg-gray-300" wire:click="decrement" wire:loading.attr="disabled">
+                    <i class="ri-subtract-line"></i>
+                </button>
+            </div>
             <div>
                 {{ $basketProduct->count }}
             </div>
-            <button class="btn btn-circle" wire:click="increment">
-                +
-            </button>
+            <div>
+                <button class="w-6 h-6 shadow-md rounded-full m-auto hover:bg-gray-300" wire:click="increment" wire:loading.attr="disabled">
+                    <i class="ri-add-line"></i>
+                </button>
+            </div>
         </div>
 
     </td>
     <td>
-        {{ number_format($basketProduct->total, 2, '.', ' ') }}
+        {{ number_format($basketProduct->total, 2, '.', ' ').' ₴' }}
     </td>
-    <th>
-        <button class="btn btn-ghost btn-xs" wire:click="remove" wire:loading.attr="disabled">
+    <td>
+        <button class="btn btn-ghost max-sm:w-5 max-sm:h-5" wire:click="remove" wire:loading.attr="disabled">
             <i class="ri-delete-bin-line"></i>
         </button>
-    </th>
+    </td>
 </tr>

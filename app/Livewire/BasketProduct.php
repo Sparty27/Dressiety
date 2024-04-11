@@ -12,7 +12,7 @@ class BasketProduct extends Component
     public function remove()
     {
         if($this->basketProduct->id == null)
-            return false;
+            $this->dispatch('basketUpdated');
 
         basket()->remove($this->basketProduct);
 
