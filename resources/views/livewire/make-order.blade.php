@@ -1,21 +1,24 @@
-<div>
-    <table class="table">
-        <!-- head -->
-        <thead>
-        <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Count</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach(basket()->get() as $basketProduct)
-            @livewire('basket-product', compact('basketProduct'), key($basketProduct->id))
-        @endforeach
-        </tbody>
-    </table>
+<div class="container mx-auto max-w-[900px]">
+    <div class="border-green-200 border-2 rounded-2xl">
+        <table class="table">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Count</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach(basket()->get() as $basketProduct)
+                @livewire('basket-product', compact('basketProduct'), key($basketProduct->id))
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+
     <div class="card w-96 bg-base-100 shadow-xl p-4 mx-auto mt-4">
         <form>
             <label class="input input-bordered flex items-center gap-2">
