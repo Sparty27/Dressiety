@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\BasketProduct as Product;
 
@@ -11,12 +12,10 @@ class BasketProduct extends Component
 
     public function remove()
     {
-        if($this->basketProduct->id == null)
-            $this->dispatch('basketUpdated');
+        if($this->basketProduct == null)
+            return false;
 
         basket()->remove($this->basketProduct);
-
-        $this->dispatch('basketUpdated');
     }
 
     public function increment()

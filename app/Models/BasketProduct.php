@@ -28,6 +28,8 @@ class BasketProduct extends Model
 
     public function getTotalAttribute()
     {
+        if($this->product == null)
+            return null;
         return $this->count * $this->product->price;
     }
 }
