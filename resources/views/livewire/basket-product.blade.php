@@ -2,14 +2,14 @@
     <td>
         <div class="avatar">
             <div class="w-12 rounded-xl">
-                <img src="{{ $basketProduct->product->photo->url }}" />
+                <img src="{{ $basketProduct->product->photo->url ?? ''}}" alt="product image" />
             </div>
         </div>
     </td>
     <td>
-        <span class="font-medium">
-            {{ $basketProduct->product->name }}
-        </span>
+    <span class="font-medium">
+        {{ $basketProduct->product->name ?? '' }}
+    </span>
     </td>
     <td>
         <div class="flex items-center justify-between gap-1">
@@ -19,7 +19,7 @@
                 </button>
             </div>
             <div>
-                {{ $basketProduct->count }}
+                {{ $basketProduct->count ?? '' }}
             </div>
             <div>
                 <button class="w-6 h-6 shadow-md rounded-full m-auto hover:bg-gray-300" wire:click="increment" wire:loading.attr="disabled">
@@ -30,7 +30,7 @@
 
     </td>
     <td>
-        {{ number_format($basketProduct->total, 2, '.', ' ').' ₴' }}
+        {{ number_format($basketProduct->total ?? 0, 2, '.', ' ').' ₴' ?? '' }}
     </td>
     <td>
         <button class="btn btn-ghost max-sm:w-5 max-sm:h-5" wire:click="remove" wire:loading.attr="disabled">
