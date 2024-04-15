@@ -6,7 +6,7 @@
                 <h2 class="card-title">{{ $product->name }}</h2>
                 <p>If a dog chews shoes whose shoes does he choose?</p>
                 <div class="card-actions justify-between items-center mt-2">
-                    <p class="font-bold my-auto">{{ number_format($product->price, 2, '.', ' ') }} грн</p>
+                    <p class="font-bold my-auto">{{ number_format($product->formatted_price, 2, '.', ' ') }} грн</p>
                     <div class="justify-end">
                         @if(collect(basket()->get())->contains('product_id', $product->id))
                             <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">Added</label>

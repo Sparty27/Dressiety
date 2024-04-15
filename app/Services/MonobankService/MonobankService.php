@@ -2,33 +2,25 @@
 
 namespace App\Services\MonobankService;
 
+use App\Models\OrderTransaction;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
 class MonobankService
 {
-    public function checkout()
+    public function checkout(OrderTransaction $orderTransaction)
     {
         $response = Http::withHeaders(['X-Token' => 'uZbeYZd_4Cja_hiDLY_FExeoL2kuwRNfDKr7qjj2QiuU'])
             ->post('https://api.monobank.ua/api/merchant/invoice/create',
                 [
-                    'amount' => 10000,
+                    'amount' => $orderTransaction->sum,
                     'ccy' => 980,
-                    'redirectUrl' => 'http://127.0.0.1:8000/paymentInfo',
-                    'merchantPaymInfo' =>
-                        [
-                            'destination' => 'Т-72Б3',
-                            'comment' => 'Soviet tank',
-                            'customerEmails' =>
-                                [
-                                    'nazarzadrot8@gmail.com'
-                                ],
-                        ]
+                    'redirectUrl' => 'http://127.0.0.1:8000/shop',
                 ]);
 
         if($response->successful())
         {
-            return $response->json();
+            return $response->json()['invoiceId'];
         }
 
         return false;

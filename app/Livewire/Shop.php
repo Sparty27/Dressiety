@@ -13,7 +13,7 @@ class Shop extends Component
 
     public function mount()
     {
-        $this->products = Product::take(12)->get();
+        $this->products = Product::with('photo')->take(25)->get();
     }
 
     public function addToBasket(Product $product)

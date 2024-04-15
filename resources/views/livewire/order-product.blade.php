@@ -20,6 +20,6 @@
 
     </td>
     <td>
-        {{ number_format($basketProduct->total ?? 0, 2, '.', ' ').' ₴' ?? '' }}
+        {{ number_format($basketProduct->formattedTotal ?? 0, 2, '.', ' ').' ₴' ?? '' }}
     </td>
 </tr>

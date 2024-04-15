@@ -30,7 +30,7 @@
 
     </td>
     <td>
-        {{ number_format($basketProduct->total ?? 0, 2, '.', ' ').' ₴' ?? '' }}
+        {{ number_format($basketProduct->formatted_total ?? 0, 2, '.', ' ').' ₴' ?? '' }}
     </td>
     <td>
         <button class="btn btn-ghost max-sm:w-5 max-sm:h-5" wire:click="remove" wire:loading.attr="disabled">

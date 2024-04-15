@@ -39,11 +39,16 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function price():Attribute
+//    public function price():Attribute
+//    {
+//        return Attribute::make(
+//            get: fn(int $value) => (float)($value / 100),
+//            set: fn(float $value) => (int)($value * 100)
+//        );
+//    }
+
+    public function getFormattedPriceAttribute()
     {
-        return Attribute::make(
-            get: fn(int $value) => (float)($value / 100),
-            set: fn(float $value) => (int)($value * 100)
-        );
+        return (float)($this->price / 100);
     }
 }

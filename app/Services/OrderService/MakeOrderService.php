@@ -7,10 +7,15 @@ use App\Enums\PaymentStatusEnum;
 use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\Warehouse;
+use App\Services\MonobankService\MonobankService;
 use App\Services\OrderService\Models\Customer;
 
 class MakeOrderService
 {
+    public function __construct(
+        protected MonobankService $monobankService,
+    ) {}
+
     public function make(Customer $customer, Warehouse $warehouse): Order
     {
         $order = auth()->user()->orders()->create(array_merge(
@@ -31,13 +36,15 @@ class MakeOrderService
             ]);
         }
 
-        $order->orderTransaction()->create(
+        $orderTransaction = $order->orderTransaction()->create(
             [
                 'type' => OrderTransaction::MONOBANK,
                 'sum' => $order->total,
                 'status' => PaymentStatusEnum::PROCESS
             ]
         );
+
+        dump($this->monobankService->checkout($orderTransaction));
 
         $order->orderDelivery()->create(
             [

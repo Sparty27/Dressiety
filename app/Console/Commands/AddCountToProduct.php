@@ -26,8 +26,8 @@ class AddCountToProduct extends Command
      */
     public function handle()
     {
-//        Product::query()->update(['count' => 15]);
+        Product::query()->update(['count' => 15]);
 
-//        Product::query()->update(['price' => 31400]);
+//        Product::query()->update(['price' => 15875]);
     }
 }

@@ -126,6 +126,11 @@ class BasketService
         return $this->get()->sum('total');
     }
 
+    public function formattedTotal()
+    {
+        return $this->get()->sum('total') / 100;
+    }
+
     public function clear()
     {
         $basketProducts = $this->get();

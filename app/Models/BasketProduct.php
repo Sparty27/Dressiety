@@ -32,4 +32,11 @@ class BasketProduct extends Model
             return null;
         return $this->count * $this->product->price;
     }
+
+    public function getFormattedTotalAttribute()
+    {
+        if($this->product == null)
+            return null;
+        return $this->count * $this->product->formatted_price;
+    }
 }
