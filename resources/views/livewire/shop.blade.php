@@ -8,7 +8,11 @@
                 <div class="card-actions justify-between items-center mt-2">
                     <p class="font-bold my-auto">{{ number_format($product->price, 2, '.', ' ') }} грн</p>
                     <div class="justify-end">
-                        <button class="btn btn-primary" wire:click="addToBasket('{{ $product->id }}')">Add to Basket</button>
+                        @if(collect(basket()->get())->contains('product_id', $product->id))
+                            <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">Added</label>
+                        @else
+                            <button class="btn btn-primary" wire:click="addToBasket('{{ $product->id }}')">Add to Basket</button>
+                        @endif
                     </div>
                 </div>
             </div>

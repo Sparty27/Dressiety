@@ -4,27 +4,30 @@ namespace App\Livewire;
 
 use App\Models\City;
 use App\Models\Warehouse;
+use App\Services\OrderService\MakeOrderService;
+use App\Services\OrderService\Models\Customer;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class MakeOrder extends Component
 {
-    #[Validate('required')]
+    #[Validate('required|string|min:5|max:190')]
     public $email = '';
 
-    #[Validate('required')]
+    #[Validate('required|string|min:8|max:25')]
     public $phone = '';
 
-    #[Validate('required')]
+    #[Validate('required|string|min:5|max:190')]
     public $name = '';
 
-    #[Validate('required')]
-    public $warehouseId = '';
-
     public City $selectedCity;
+
+    #[Validate('required')]
     public Warehouse $selectedWarehouse;
 
     public $searchCity;
+
     public $searchWarehouse;
 
     public $cities;
@@ -50,6 +53,8 @@ class MakeOrder extends Component
     {
         $this->searchCity = $city->name;
         $this->selectedCity = $city;
+
+        $this->warehouses = Warehouse::take(10)->where('city_ref', $city->ref)->get();
     }
 
     public function selectWarehouse(Warehouse $warehouse)
@@ -58,11 +63,17 @@ class MakeOrder extends Component
         $this->selectedWarehouse = $warehouse;
     }
 
-    public function makeOrder()
+    public function makeOrder(MakeOrderService $service)
     {
-        dd($this->searchCity);
+        $this->validate();
+
+        $customer = new Customer($this->name, $this->email, $this->phone);
+        $order = $service->make($customer, $this->selectedWarehouse);
+
+        dd($order);
     }
 
+    #[On('basketUpdated')]
     public function render()
     {
         return view('livewire.make-order');

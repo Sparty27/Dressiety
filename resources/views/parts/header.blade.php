@@ -21,6 +21,16 @@
 {{--                    <li><a href="{{ route('logout') }}">Logout</a></li>--}}
 {{--                </ul>--}}
 {{--            </div>--}}
+            <div class="dropdown dropdown-end">
+                <span tabindex="0" class="avatar cursor-pointer  btn  btn-ghost font-bold">{{ auth()->user()->name ?? '' }}</span>
+                <ul tabindex="0"
+                    class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <li><button type="submit">Logout</button></li>
+                    </form>
+                </ul>
+            </div>
         </div>
     </nav>
 </div>

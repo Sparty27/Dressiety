@@ -8,6 +8,6 @@ class OrderController extends Controller
 {
     public function make()
     {
-        return view('');
+        return view();
     }
 }

@@ -12,11 +12,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        $city = City::first();
-
-        dump($city);
-
-        dd($city->area);
+        abort('404');
     }
 
     /**

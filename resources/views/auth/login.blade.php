@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
@@ -50,6 +50,7 @@
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\BasketProduct;
 use App\Models\Product;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Shop extends Component
@@ -22,6 +23,19 @@ class Shop extends Component
         $this->dispatch('basketUpdated');
     }
 
+    public function removeFromBasket($productId)
+    {
+        $basketProduct = basket()->get()->where('product_id', $productId)->first();
+
+        if($basketProduct == null)
+            return false;
+
+        basket()->remove($basketProduct);
+
+        $this->dispatch('basketUpdated');
+    }
+
+    #[On('basketUpdated')]
     public function render()
     {
 

@@ -16,6 +16,8 @@ class BasketProduct extends Component
             return false;
 
         basket()->remove($this->basketProduct);
+
+        $this->dispatch('basketUpdated');
     }
 
     public function increment()

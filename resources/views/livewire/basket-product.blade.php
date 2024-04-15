@@ -12,9 +12,9 @@
     </span>
     </td>
     <td>
-        <div class="flex items-center justify-between gap-1">
+        <div class="flex items-center justify-between gap-2">
             <div>
-                <button class="w-6 h-6 shadow-md rounded-full m-auto hover:bg-gray-300" wire:click="decrement" wire:loading.attr="disabled">
+                <button class="w-6 h-6 shadow-mg rounded-full m-auto hover:bg-gray-300" wire:click="decrement" wire:loading.attr="disabled">
                     <i class="ri-subtract-line"></i>
                 </button>
             </div>
@@ -22,7 +22,7 @@
                 {{ $basketProduct->count ?? '' }}
             </div>
             <div>
-                <button class="w-6 h-6 shadow-md rounded-full m-auto hover:bg-gray-300" wire:click="increment" wire:loading.attr="disabled">
+                <button class="w-6 h-6 shadow-mg rounded-full m-auto hover:bg-gray-300" wire:click="increment" wire:loading.attr="disabled">
                     <i class="ri-add-line"></i>
                 </button>
             </div>
