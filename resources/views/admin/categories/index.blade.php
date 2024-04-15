@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="overflow-x-auto">
-        <a href="{{ route('categories.create')}}" class="btn btn-primary mb-8">Create</a>
+        <a href="{{ route('admin.categories.create')}}" class="btn btn-primary mb-8">Create</a>
         <table class="table">
             <!-- head -->
             <thead>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </td>
-                    <td><a href="{{ route('categories.show', compact('category')) }}">{{$category->name}}</a></td>
+                    <td><a href="{{ route('admin.categories.show', compact('category')) }}">{{$category->name}}</a></td>
                     <td>{{$category->created_at}}</td>
                 </tr>
             @endforeach
