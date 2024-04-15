@@ -70,6 +70,8 @@ class MakeOrder extends Component
         $customer = new Customer($this->name, $this->email, $this->phone);
         $order = $service->make($customer, $this->selectedWarehouse);
 
+        basket()->clear();
+
         dd($order);
     }
 

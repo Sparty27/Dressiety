@@ -21,8 +21,12 @@ class BasketService
 
         if(auth()->check()) {
             return Basket::updateOrCreate(
-                ['session_id' => $session],
-                ['user_id' => auth()->id()]
+                [
+                 'user_id' => auth()->id(),
+                ],
+                ['user_id' => auth()->id(),
+                 'session_id' => $session
+                ]
             );
         }
 
@@ -122,5 +126,13 @@ class BasketService
         return $this->get()->sum('total');
     }
 
-    
+    public function clear()
+    {
+        $basketProducts = $this->get();
+
+        foreach($basketProducts as $basketProduct)
+        {
+            $basketProduct->delete();
+        }
+    }
 }
