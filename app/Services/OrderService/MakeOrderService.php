@@ -18,6 +18,11 @@ class MakeOrderService
 
     public function make(Customer $customer, Warehouse $warehouse): Order
     {
+        if(!auth()->check())
+        {
+            throw new \Exception("Customer is not authorized");
+        }
+
         $order = auth()->user()->orders()->create(array_merge(
             [
                 'total' => basket()->total(),
@@ -40,11 +45,10 @@ class MakeOrderService
             [
                 'type' => OrderTransaction::MONOBANK,
                 'sum' => $order->total,
-                'status' => PaymentStatusEnum::PROCESS
+                'status' => PaymentStatusEnum::PROCESS,
             ]
         );
-
-        dump($this->monobankService->checkout($orderTransaction));
+        $this->monobankService->checkout($orderTransaction);
 
         $order->orderDelivery()->create(
             [

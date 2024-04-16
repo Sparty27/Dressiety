@@ -6,9 +6,11 @@ use App\Models\City;
 use App\Models\Warehouse;
 use App\Services\OrderService\MakeOrderService;
 use App\Services\OrderService\Models\Customer;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Mockery\Exception;
 
 class MakeOrder extends Component
 {
@@ -68,11 +70,16 @@ class MakeOrder extends Component
         $this->validate();
 
         $customer = new Customer($this->name, $this->email, $this->phone);
-        $order = $service->make($customer, $this->selectedWarehouse);
+
+        try {
+            $order = $service->make($customer, $this->selectedWarehouse);
+
+        } catch(Exception $ex) {
+            Log::info($ex->getMessage());
+        }
 
         basket()->clear();
 
-        dd($order);
     }
 
     #[On('basketUpdated')]

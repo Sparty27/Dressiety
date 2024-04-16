@@ -2,6 +2,7 @@
 
 namespace App\Services\MonobankService;
 
+use App\Enums\PaymentStatusEnum;
 use App\Models\OrderTransaction;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
@@ -20,30 +21,53 @@ class MonobankService
 
         if($response->successful())
         {
-            return $response->json()['invoiceId'];
+            $invoiceId = $response->json()['invoiceId'];
+
+            $orderTransaction->update([
+                'transaction_id' => $invoiceId
+            ]);
+
+            return $invoiceId;
         }
 
         return false;
     }
 
-    public function check($invoiceId)
+    public function check(OrderTransaction $orderTransaction)
     {
         $response = Http::withHeaders(['X-Token' => 'uZbeYZd_4Cja_hiDLY_FExeoL2kuwRNfDKr7qjj2QiuU'])
             ->get('https://api.monobank.ua/api/merchant/invoice/status',
                 [
-                    'invoiceId' => $invoiceId
+                    'invoiceId' => $orderTransaction->transaction_id
                 ]);
 
         if($response->successful())
         {
-            return $response->json();
+            $status = $response->json()['status'];
+
+            $newStatus = $orderTransaction->status;
+
+            switch($status) {
+                case 'processing':
+                    $newStatus = PaymentStatusEnum::PROCESS;
+                    break;
+                case 'success':
+                    $newStatus = PaymentStatusEnum::SUCCESS;
+                    break;
+                case 'failure':
+                    $newStatus = PaymentStatusEnum::FAILED;
+                    break;
+            }
+
+            $orderTransaction->update(
+                [
+                    'status' => $newStatus
+                ]
+            );
+
+            return true;
         }
 
         return false;
-    }
-
-    public function test()
-    {
-
     }
 }

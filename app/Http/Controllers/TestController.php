@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\OrderTransaction;
+use App\Services\MonobankService\MonobankService;
+use App\Services\OrderService\Models\Customer;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -10,9 +13,9 @@ class TestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(MonobankService $service)
     {
-        basket()->clear();
+        dd($service->check(OrderTransaction::where('transaction_id', '2404165nUTap1uJ2RSRY')->first()));
     }
 
     /**

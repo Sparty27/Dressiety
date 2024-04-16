@@ -17,9 +17,15 @@ class OrderTransaction extends Model
         'status',
         'sum',
         'type',
+        'transaction_id',
     ];
 
     protected $casts = [
         'status' => PaymentStatusEnum::class
     ];
+
+    public function scopeNotCompleted($query)
+    {
+        return $query->whereNotIn('status', [PaymentStatusEnum::FAILED, PaymentStatusEnum::SUCCESS]);
+    }
 }
