@@ -21,8 +21,6 @@ Auth::routes();
 
 Route::get('/test', [TestController::class, 'index'])->name('test.index');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/shop', Shop::class);
 
 Route::get('/order/make', MakeOrder::class)->name('order.make');
