@@ -27,16 +27,13 @@ class CheckTransactions extends Command
      */
     public function handle(MonobankService $service)
     {
-        $orderTransactions = OrderTransaction::notCompleted()->get();
+        $orderTransactions = OrderTransaction::shouldCheck()->get();
 
         dump($orderTransactions);
 
         foreach($orderTransactions as $orderTransaction)
         {
-            if($orderTransaction->transaction_id)
-            {
-                $service->check($orderTransaction);
-            }
+            $service->check($orderTransaction);
         }
     }
 }

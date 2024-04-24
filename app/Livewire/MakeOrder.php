@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\City;
 use App\Models\Warehouse;
+use App\Services\MonobankService\MonobankService;
 use App\Services\OrderService\MakeOrderService;
 use App\Services\OrderService\Models\Customer;
 use Illuminate\Support\Facades\Log;
@@ -39,6 +40,11 @@ class MakeOrder extends Component
     {
         $this->cities = City::take(10)->get();
         $this->warehouses = Warehouse::take(10)->get();
+
+        $this->email = 'testemail@gmail.com';
+        $this->phone = '380500243492';
+        $this->name = 'Nazar';
+        $this->selectedWarehouse = Warehouse::first();
     }
 
     public function updatedSearchCity($value)
@@ -65,7 +71,7 @@ class MakeOrder extends Component
         $this->selectedWarehouse = $warehouse;
     }
 
-    public function makeOrder(MakeOrderService $service)
+    public function makeOrder(MakeOrderService $service, MonobankService $monobankService)
     {
         $this->validate();
 
@@ -73,6 +79,10 @@ class MakeOrder extends Component
 
         try {
             $order = $service->make($customer, $this->selectedWarehouse);
+
+            $url = $monobankService->checkout($order->orderTransaction);
+
+            redirect($url);
 
         } catch(Exception $ex) {
             Log::info($ex->getMessage());

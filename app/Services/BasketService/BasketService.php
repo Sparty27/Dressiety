@@ -8,9 +8,14 @@ use App\Models\Product;
 
 class BasketService
 {
+    public $instance;
 
     private function getToken()
     {
+        if(isset($this->instance))
+        {
+            return $this->instance;
+        }
         $session = session()->get('session_id');
 
         if (!$session) {
@@ -20,7 +25,7 @@ class BasketService
         $session = session()->get('session_id');
 
         if(auth()->check()) {
-            return Basket::updateOrCreate(
+            $this->instance = Basket::updateOrCreate(
                 [
                  'user_id' => auth()->id(),
                 ],
@@ -28,11 +33,19 @@ class BasketService
                  'session_id' => $session
                 ]
             );
+
+            $this->instance->load('basketProducts');
+
+            return $this->instance;
         }
 
-        return Basket::firstOrCreate(
+        $this->instance = Basket::firstOrCreate(
             ['session_id' => $session]
         );
+
+        $this->instance->load('basketProducts');
+
+        return $this->instance;
     }
 
     public function get()

@@ -10,11 +10,21 @@ use Livewire\Component;
 class Shop extends Component
 {
     public $products;
+    public $basketProducts;
 
     public function mount()
     {
         $this->products = Product::with('photo')->take(25)->get();
+        $this->basketProducts = basket()->get();
     }
+
+
+    #[On('basketUpdated')]
+    public function updateBasketProducts()
+    {
+        $this->basketProducts = basket()->get();
+    }
+
 
     public function addToBasket(Product $product)
     {
@@ -38,7 +48,6 @@ class Shop extends Component
     #[On('basketUpdated')]
     public function render()
     {
-
         return view('livewire.shop');
     }
 }

@@ -24,8 +24,18 @@ class OrderTransaction extends Model
         'status' => PaymentStatusEnum::class
     ];
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public function scopeNotCompleted($query)
     {
         return $query->whereNotIn('status', [PaymentStatusEnum::FAILED, PaymentStatusEnum::SUCCESS]);
+    }
+
+    public function scopeShouldCheck($query)
+    {
+        return $query->notCompleted()->whereNotNull('transaction_id');
     }
 }

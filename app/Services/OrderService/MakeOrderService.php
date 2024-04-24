@@ -12,9 +12,6 @@ use App\Services\OrderService\Models\Customer;
 
 class MakeOrderService
 {
-    public function __construct(
-        protected MonobankService $monobankService,
-    ) {}
 
     public function make(Customer $customer, Warehouse $warehouse): Order
     {
@@ -41,14 +38,13 @@ class MakeOrderService
             ]);
         }
 
-        $orderTransaction = $order->orderTransaction()->create(
+        $order->orderTransaction()->create(
             [
                 'type' => OrderTransaction::MONOBANK,
                 'sum' => $order->total,
                 'status' => PaymentStatusEnum::PROCESS,
             ]
         );
-        $this->monobankService->checkout($orderTransaction);
 
         $order->orderDelivery()->create(
             [

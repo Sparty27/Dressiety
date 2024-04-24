@@ -5,10 +5,8 @@
                 src="{{ $url ?? 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}"
                 alt="{{ $alt }}" />
         </div>
-        @if(isset($name))
-            <div>
-                <div class="font-bold">{{ $name }}</div>
-            </div>
-        @endif
     </div>
+    @if(isset($name))
+        <div class="">{{ $name }}</div>
+    @endif
 </div>
