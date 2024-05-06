@@ -38,4 +38,9 @@ class Order extends Model
     {
         return $this->hasOne(OrderDelivery::class);
     }
+
+    public function formattedTotal()
+    {
+        return (float)($this->total / 100);
+    }
 }

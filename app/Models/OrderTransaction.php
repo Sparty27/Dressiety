@@ -11,6 +11,7 @@ class OrderTransaction extends Model
     use HasFactory;
 
     const MONOBANK = 'monobank';
+    const FONDY = 'fondy';
 
     protected $fillable = [
         'order_id',

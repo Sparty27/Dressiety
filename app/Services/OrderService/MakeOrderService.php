@@ -3,17 +3,17 @@
 namespace App\Services\OrderService;
 
 use App\Enums\DeliveryStatusEnum;
+use App\Enums\PaymentMethodEnum;
 use App\Enums\PaymentStatusEnum;
 use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\Warehouse;
-use App\Services\MonobankService\MonobankService;
 use App\Services\OrderService\Models\Customer;
 
 class MakeOrderService
 {
 
-    public function make(Customer $customer, Warehouse $warehouse): Order
+    public function make(Customer $customer, Warehouse $warehouse, PaymentMethodEnum $paymentMethod): Order
     {
         if(!auth()->check())
         {
@@ -40,7 +40,7 @@ class MakeOrderService
 
         $order->orderTransaction()->create(
             [
-                'type' => OrderTransaction::MONOBANK,
+                'type' => $paymentMethod,
                 'sum' => $order->total,
                 'status' => PaymentStatusEnum::PROCESS,
             ]

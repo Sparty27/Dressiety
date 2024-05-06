@@ -39,6 +39,21 @@ class Product extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function scopeSort($query, $column, $direction)
+    {
+        $query->orderBy($column, $direction);
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        $query->where('name', 'like', '%'.$search.'%');
+    }
+
+    public function scopeFilter($query, $categoryId)
+    {
+        $query->where('category_id', $categoryId);
+    }
+
 //    public function price():Attribute
 //    {
 //        return Attribute::make(
