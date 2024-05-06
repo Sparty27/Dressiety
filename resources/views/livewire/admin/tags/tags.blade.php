@@ -7,7 +7,7 @@
             <!-- head -->
             <thead>
             <tr>
-                <th wire:click="toggleSortColumn('id')">ID
+                <th class="cursor-pointer" wire:click="toggleSortColumn('id')">ID
                     @if($sortColumn == 'id')
                         @if($sortDirection == 'asc')
                             <i class="ri-arrow-up-line"></i>
@@ -18,7 +18,7 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
-                <th wire:click="toggleSortColumn('name')">Name
+                <th class="cursor-pointer" wire:click="toggleSortColumn('name')">Name
                     @if($sortColumn == 'name')
                         @if($sortDirection == 'asc')
                             <i class="ri-arrow-up-line"></i>
@@ -29,7 +29,7 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
-                <th wire:click="toggleSortColumn('status')">Status
+                <th class="cursor-pointer" wire:click="toggleSortColumn('status')">Status
                     @if($sortColumn == 'status')
                         @if($sortDirection == 'asc')
                             <i class="ri-arrow-up-line"></i>
@@ -40,7 +40,7 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
-                <th wire:click="toggleSortColumn('created_at')">Created At
+                <th class="cursor-pointer" wire:click="toggleSortColumn('created_at')">Created At
                     @if($sortColumn == 'created_at')
                         @if($sortDirection == 'asc')
                             <i class="ri-arrow-up-line"></i>
@@ -51,7 +51,7 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
-                <th wire:click="toggleSortColumn('updated_at')">Updated At
+                <th class="cursor-pointer" wire:click="toggleSortColumn('updated_at')">Updated At
                     @if($sortColumn == 'updated_at')
                         @if($sortDirection == 'asc')
                             <i class="ri-arrow-up-line"></i>

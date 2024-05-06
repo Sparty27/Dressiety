@@ -47,7 +47,7 @@
             <!-- head -->
             <thead>
             <tr>
-                <th wire:click="toggleSortColumn('id')">
+                <th class="cursor-pointer" wire:click="toggleSortColumn('id')">
                     ID
                     @if($sortColumn == 'id')
                         @if($sortDirection == 'asc')
@@ -59,7 +59,7 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
-                <th wire:click="toggleSortColumn('name')">
+                <th class="cursor-pointer" wire:click="toggleSortColumn('name')">
                     Name
                     @if($sortColumn == 'name')
                         @if($sortDirection == 'asc')
@@ -73,7 +73,7 @@
                 </th>
                 <th>Category</th>
                 <th>Image</th>
-                <th wire:click="toggleSortColumn('count')">
+                <th class="cursor-pointer" wire:click="toggleSortColumn('count')">
                     Count
                     @if($sortColumn == 'count')
                         @if($sortDirection == 'asc')
@@ -85,7 +85,7 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
-                <th wire:click="toggleSortColumn('price')">
+                <th class="cursor-pointer" wire:click="toggleSortColumn('price')">
                     Price
                     @if($sortColumn == 'price')
                         @if($sortDirection == 'asc')
@@ -97,7 +97,7 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
-                <th wire:click="toggleSortColumn('created_at')">
+                <th class="cursor-pointer" wire:click="toggleSortColumn('created_at')">
                     Created at
                     @if($sortColumn == 'created_at')
                         @if($sortDirection == 'asc')
