@@ -8,19 +8,107 @@
     {{--            </a>--}}
     {{--        @endforeach--}}
     {{--    </div>--}}
+
+
+{{--    <table>--}}
+{{--        <thead>--}}
+{{--            <tr>--}}
+{{--                @foreach($columns as $column)--}}
+{{--                    <th @if( $column->sortable) wire:click="toggleSortColumn({{ $column->key }})" @endif>--}}
+{{--                        {{ $column->name }}--}}
+{{--                        @if($column->sortable)--}}
+{{--                            @if($sortColumn == $column->key)--}}
+{{--                                @if($sortDirection == 'asc')--}}
+{{--                                    <i class="ri-arrow-up-line"></i>--}}
+{{--                                @else--}}
+{{--                                    <i class="ri-arrow-down-line"></i>--}}
+{{--                                @endif--}}
+{{--                            @else--}}
+{{--                                <i class="ri-arrow-up-down-line"></i>--}}
+{{--                            @endif--}}
+{{--                        @endif--}}
+{{--                    </th>--}}
+{{--                @endforeach--}}
+{{--            </tr>--}}
+{{--        </thead>--}}
+{{--    </table>--}}
+
+
     <div class="overflow-x-auto">
         <a href="{{ route('admin.products.create')}}" class="btn btn-primary mb-8">Create</a>
+        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
+        <select class="select select-bordered w-full max-w-xs" wire:model.live="selectedCategory">
+            <option value="" selected>All</option>
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+        </select>
         <table class="table">
             <!-- head -->
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th wire:click="toggleSortColumn('id')">
+                    ID
+                    @if($sortColumn == 'id')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line"></i>
+                        @else
+                            <i class="ri-arrow-down-line"></i>
+                        @endif
+                    @else
+                        <i class="ri-arrow-up-down-line"></i>
+                    @endif
+                </th>
+                <th wire:click="toggleSortColumn('name')">
+                    Name
+                    @if($sortColumn == 'name')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line"></i>
+                        @else
+                            <i class="ri-arrow-down-line"></i>
+                        @endif
+                    @else
+                        <i class="ri-arrow-up-down-line"></i>
+                    @endif
+                </th>
                 <th>Category</th>
                 <th>Image</th>
-                <th>Count</th>
-                <th>Price</th>
-                <th>Created at</th>
+                <th wire:click="toggleSortColumn('count')">
+                    Count
+                    @if($sortColumn == 'count')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line"></i>
+                        @else
+                            <i class="ri-arrow-down-line"></i>
+                        @endif
+                    @else
+                        <i class="ri-arrow-up-down-line"></i>
+                    @endif
+                </th>
+                <th wire:click="toggleSortColumn('price')">
+                    Price
+                    @if($sortColumn == 'price')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line"></i>
+                        @else
+                            <i class="ri-arrow-down-line"></i>
+                        @endif
+                    @else
+                        <i class="ri-arrow-up-down-line"></i>
+                    @endif
+                </th>
+                <th wire:click="toggleSortColumn('created_at')">
+                    Created at
+                    @if($sortColumn == 'created_at')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line"></i>
+                        @else
+                            <i class="ri-arrow-down-line"></i>
+                        @endif
+                    @else
+                        <i class="ri-arrow-up-down-line"></i>
+                    @endif
+                </th>
                 <th></th>
             </tr>
             </thead>
@@ -61,4 +149,6 @@
             </tbody>
         </table>
     </div>
+
+    {{ $products->links() }}
 </div>
