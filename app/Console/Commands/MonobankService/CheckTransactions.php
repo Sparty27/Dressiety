@@ -3,7 +3,8 @@
 namespace App\Console\Commands\MonobankService;
 
 use App\Models\OrderTransaction;
-use App\Services\MonobankService\MonobankService;
+use App\Services\PaymentServices\FondyService\FondyService;
+use App\Services\PaymentServices\MonobankService\MonobankService;
 use Illuminate\Console\Command;
 
 class CheckTransactions extends Command
@@ -25,7 +26,7 @@ class CheckTransactions extends Command
     /**
      * Execute the console command.
      */
-    public function handle(MonobankService $service)
+    public function handle(MonobankService $monobankService, FondyService $fondyService)
     {
         $orderTransactions = OrderTransaction::shouldCheck()->get();
 
@@ -33,7 +34,16 @@ class CheckTransactions extends Command
 
         foreach($orderTransactions as $orderTransaction)
         {
-            $service->check($orderTransaction);
+            switch($orderTransaction->type) {
+                case OrderTransaction::MONOBANK:
+                    dump('monobank type. Type: '.$orderTransaction->type);
+                    $monobankService->check($orderTransaction);
+                    break;
+                case OrderTransaction::FONDY:
+                    dump('fondy type. Type: '.$orderTransaction->type);
+                    $fondyService->check($orderTransaction);
+                    break;
+            }
         }
     }
 }

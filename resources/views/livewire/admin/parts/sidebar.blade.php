@@ -36,6 +36,14 @@
                     <span class="flex-1">{{ trans('pages.admin.tags.index') }}</span>
                 </a>
             </li>
+            <li class="mt-3">
+                <a href="{{ route('admin.orders.index') }}" class="flex gap-4 {{request()->routeIs('admin.orders.*') ? 'active':''}}">
+                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
+                        <i class="ri-bookmark-line"></i>
+                    </span>
+                    <span class="flex-1">{{ trans('pages.admin.orders.index') }}</span>
+                </a>
+            </li>
             {{--            <li>--}}
             {{--                <a href="https://remixicon.com/" target="_blank" class="flex gap-4">--}}
             {{--                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">--}}

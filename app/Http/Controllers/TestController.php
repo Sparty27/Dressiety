@@ -2,25 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Basket;
-use App\Models\City;
 use App\Models\Order;
 use App\Models\OrderTransaction;
-use App\Services\MonobankService\MonobankService;
-use App\Services\OrderService\Models\Customer;
+use App\Services\PaymentServices\FondyService\FondyService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(FondyService $service)
     {
-        $order = Order::first();
-
-        dd(route('payments.monobank.webhook', compact('order')));
+        $order = Order::latest()->first();
+        dd(route('payments.fondy.webhook', compact('order')));
     }
 
     /**

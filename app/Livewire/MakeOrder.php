@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Enums\PaymentMethodEnum;
 use App\Models\City;
 use App\Models\Warehouse;
-use App\Services\MonobankService\MonobankService;
 use App\Services\OrderService\MakeOrderService;
 use App\Services\OrderService\Models\Customer;
+use App\Services\PaymentServices\FondyService\FondyService;
+use App\Services\PaymentServices\MonobankService\MonobankService;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
@@ -23,6 +25,9 @@ class MakeOrder extends Component
 
     #[Validate('required|string|min:5|max:190')]
     public $name = '';
+
+    #[Validate('required')]
+    public PaymentMethodEnum $selectedPaymentMethod;
 
     public City $selectedCity;
 
@@ -45,6 +50,11 @@ class MakeOrder extends Component
         $this->phone = '380500243492';
         $this->name = 'Nazar';
         $this->selectedWarehouse = Warehouse::first();
+    }
+
+    public function setPaymentMethod(PaymentMethodEnum $method)
+    {
+        $this->selectedPaymentMethod = $method;
     }
 
     public function updatedSearchCity($value)
@@ -71,17 +81,29 @@ class MakeOrder extends Component
         $this->selectedWarehouse = $warehouse;
     }
 
-    public function makeOrder(MakeOrderService $service, MonobankService $monobankService)
+    public function makeOrder(MakeOrderService $service, MonobankService $monobankService, FondyService $fondyService)
     {
         $this->validate();
 
         $customer = new Customer($this->name, $this->email, $this->phone);
 
         try {
-            $order = $service->make($customer, $this->selectedWarehouse);
+            $order = $service->make($customer, $this->selectedWarehouse, $this->selectedPaymentMethod);
 
-            $url = $monobankService->checkout($order->orderTransaction);
+            switch($this->selectedPaymentMethod)
+            {
+                case PaymentMethodEnum::MONOBANK:
+                    $url = $monobankService->checkout($order->orderTransaction);
+                    break;
+                case PaymentMethodEnum::FONDY:
+                    $url = $fondyService->checkout($order->orderTransaction);
+                    break;
+                default:
+                    $url = '';
+                    break;
+            }
 
+            dump($url);
             redirect($url);
 
         } catch(Exception $ex) {
@@ -89,7 +111,6 @@ class MakeOrder extends Component
         }
 
         basket()->clear();
-
     }
 
     #[On('basketUpdated')]

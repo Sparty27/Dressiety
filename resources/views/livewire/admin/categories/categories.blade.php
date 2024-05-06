@@ -1,8 +1,6 @@
 <div class="overflow-x-auto">
-    <a href="{{ route('admin.categories.create')}}" class="btn btn-primary mb-8">Create</a>
-{{--    <button class="btn" onclick="create_category.showModal()">Create</button>--}}
-{{--    @include('livewire.admin.categories.create-category')--}}
-{{--    @livewire('admin.categories.create-category')--}}
+    @livewire('admin.categories.create-category')
+
     <table class="table">
         <!-- head -->
         <thead>
@@ -24,7 +22,7 @@
                     <div class="flex items-center gap-3">
                         <div class="avatar">
                             <div class="mask mask-squircle w-12 h-12">
-                                <img src="{{ $category->photos()->value('url') ?? 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" alt="Avatar Tailwind CSS Component" />
+                                <img src="{{ asset($category->photos()->value('url')) ?? 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" alt="Avatar Tailwind CSS Component" />
                             </div>
                         </div>
                     </div>

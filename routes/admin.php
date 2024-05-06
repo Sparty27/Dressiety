@@ -8,6 +8,7 @@ use App\Livewire\Admin\Categories\EditCategory;
 use App\Livewire\Admin\Categories\InfoCategory;
 use App\Livewire\Admin\Categories\ShowCategory;
 use App\Livewire\Admin\Home;
+use App\Livewire\Admin\Orders\Orders;
 use App\Livewire\Admin\Products\CreateProduct;
 use App\Livewire\Admin\Products\EditProduct;
 use App\Livewire\Admin\Products\Products;
@@ -47,3 +48,5 @@ Route::get('/tags', Tags::class)->name('tags.index');
 Route::get('/tags/create', CreateTag::class)->name('tags.create');
 Route::get('/tags/{tag}', ShowTag::class)->name('tags.show');
 Route::get('/tags/{tag}/edit', EditTag::class)->name('tags.edit');
+
+Route::get('/orders', Orders::class)->name('orders.index');

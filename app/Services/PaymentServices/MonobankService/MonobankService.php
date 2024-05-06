@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Services\MonobankService;
+namespace App\Services\PaymentServices\MonobankService;
 
 use App\Enums\PaymentStatusEnum;
-use App\Models\Order;
 use App\Models\OrderTransaction;
 use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class MonobankService
 {
@@ -38,8 +37,6 @@ class MonobankService
         ]);
 
         return $responseData['pageUrl'];
-
-        return true;
     }
 
     public function check(OrderTransaction $orderTransaction)

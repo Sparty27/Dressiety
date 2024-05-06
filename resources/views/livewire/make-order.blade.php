@@ -77,8 +77,27 @@
                     ])
                 </div>
             @endif
-            <div class="float-right mt-3">
-                <button type="submit" class="btn btn-primary">Confirm Order</button>
+
+            <div class="flex w-full mt-3">
+                <button type="button" wire:click="setPaymentMethod('{{ \App\Enums\PaymentMethodEnum::MONOBANK }}')" class="grid h-20 flex-grow card bg-white border-2 rounded-box place-items-center">
+                    <img src="https://asset.brandfetch.io/id-CBRc8NA/idbiSfkx2x.svg" alt="monobank method" class="w-[100px]">
+                </button>
+                <div class="divider divider-horizontal"></div>
+                <button type="button" wire:click="setPaymentMethod('{{ \App\Enums\PaymentMethodEnum::FONDY }}')" class="grid h-20 flex-grow card bg-white border-2 rounded-box place-items-center">
+                    <img src="{{ asset('images/fondy-main-light.svg') }}" alt="fondy method" class="w-[100px]">
+                </button>
+            </div>
+
+            <div class="float-right">
+                <div class="my-3">
+                    <p class="text-2xl font-bold">
+                        Your payment method: {{ $selectedPaymentMethod }}
+                    </p>
+                </div>
+
+                <div class="float-right mt-3">
+                    <button type="submit" class="btn btn-primary">Confirm Order</button>
+                </div>
             </div>
         </form>
     </div>
