@@ -1,15 +1,56 @@
 <div class="overflow-x-auto">
     @livewire('admin.categories.create-category')
+    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
 
     <table class="table">
         <!-- head -->
         <thead>
         <tr>
-            <th>ID</th>
+            <th wire:click="toggleSortColumn('id')">ID
+                @if($sortColumn == 'id')
+                    @if($sortDirection == 'asc')
+                        <i class="ri-arrow-up-line"></i>
+                    @else
+                        <i class="ri-arrow-down-line"></i>
+                    @endif
+                @else
+                    <i class="ri-arrow-up-down-line"></i>
+                @endif
+            </th>
             <th>Image</th>
-            <th>Name</th>
-            <th>Created At</th>
-            <th>Updated At</th>
+            <th wire:click="toggleSortColumn('name')">Name
+                @if($sortColumn == 'name')
+                    @if($sortDirection == 'asc')
+                        <i class="ri-arrow-up-line"></i>
+                    @else
+                        <i class="ri-arrow-down-line"></i>
+                    @endif
+                @else
+                    <i class="ri-arrow-up-down-line"></i>
+                @endif
+            </th>
+            <th wire:click="toggleSortColumn('created_at')">Created At
+                @if($sortColumn == 'created_at')
+                    @if($sortDirection == 'asc')
+                        <i class="ri-arrow-up-line"></i>
+                    @else
+                        <i class="ri-arrow-down-line"></i>
+                    @endif
+                @else
+                    <i class="ri-arrow-up-down-line"></i>
+                @endif
+            </th>
+            <th wire:click="toggleSortColumn('updated_at')">Updated At
+                @if($sortColumn == 'updated_at')
+                    @if($sortDirection == 'asc')
+                        <i class="ri-arrow-up-line"></i>
+                    @else
+                        <i class="ri-arrow-down-line"></i>
+                    @endif
+                @else
+                    <i class="ri-arrow-up-down-line"></i>
+                @endif
+            </th>
             <th></th>
         </tr>
         </thead>
@@ -43,4 +84,6 @@
         @endforeach
         </tbody>
     </table>
+
+    {{ $categories->links() }}
 </div>

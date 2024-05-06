@@ -22,4 +22,14 @@ class Tag extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    public function scopeSearch($query, $search)
+    {
+        $query->where('name', 'like', '%'.$search.'%');
+    }
+
+    public function scopeSort($query, $column, $direction)
+    {
+        $query->orderBy($column, $direction);
+    }
 }

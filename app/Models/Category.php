@@ -28,4 +28,14 @@ class Category extends Model
     {
         return $this->morphOne(Photo::class, 'photoble');
     }
+
+    public function scopeSearch($query, $search)
+    {
+        $query->where('name', 'like', '%'.$search.'%');
+    }
+
+    public function scopeSort($query, $column, $direction)
+    {
+        $query->orderBy($column, $direction);
+    }
 }
