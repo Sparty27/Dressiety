@@ -13,11 +13,11 @@
         <div class="h-4"></div>
         <ul class="menu menu-sm lg:menu-md px-4 py-0">
             <li>
-                <a href="{{ route('admin.categories.index') }}" class="flex gap-4 {{request()->routeIs('admin.categories.*') ? 'active':''}}">
+                <a href="{{ route('admin.orders.index') }}" class="flex gap-4 {{request()->routeIs('admin.orders.*') ? 'active':''}}">
                     <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
-                        <i class="ri-list-check"></i>
+                        <i class="ri-shopping-cart-2-line"></i>
                     </span>
-                    <span class="flex-1">{{ trans('pages.admin.categories.index') }}</span>
+                    <span class="flex-1">{{ trans('pages.admin.orders.index') }}</span>
                 </a>
             </li>
             <li class="mt-3">
@@ -29,19 +29,19 @@
                 </a>
             </li>
             <li class="mt-3">
+                <a href="{{ route('admin.categories.index') }}" class="flex gap-4 {{request()->routeIs('admin.categories.*') ? 'active':''}}">
+                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
+                        <i class="ri-list-check"></i>
+                    </span>
+                    <span class="flex-1">{{ trans('pages.admin.categories.index') }}</span>
+                </a>
+            </li>
+            <li class="mt-3">
                 <a href="{{ route('admin.tags.index') }}" class="flex gap-4 {{request()->routeIs('admin.tags.*') ? 'active':''}}">
                     <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
                         <i class="ri-bookmark-line"></i>
                     </span>
                     <span class="flex-1">{{ trans('pages.admin.tags.index') }}</span>
-                </a>
-            </li>
-            <li class="mt-3">
-                <a href="{{ route('admin.orders.index') }}" class="flex gap-4 {{request()->routeIs('admin.orders.*') ? 'active':''}}">
-                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
-                        <i class="ri-bookmark-line"></i>
-                    </span>
-                    <span class="flex-1">{{ trans('pages.admin.orders.index') }}</span>
                 </a>
             </li>
             {{--            <li>--}}

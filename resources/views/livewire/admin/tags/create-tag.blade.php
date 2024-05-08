@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit="save" class="max-w-xs border-[3px] border-blue-200 rounded-[15px] p-6">
+    <form wire:submit="save" class="max-w-xs rounded-[15px] p-6">
         @csrf
         <label class="form-control w-full font-bold">Name</label>
         <input name="name" type="text" placeholder="Type here" wire:model="name" class="input w-full max-w-xs mt-6 border-2 border-gray-200" />

@@ -2,12 +2,20 @@
 
 namespace App\Livewire\Admin\Tags;
 
+use App\Models\Category;
 use App\Models\Tag;
 use Livewire\Component;
 
 class ShowTag extends Component
 {
     public Tag $tag;
+
+    public $open = false;
+
+    public function toggleDeleteModal()
+    {
+        $this->open = !$this->open;
+    }
 
     public function delete()
     {

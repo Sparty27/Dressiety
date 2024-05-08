@@ -10,7 +10,7 @@ class EditTag extends Component
 {
     public Tag $tag;
 
-    #[Validate('required|min:5')]
+    #[Validate('required|min:3')]
     public $name;
 
     #[Validate('required')]

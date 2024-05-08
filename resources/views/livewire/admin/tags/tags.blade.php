@@ -1,8 +1,14 @@
 <div>
-    <div class="overflow-x-auto">
-        <a href="{{ route('admin.tags.create')}}" class="btn btn-primary mb-8">Create</a>
-        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
+    <div class="flex justify-center relative my-9">
+        <a href="{{ route('admin.tags.create')}}" class="btn btn-primary mb-8 absolute left-0">Create</a>
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-2xl">Search</span>
+            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
+        </div>
+    </div>
 
+
+    <div class="overflow-x-auto">
         <table class="table">
             <!-- head -->
             <thead>
