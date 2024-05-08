@@ -9,6 +9,13 @@ class ShowCategory extends Component
 {
     public Category $category;
 
+    public $open = false;
+
+    public function toggleDeleteModal()
+    {
+        $this->open = !$this->open;
+    }
+
     public function delete()
     {
         $this->category->delete();

@@ -103,7 +103,6 @@ class MakeOrder extends Component
                     break;
             }
 
-            dump($url);
             redirect($url);
 
         } catch(Exception $ex) {

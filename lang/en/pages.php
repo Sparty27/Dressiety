@@ -8,7 +8,8 @@ return [
             'index' => 'Categories',
             'create' => 'Create Category',
             'edit' => 'Edit Category',
-            'show' => 'Category'
+            'show' => 'Category',
+            'delete' => 'Delete Category'
         ],
         'products' => [
             'index' => 'Products',
@@ -20,7 +21,11 @@ return [
             'index' => 'Tags',
             'create' => 'Create Tag',
             'edit' => 'Edit Tag',
-            'show' => 'Tag'
+            'show' => 'Tag',
+            'delete' => 'Delete Tag'
+        ],
+        'orders' => [
+            'index' => 'Orders'
         ]
     ]
 ];

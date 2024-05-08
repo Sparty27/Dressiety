@@ -1,55 +1,72 @@
 <div class="overflow-x-auto">
-    <a href="{{ route('admin.categories.create')}}" class="btn btn-primary mb-8">Create</a>
-    <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
+    <div class="flex justify-center relative my-9">
+        <a href="{{ route('admin.categories.create')}}" class="btn btn-primary mb-8 absolute left-0">Create</a>
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-2xl">Search</span>
+            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
+        </div>
+    </div>
 
     <table class="table">
         <!-- head -->
         <thead>
         <tr>
-            <th class="cursor-pointer" wire:click="toggleSortColumn('id')">ID
-                @if($sortColumn == 'id')
-                    @if($sortDirection == 'asc')
-                        <i class="ri-arrow-up-line"></i>
+            <th class="cursor-pointer" wire:click="toggleSortColumn('id')">
+                <div class="flex items-center">
+                    ID
+                    @if($sortColumn == 'id')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line mt-[2px]"></i>
+                        @else
+                            <i class="ri-arrow-down-line mt-[2px]"></i>
+                        @endif
                     @else
-                        <i class="ri-arrow-down-line"></i>
+                        <i class="ri-arrow-up-down-line mt-[2px]"></i>
                     @endif
-                @else
-                    <i class="ri-arrow-up-down-line"></i>
-                @endif
+                </div>
             </th>
             <th>Image</th>
-            <th class="cursor-pointer" wire:click="toggleSortColumn('name')">Name
-                @if($sortColumn == 'name')
-                    @if($sortDirection == 'asc')
-                        <i class="ri-arrow-up-line"></i>
+            <th class="cursor-pointer" wire:click="toggleSortColumn('name')">
+                <div class="flex items-center">
+                    Name
+                    @if($sortColumn == 'name')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line mt-[2px]"></i>
+                        @else
+                            <i class="ri-arrow-down-line mt-[2px]"></i>
+                        @endif
                     @else
-                        <i class="ri-arrow-down-line"></i>
+                        <i class="ri-arrow-up-down-line mt-[2px]"></i>
                     @endif
-                @else
-                    <i class="ri-arrow-up-down-line"></i>
-                @endif
+                </div>
             </th>
-            <th class="cursor-pointer" wire:click="toggleSortColumn('created_at')">Created At
-                @if($sortColumn == 'created_at')
-                    @if($sortDirection == 'asc')
-                        <i class="ri-arrow-up-line"></i>
+            <th class="cursor-pointer" wire:click="toggleSortColumn('created_at')">
+                <div class="flex items-center">
+                    Created At
+                    @if($sortColumn == 'created_at')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line mt-[2px]"></i>
+                        @else
+                            <i class="ri-arrow-down-line mt-[2px]"></i>
+                        @endif
                     @else
-                        <i class="ri-arrow-down-line"></i>
+                        <i class="ri-arrow-up-down-line mt-[2px]"></i>
                     @endif
-                @else
-                    <i class="ri-arrow-up-down-line"></i>
-                @endif
+                </div>
             </th>
-            <th class="cursor-pointer" wire:click="toggleSortColumn('updated_at')">Updated At
-                @if($sortColumn == 'updated_at')
-                    @if($sortDirection == 'asc')
-                        <i class="ri-arrow-up-line"></i>
+            <th class="cursor-pointer" wire:click="toggleSortColumn('updated_at')">
+                <div class="flex items-center">
+                    Updated At
+                    @if($sortColumn == 'updated_at')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line mt-[2px]"></i>
+                        @else
+                            <i class="ri-arrow-down-line mt-[2px]"></i>
+                        @endif
                     @else
-                        <i class="ri-arrow-down-line"></i>
+                        <i class="ri-arrow-up-down-line mt-[2px]"></i>
                     @endif
-                @else
-                    <i class="ri-arrow-up-down-line"></i>
-                @endif
+                </div>
             </th>
             <th></th>
         </tr>
@@ -63,7 +80,7 @@
                     <div class="flex items-center gap-3">
                         <div class="avatar">
                             <div class="mask mask-squircle w-12 h-12">
-                                <img src="{{ asset($category->photos()->value('url')) ?? 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" alt="Avatar Tailwind CSS Component" />
+                                <img src="{{ asset($category->photos()->value('url')) != asset('') ? asset($category->photos()->value('url')) : 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=' }}" alt="Avatar Tailwind CSS Component" />
                             </div>
                         </div>
                     </div>

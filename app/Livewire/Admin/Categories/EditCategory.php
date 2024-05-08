@@ -3,28 +3,50 @@
 namespace App\Livewire\Admin\Categories;
 
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Livewire\Forms\CategoryForm;
 use App\Livewire\Forms\CreateCategoryForm;
-use App\Livewire\Forms\EditCategoryForm;
 use App\Models\Category;
-use http\Client\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EditCategory extends Component
 {
+    use WithFileUploads;
+
     public Category $category;
 
-    public EditCategoryForm $form;
+    #[Validate('required|min:3|max:100')]
+    public $name = '';
+
+    #[Validate('image|max:36000')]
+    public $photo = '';
 
     public function mount()
     {
-        $this->form->name = $this->category->name;
+        $this->name = $this->category->name;
     }
 
     public function save()
     {
         $this->validate();
 
-        $this->category->update($this->form->all());
+        if($this->photo)
+        {
+            if($this->category->photo != null)
+                $this->category->photo->update(['url' => Storage::url($this->photo->store(path: 'public/photos'))]);
+            else
+                $this->category->photo()->create(['url' => Storage::url($this->photo->store(path: 'public/photos'))]);
+        }
+
+        $this->category->update(
+            [
+                'name' => $this->name,
+            ]
+        );
 
         return redirect()->route('admin.categories.show', $this->category);
     }
