@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Products;
 
 use App\Livewire\Admin\DataTable\Utils\Column;
 use App\Models\Category;
+use App\Models\Photo;
 use App\Models\Product;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;

@@ -33,16 +33,24 @@
 {{--        </thead>--}}
 {{--    </table>--}}
 
-
-    <div class="overflow-x-auto">
+    <div>
         <a href="{{ route('admin.products.create')}}" class="btn btn-primary mb-8">Create</a>
         <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
         <select class="select select-bordered w-full max-w-xs" wire:model.live="selectedCategory">
             <option value="" selected>All</option>
             @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" style="background-image: url('https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=')">
+                    {{--                    <div class="avatar">--}}
+                    {{--                        <div class="w-10 rounded-xl">--}}
+                    {{--                            <img src="{{ $category->photo?->getUrl() ?? App\Models\Photo::IMAGE_NOT_FOUND }}">--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
+                    {{ $category->name }}</option>
             @endforeach
         </select>
+    </div>
+
+    <div class="overflow-x-auto">
         <table class="table">
             <!-- head -->
             <thead>
@@ -97,6 +105,18 @@
                         <i class="ri-arrow-up-down-line"></i>
                     @endif
                 </th>
+                <th class="cursor-pointer" wire:click="toggleSortColumn('status')">
+                    Visible
+                    @if($sortColumn == 'status')
+                        @if($sortDirection == 'asc')
+                            <i class="ri-arrow-up-line"></i>
+                        @else
+                            <i class="ri-arrow-down-line"></i>
+                        @endif
+                    @else
+                        <i class="ri-arrow-up-down-line"></i>
+                    @endif
+                </th>
                 <th class="cursor-pointer" wire:click="toggleSortColumn('created_at')">
                     Created at
                     @if($sortColumn == 'created_at')
@@ -137,6 +157,7 @@
                     </td>
                     <td>{{ $product->count }}</td>
                     <td class="font-bold">{{ $product->formatted_price }} ₴</td>
+                    <td>{{ $product->status ? 'Yes' : 'No' }}</td>
                     <td>{{ $product->created_at }}</td>
                     <td><a class="btn border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.products.show', compact('product')) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

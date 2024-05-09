@@ -31,7 +31,7 @@
 {{--                    @yield('breadcrumbs')--}}
                 </div>
 
-                <div class="p-6 pb-16 grid gap-5">
+                <div class="p-4 grid gap-5">
                     {{ $slot }}
                 </div>
             </div>
