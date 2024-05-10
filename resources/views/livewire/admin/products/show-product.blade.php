@@ -62,9 +62,9 @@
         </div>
         <div class="mt-5">
             <span class="">Images:</span>
-            <div class="flex justify-between border-2 border p-3 rounded-xl mt-3">
+            <div class="grid grid-cols-3 gap-8 border-2 p-3 rounded-xl mt-3">
                 @foreach($product->photos as $photo)
-                    <div>
+                    <div class="flex justify-center items-center">
                         <img class="w-full max-w-56 rounded-lg" src="{{ $photo?->getUrl() ?? App\Models\Photo::IMAGE_NOT_FOUND }}">
                     </div>
                 @endforeach

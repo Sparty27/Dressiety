@@ -68,13 +68,25 @@
             </div>
             <div class="mt-5">
                 <span class="">Images:</span>
-                <div class="flex justify-between border-2 border p-3 rounded-xl mt-3">
-                    @foreach($product->photos as $photo)
-                        <div>
-                            <img class="w-full max-w-56 rounded-lg" src="{{ $photo?->getUrl() ?? App\Models\Photo::IMAGE_NOT_FOUND }}">
+                <div class="grid grid-cols-3 gap-8 border-2 p-3 rounded-xl mt-3">
+                    @foreach($photos as $photo)
+                        <div class="flex justify-center items-center">
+                            <img class="w-full max-w-56 rounded-lg" src="{{ asset($photo) ?? App\Models\Photo::IMAGE_NOT_FOUND }}">
                         </div>
                     @endforeach
+                    <div class="flex justify-center items-center">
+                        <label for="image">
+                            <i class="ri-add-circle-fill text-3xl cursor-pointer mr-3">
+                                <input id="image" type="file" class="hidden" wire:model.live="loadedPhoto"/>
+                            </i>
+                        </label>
+                    </div>
                 </div>
+                @error('loadedPhoto')
+                <div class="text-red-800 mt-3">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="flex justify-center gap-8 mt-5">
                 <button type="submit" class="btn btn-outline btn-primary">Save</button>

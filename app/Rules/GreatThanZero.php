@@ -14,9 +14,7 @@ class GreatThanZero implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $price = (integer)(floatval(str_replace(' ', '', $value)) * 100);
-
-        if($price < 0)
+        if($value < 0)
             $fail('The :attribute must be greater than zero.');
 
     }
