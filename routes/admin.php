@@ -38,7 +38,7 @@ Route::get('/', Home::class)->name('home');
 Route::prefix('/categories')->name('categories.')->group(function() {
     Route::get('/', Categories::class)->name('index');
     Route::get('/create', CreateCategory::class)->name('create');
-    Route::get('/{category}', ShowCategory::class)->name('show');
+//    Route::get('/{category}', ShowCategory::class)->name('show');
     Route::get('/{category}/edit', EditCategory::class)->name('edit');
 });
 
@@ -52,7 +52,7 @@ Route::prefix('/products')->name('products.')->group(function() {
 Route::prefix('/tags')->name('tags.')->group(function() {
     Route::get('/', Tags::class)->name('index');
     Route::get('/create', CreateTag::class)->name('create');
-    Route::get('/{tag}', ShowTag::class)->name('show');
+//    Route::get('/{tag}', ShowTag::class)->name('show');
     Route::get('/{tag}/edit', EditTag::class)->name('edit');
 });
 

@@ -27,78 +27,90 @@
             <thead>
             <tr>
                 <th class="cursor-pointer" wire:click="toggleSortColumn('id')">
-                    ID
-                    @if($sortColumn == 'id')
-                        @if($sortDirection == 'asc')
-                            <i class="ri-arrow-up-line"></i>
+                    <div class="flex items-center gap-1">
+                        ID
+                        @if($sortColumn == 'id')
+                            @if($sortDirection == 'asc')
+                                <i class="ri-arrow-up-line mt-0.5"></i>
+                            @else
+                                <i class="ri-arrow-down-line mt-0.5"></i>
+                            @endif
                         @else
-                            <i class="ri-arrow-down-line"></i>
+                            <i class="ri-arrow-up-down-line mt-0.5"></i>
                         @endif
-                    @else
-                        <i class="ri-arrow-up-down-line"></i>
-                    @endif
+                    </div>
                 </th>
                 <th class="cursor-pointer" wire:click="toggleSortColumn('name')">
-                    Name
-                    @if($sortColumn == 'name')
-                        @if($sortDirection == 'asc')
-                            <i class="ri-arrow-up-line"></i>
+                    <div class="flex items-center gap-1">
+                        Name
+                        @if($sortColumn == 'name')
+                            @if($sortDirection == 'asc')
+                                <i class="ri-arrow-up-line mt-0.5"></i>
+                            @else
+                                <i class="ri-arrow-down-line mt-0.5"></i>
+                            @endif
                         @else
-                            <i class="ri-arrow-down-line"></i>
+                            <i class="ri-arrow-up-down-line mt-0.5"></i>
                         @endif
-                    @else
-                        <i class="ri-arrow-up-down-line"></i>
-                    @endif
+                    </div>
                 </th>
                 <th>Category</th>
                 <th>Image</th>
                 <th class="cursor-pointer" wire:click="toggleSortColumn('count')">
-                    Count
-                    @if($sortColumn == 'count')
-                        @if($sortDirection == 'asc')
-                            <i class="ri-arrow-up-line"></i>
+                    <div class="flex items-center gap-1">
+                        Count
+                        @if($sortColumn == 'count')
+                            @if($sortDirection == 'asc')
+                                <i class="ri-arrow-up-line mt-0.5"></i>
+                            @else
+                                <i class="ri-arrow-down-line mt-0.5"></i>
+                            @endif
                         @else
-                            <i class="ri-arrow-down-line"></i>
+                            <i class="ri-arrow-up-down-line mt-0.5"></i>
                         @endif
-                    @else
-                        <i class="ri-arrow-up-down-line"></i>
-                    @endif
+                    </div>
                 </th>
                 <th class="cursor-pointer" wire:click="toggleSortColumn('price')">
-                    Price
-                    @if($sortColumn == 'price')
-                        @if($sortDirection == 'asc')
-                            <i class="ri-arrow-up-line"></i>
+                    <div class="flex items-center gap-1">
+                        Price
+                        @if($sortColumn == 'price')
+                            @if($sortDirection == 'asc')
+                                <i class="ri-arrow-up-line mt-0.5"></i>
+                            @else
+                                <i class="ri-arrow-down-line mt-0.5"></i>
+                            @endif
                         @else
-                            <i class="ri-arrow-down-line"></i>
+                            <i class="ri-arrow-up-down-line mt-0.5"></i>
                         @endif
-                    @else
-                        <i class="ri-arrow-up-down-line"></i>
-                    @endif
+                    </div>
                 </th>
                 <th class="cursor-pointer" wire:click="toggleSortColumn('status')">
-                    Visible
-                    @if($sortColumn == 'status')
-                        @if($sortDirection == 'asc')
-                            <i class="ri-arrow-up-line"></i>
+                    <div class="flex items-center gap-1">
+                        Visible
+                        @if($sortColumn == 'status')
+                            @if($sortDirection == 'asc')
+                                <i class="ri-arrow-up-line mt-0.5"></i>
+                            @else
+                                <i class="ri-arrow-down-line mt-0.5"></i>
+                            @endif
                         @else
-                            <i class="ri-arrow-down-line"></i>
+                            <i class="ri-arrow-up-down-line mt-0.5"></i>
                         @endif
-                    @else
-                        <i class="ri-arrow-up-down-line"></i>
-                    @endif
+                    </div>
                 </th>
                 <th class="cursor-pointer" wire:click="toggleSortColumn('created_at')">
-                    Created at
-                    @if($sortColumn == 'created_at')
-                        @if($sortDirection == 'asc')
-                            <i class="ri-arrow-up-line"></i>
+                    <div class="flex items-center gap-1">
+                        Created at
+                        @if($sortColumn == 'created_at')
+                            @if($sortDirection == 'asc')
+                                <i class="ri-arrow-up-line mt-0.5"></i>
+                            @else
+                                <i class="ri-arrow-down-line mt-0.5"></i>
+                            @endif
                         @else
-                            <i class="ri-arrow-down-line"></i>
+                            <i class="ri-arrow-up-down-line mt-0.5"></i>
                         @endif
-                    @else
-                        <i class="ri-arrow-up-down-line"></i>
-                    @endif
+                    </div>
                 </th>
                 <th></th>
             </tr>
@@ -135,7 +147,7 @@
                                 <i class="ri-pencil-line"></i>
                             </a>
 
-                            <button type="button" class="btn btn-sm btn-danger bg-red-600 hover:bg-red-700 text-white" wire:click="toggleDeleteModal">
+                            <button type="button" class="btn btn-sm btn-danger bg-red-600 hover:bg-red-700 text-white" wire:click="toggleDeleteModal('{{ $product->id }}')">
                                 <i class="ri-delete-bin-line"></i>
                             </button>
                         </div>
@@ -144,6 +156,34 @@
             @endforeach
             </tbody>
         </table>
+    </div>
+
+    <div class="flex gap-3 justify-end my-5">
+        @if(isset($deleteProduct))
+        <dialog id="modal" class="modal modal-vertical modal-sm" @if($open) open @endif>
+            <div class="w-screen h-screen relative  bg-base-content opacity-40">
+            </div>
+            <form wire:submit="delete" method="dialog" class="modal-box absolute top-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-100">
+                <div class="mt-2 flex justify-center">
+                    <button type="button" wire:click="toggleDeleteModal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                </div>
+                <div class="flex flex-wrap justify-center gap-5">
+                    <div class="font-extrabold text-xl flex justify-center">
+                        {{ trans('pages.admin.products.delete') }}
+                    </div>
+                </div>
+                <div class="mt-3 text-center text-lg">
+                    Are you sure you want to delete
+                    <span class="font-bold">{{ $deleteProduct->name }}</span>
+                    ?
+                </div>
+                <div class="flex gap-3 justify-center mt-6">
+                    <button type="submit" class="btn bg-red-600 hover:bg-red-700 text-white">Delete</button>
+                    <button type="button" wire:click="toggleDeleteModal" class="btn">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+        @endif
     </div>
 
     {{ $products->links() }}

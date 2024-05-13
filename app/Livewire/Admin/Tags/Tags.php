@@ -16,6 +16,10 @@ class Tags extends Component
     public $sortColumn = 'id';
     public $sortDirection = 'asc';
 
+    public $deleteTag;
+
+    public $open;
+
     public function mount()
     {
 
@@ -52,6 +56,20 @@ class Tags extends Component
         $this->sortQuery($builder);
 
         return $builder->paginate(10);
+    }
+
+    public function toggleDeleteModal(Tag $tag)
+    {
+        $this->deleteTag = $tag;
+
+        $this->open = !$this->open;
+    }
+
+    public function delete()
+    {
+        $this->deleteTag->delete();
+
+        return redirect()->route('admin.tags.index');
     }
 
     public function render()

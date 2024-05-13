@@ -23,6 +23,10 @@ class Products extends Component
 
     public $selectedCategory;
 
+    public $open;
+
+    public $deleteProduct;
+
     public function mount()
     {
         $this->categories = Category::all();
@@ -66,6 +70,20 @@ class Products extends Component
         $this->filterQuery($builder);
 
         return $builder->paginate(10);
+    }
+
+    public function toggleDeleteModal(Product $product)
+    {
+        $this->deleteProduct = $product;
+
+        $this->open = !$this->open;
+    }
+
+    public function delete()
+    {
+        $this->deleteProduct->delete();
+
+        return redirect()->route('admin.products.index');
     }
 
     public function render()

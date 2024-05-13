@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Categories;
 use App\Http\Requests\CategoryRequest;
 use App\Livewire\Forms\CreateCategoryForm;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
@@ -21,6 +22,10 @@ class Categories extends Component
 
     public $sortColumn = 'id';
     public $sortDirection = 'asc';
+
+    public $deleteCategory;
+
+    public $open;
 
     public function mount()
     {
@@ -58,6 +63,20 @@ class Categories extends Component
         $this->sortQuery($builder);
 
         return $builder->paginate(10);
+    }
+
+    public function toggleDeleteModal(Category $category)
+    {
+        $this->deleteCategory = $category;
+
+        $this->open = !$this->open;
+    }
+
+    public function delete()
+    {
+        $this->deleteCategory->delete();
+
+        return redirect()->route('admin.categories.index');
     }
 
     public function render()
