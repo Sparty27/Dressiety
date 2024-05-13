@@ -1,6 +1,6 @@
 <div class="
   sticky top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100
-  bg-base-100 text-base-content
+  bg-base-100 text-base-content shadow-lg
 
 ">
     <nav class="flex items-center justify-between gap-x-3 px-3 lg:px-6 w-full">

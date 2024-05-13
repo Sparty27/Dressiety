@@ -20,7 +20,6 @@ class CreateProduct extends Component
     public $category = '';
     public $visible;
 
-
     public $categories;
 
     public function mount()
@@ -30,14 +29,14 @@ class CreateProduct extends Component
 
     public function save()
     {
-        $this->validate();
+        $this->price = (integer)(floatval(str_replace(' ', '', $this->price)) * 100);
 
-        $price = (integer)(floatval(str_replace(' ', '', $this->price)) * 100);
+        $this->validate();
 
         Product::create([
             'name' => $this->name,
             'count' => $this->count,
-            'price' => $price,
+            'price' => $this->price,
             'category_id' => $this->category,
             'status' => $this->visible ?? false,
         ]);

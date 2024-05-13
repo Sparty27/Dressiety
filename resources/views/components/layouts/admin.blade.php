@@ -24,15 +24,17 @@
     <div>
         <div class="bg-base-100 drawer lg:drawer-open">
             <input id="drawer" type="checkbox" class="drawer-toggle">
-            <div class="drawer-content">
+            <div class="drawer-content bg-gray-200">
                 @livewire('admin.parts.header')
 
                 <div class="px-6">
 {{--                    @yield('breadcrumbs')--}}
                 </div>
 
-                <div class="p-4 grid gap-5">
-                    {{ $slot }}
+                <div class="p-4 grid gap-5 pt-5">
+                    @component('parts.layouts.card')
+                        {{ $slot }}
+                    @endcomponent
                 </div>
             </div>
 

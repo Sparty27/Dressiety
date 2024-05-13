@@ -12,7 +12,7 @@
                     <label for="name" class="">Name: </label>
                 </div>
                 <div>
-                    <input id="name" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model="name"/>
+                    <input id="name" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model="form.name"/>
                     @error('name')
                     <div class="text-red-800 mt-3">
                         {{ $message }}
@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <div class="flex items-center">
-                        <input id="price" x-mask:dynamic="$money($input, '.', ' ')" type="text" placeholder="0.00" class="input input-bordered w-full max-w-xs" wire:model="price">
+                        <input id="price" x-mask:dynamic="$money($input, '.', ' ')" type="text" placeholder="0.00" class="input input-bordered w-full max-w-xs" wire:model="form.price">
                         <span class="ml-2">₴</span>
                     </div>
                     @error('price')
@@ -42,7 +42,7 @@
                 </div>
                 <div>
                     <div class="flex items-center">
-                        <input id="count" type="number" min="0" placeholder="0" class="input input-bordered w-full max-w-xs" wire:model="count"/>
+                        <input id="count" type="number" min="0" placeholder="0" class="input input-bordered w-full max-w-xs" wire:model="form.count"/>
                         <span class="ml-2">pcs.</span>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="max-w-36 w-full ">
                     <label for="category" class="">Category: </label>
                 </div>
-                <select id="category" class="select select-bordered w-full max-w-xs" wire:model="category">
+                <select id="category" class="select select-bordered w-full max-w-xs" wire:model="form.category">
                     <option disabled selected>Choose category</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -63,7 +63,7 @@
                     <label for="visible" class="">Make visible: </label>
                 </div>
                 <div class="form-control">
-                    <input id="visible" type="checkbox" class="checkbox" wire:model="visible"/>
+                    <input id="visible" type="checkbox" class="checkbox" wire:model="form.visible"/>
                 </div>
             </div>
             <div class="mt-5">
@@ -77,7 +77,7 @@
                     <div class="flex justify-center items-center">
                         <label for="image">
                             <i class="ri-add-circle-fill text-3xl cursor-pointer mr-3">
-                                <input id="image" type="file" class="hidden" wire:model.live="loadedPhoto"/>
+                                <input id="image" type="file" class="hidden" wire:model.live="form.loadedPhoto"/>
                             </i>
                         </label>
                     </div>

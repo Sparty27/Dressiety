@@ -1,4 +1,4 @@
-<div class="drawer-side z-40">
+<div class="drawer-side z-40 shadow-lg">
     <label for="drawer" class="drawer-overlay"></label>
     <aside class="bg-base-100 w-80 h-full">
         <div

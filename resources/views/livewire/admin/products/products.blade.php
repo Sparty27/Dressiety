@@ -1,53 +1,24 @@
 <div>
-    {{--    <a href="{{route('products.create')}}" class="btn btn-primary my-4">Create</a>--}}
-    {{--    <div class="border-teal-500 border-2 p-3 rounded-md flex-wrap flex gap-2">--}}
-    {{--        @foreach($products as $product)--}}
-    {{--            <a class="mb-2 rounded-md border-gray-200 border-2 p-2 hover:shadow-md cursor-pointer ease-linear duration-200"--}}
-    {{--               href="{{ route('products.show', compact('product')) }}">--}}
-    {{--                {{$product->name}}--}}
-    {{--            </a>--}}
-    {{--        @endforeach--}}
-    {{--    </div>--}}
+    <div class="flex justify-between items-end mb-8">
+        <div class="flex gap-8 w-full">
+            @include('parts.form.input', [
+                'title' => 'Search',
+                'model' => 'searchText',
+                'small' => true
+            ])
+            @include('parts.form.select', [
+                'title' => 'Categories',
+                'model' => 'selectedCategory',
+                'options' => $categories,
+                'value' => 'id',
+                'name' => 'name',
+                'small' => true
+            ])
+        </div>
 
-
-{{--    <table>--}}
-{{--        <thead>--}}
-{{--            <tr>--}}
-{{--                @foreach($columns as $column)--}}
-{{--                    <th @if( $column->sortable) wire:click="toggleSortColumn({{ $column->key }})" @endif>--}}
-{{--                        {{ $column->name }}--}}
-{{--                        @if($column->sortable)--}}
-{{--                            @if($sortColumn == $column->key)--}}
-{{--                                @if($sortDirection == 'asc')--}}
-{{--                                    <i class="ri-arrow-up-line"></i>--}}
-{{--                                @else--}}
-{{--                                    <i class="ri-arrow-down-line"></i>--}}
-{{--                                @endif--}}
-{{--                            @else--}}
-{{--                                <i class="ri-arrow-up-down-line"></i>--}}
-{{--                            @endif--}}
-{{--                        @endif--}}
-{{--                    </th>--}}
-{{--                @endforeach--}}
-{{--            </tr>--}}
-{{--        </thead>--}}
-{{--    </table>--}}
-
-    <div>
-        <a href="{{ route('admin.products.create')}}" class="btn btn-primary mb-8">Create</a>
-        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" wire:model.live="searchText"/>
-        <select class="select select-bordered w-full max-w-xs" wire:model.live="selectedCategory">
-            <option value="" selected>All</option>
-            @foreach($categories as $category)
-                <option value="{{ $category->id }}" style="background-image: url('https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=')">
-                    {{--                    <div class="avatar">--}}
-                    {{--                        <div class="w-10 rounded-xl">--}}
-                    {{--                            <img src="{{ $category->photo?->getUrl() ?? App\Models\Photo::IMAGE_NOT_FOUND }}">--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
-                    {{ $category->name }}</option>
-            @endforeach
-        </select>
+        <a href="{{ route('admin.products.create')}}" class="btn btn-primary btn-sm">
+            <i class="ri-add-circle-line"></i>
+        </a>
     </div>
 
     <div class="overflow-x-auto">
@@ -140,31 +111,35 @@
                     <td class="font-"><a href="{{ route('admin.products.show', compact('product')) }}">{{$product->name}}</a></td>
                     <td>
                         @include('parts.table.photo', ['url' => $product->category?->photo?->url,
-    'alt' => $product->name,
+    'alt' => $product->category->name,
     'name' => $product->category->name
     ])
                     </td>
                     <td>
-                        <div class="avatar-group -space-x-6 rtl:space-x-reverse">
-                            @foreach($product->photos as $photo)
-                                <div class="avatar">
-                                    <div class="w-12">
-                                        <img src="{{ $photo->url }}" />
-                                    </div>
-                                </div>
-                            @endforeach
+                        <div class="avatar">
+                            <div class="w-12 rounded-xl">
+                                <img src="{{ $product->photo?->getUrl() ?? \App\Models\Photo::IMAGE_NOT_FOUND }}" />
+                            </div>
                         </div>
                     </td>
                     <td>{{ $product->count }}</td>
                     <td class="font-bold">{{ $product->formatted_price }} ₴</td>
                     <td>{{ $product->status ? 'Yes' : 'No' }}</td>
                     <td>{{ $product->created_at }}</td>
-                    <td><a class="btn border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.products.show', compact('product')) }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            </svg>
-                        </a></td>
+                    <td>
+                        <div class="flex gap-3 items-center">
+                            <a class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.products.show', compact('product')) }}">
+                                <i class="ri-eye-line"></i>
+                            </a>
+                            <a class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{route('admin.products.edit', $product)}}">
+                                <i class="ri-pencil-line"></i>
+                            </a>
+
+                            <button type="button" class="btn btn-sm btn-danger bg-red-600 hover:bg-red-700 text-white" wire:click="toggleDeleteModal">
+                                <i class="ri-delete-bin-line"></i>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
