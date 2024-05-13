@@ -11,6 +11,7 @@ use App\Livewire\Admin\Home;
 use App\Livewire\Admin\Orders\Orders;
 use App\Livewire\Admin\Products\CreateProduct;
 use App\Livewire\Admin\Products\EditProduct;
+use App\Livewire\Admin\Products\ProductForm;
 use App\Livewire\Admin\Products\Products;
 use App\Livewire\Admin\Products\ShowProduct;
 use App\Livewire\Admin\Tags\CreateTag;
@@ -34,19 +35,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 
-Route::get('/categories', Categories::class)->name('categories.index');
-Route::get('/categories/create', CreateCategory::class)->name('categories.create');
-Route::get('/categories/{category}', ShowCategory::class)->name('categories.show');
-Route::get('/categories/{category}/edit', EditCategory::class)->name('categories.edit');
+Route::prefix('/categories')->name('categories.')->group(function() {
+    Route::get('/', Categories::class)->name('index');
+    Route::get('/create', CreateCategory::class)->name('create');
+    Route::get('/{category}', ShowCategory::class)->name('show');
+    Route::get('/{category}/edit', EditCategory::class)->name('edit');
+});
 
-Route::get('/products', Products::class)->name('products.index');
-Route::get('/products/create', CreateProduct::class)->name('products.create');
-Route::get('/products/{product}', ShowProduct::class)->name('products.show');
-Route::get('/products/{product}/edit', EditProduct::class)->name('products.edit');
+Route::prefix('/products')->name('products.')->group(function() {
+    Route::get('/', Products::class)->name('index');
+    Route::get('/create', ProductForm::class)->name('create');
+    Route::get('/{product}', ShowProduct::class)->name('show');
+    Route::get('/{product}/edit', ProductForm::class)->name('edit');
+});
 
-Route::get('/tags', Tags::class)->name('tags.index');
-Route::get('/tags/create', CreateTag::class)->name('tags.create');
-Route::get('/tags/{tag}', ShowTag::class)->name('tags.show');
-Route::get('/tags/{tag}/edit', EditTag::class)->name('tags.edit');
+Route::prefix('/tags')->name('tags.')->group(function() {
+    Route::get('/', Tags::class)->name('index');
+    Route::get('/create', CreateTag::class)->name('create');
+    Route::get('/{tag}', ShowTag::class)->name('show');
+    Route::get('/{tag}/edit', EditTag::class)->name('edit');
+});
 
-Route::get('/orders', Orders::class)->name('orders.index');
+Route::prefix('/orders')->name('orders.')->group(function() {
+    Route::get('/', Orders::class)->name('index');
+});
+
