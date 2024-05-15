@@ -12,7 +12,8 @@
                 'options' => $categories,
                 'value' => 'id',
                 'name' => 'name',
-                'small' => true
+                'small' => true,
+                'placeholder' => 'All'
             ])
         </div>
 
@@ -122,10 +123,11 @@
                     <td class="font-black">{{$product->id}}</td>
                     <td class="font-"><a href="{{ route('admin.products.show', compact('product')) }}">{{$product->name}}</a></td>
                     <td>
-                        @include('parts.table.photo', ['url' => $product->category?->photo?->url,
-    'alt' => $product->category->name,
-    'name' => $product->category->name
-    ])
+                        @include('parts.table.photo', [
+                            'url' => $product->category?->photo?->url,
+                            'alt' => $product->category->name,
+                            'name' => $product->category->name
+                        ])
                     </td>
                     <td>
                         <div class="avatar">

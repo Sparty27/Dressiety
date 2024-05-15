@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TagController;
 use App\Livewire\Admin\Categories\Categories;
+use App\Livewire\Admin\Categories\CategoryForm;
 use App\Livewire\Admin\Categories\CreateCategory;
 use App\Livewire\Admin\Categories\EditCategory;
 use App\Livewire\Admin\Categories\InfoCategory;
@@ -17,6 +18,7 @@ use App\Livewire\Admin\Products\ShowProduct;
 use App\Livewire\Admin\Tags\CreateTag;
 use App\Livewire\Admin\Tags\EditTag;
 use App\Livewire\Admin\Tags\ShowTag;
+use App\Livewire\Admin\Tags\TagForm;
 use App\Livewire\Admin\Tags\Tags;
 use Illuminate\Support\Facades\Route;
 
@@ -37,9 +39,9 @@ Route::get('/', Home::class)->name('home');
 
 Route::prefix('/categories')->name('categories.')->group(function() {
     Route::get('/', Categories::class)->name('index');
-    Route::get('/create', CreateCategory::class)->name('create');
+    Route::get('/create', CategoryForm::class)->name('create');
 //    Route::get('/{category}', ShowCategory::class)->name('show');
-    Route::get('/{category}/edit', EditCategory::class)->name('edit');
+    Route::get('/{category}/edit', CategoryForm::class)->name('edit');
 });
 
 Route::prefix('/products')->name('products.')->group(function() {
@@ -51,9 +53,9 @@ Route::prefix('/products')->name('products.')->group(function() {
 
 Route::prefix('/tags')->name('tags.')->group(function() {
     Route::get('/', Tags::class)->name('index');
-    Route::get('/create', CreateTag::class)->name('create');
+    Route::get('/create', TagForm::class)->name('create');
 //    Route::get('/{tag}', ShowTag::class)->name('show');
-    Route::get('/{tag}/edit', EditTag::class)->name('edit');
+    Route::get('/{tag}/edit', TagForm::class)->name('edit');
 });
 
 Route::prefix('/orders')->name('orders.')->group(function() {

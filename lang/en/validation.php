@@ -186,6 +186,13 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'product.description' => 'description',
+        'product.name' => 'name',
+        'product.category_id' => 'category',
+        'product.price' => 'price',
+        'product.count' => 'count',
+        'product.status' => 'status',
+    ],
 
 ];

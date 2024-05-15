@@ -4,7 +4,7 @@
         <span class="label-text">{{ $title }}</span>
     </div>
     @endif
-    <textarea class="textarea textarea-bordered h-24 @error($model) textarea-error @enderror"
+    <textarea class="{{ $class ?? '' }} textarea textarea-bordered h-24 @error($model) textarea-error @enderror"
               placeholder="{{ $title ?? 'Type here' }}"
               wire:model.live="{{ $model }}"></textarea>
     @error($model)

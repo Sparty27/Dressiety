@@ -1,5 +1,7 @@
 <form wire:submit.prevent="save">
-    @component('parts.layouts.card')
+    @component('parts.layouts.card', [
+        'class' => 'mb-6 border-[1px] border-gray-100'
+    ])
         <p class="card-title">Content</p>
         @include('parts.form.input', [
             'model' => 'product.name',
@@ -7,10 +9,13 @@
         ])
         @include('parts.form.textarea', [
             'model' => 'product.description',
-            'title' => 'Description'
+            'title' => 'Description',
+            'class' => 'max-h-[400px]'
         ])
     @endcomponent
-    @component('parts.layouts.card')
+    @component('parts.layouts.card', [
+        'class' => 'mb-6 border-[1px] border-gray-100'
+    ])
         <p class="card-title">Attributes</p>
         @include('parts.form.input', [
             'model' => 'product.price',
@@ -24,13 +29,14 @@
             'options' => $categories,
             'value' => 'id',
             'name' => 'name',
-            'small' => true
+            'placeholder' => 'Choose category'
         ])
-
-        @include('parts.form.toggle', [
-            'title' => 'Status',
-            'model' => 'product.status'
-        ])
+        <div class="max-w-32">
+            @include('parts.form.toggle', [
+                'title' => 'Visible',
+                'model' => 'product.status'
+            ])
+        </div>
 
         @include('parts.form.input', [
             'model' => 'product.count',
@@ -39,5 +45,10 @@
     @endcomponent
 
 
-    <button class="btn btn-primary">Save</button>
+    <div class="flex items-center justify-center gap-3">
+        <button class="btn btn-primary">Save</button>
+        @include('parts.back', [
+            'route' => 'admin.products.index',
+        ])
+    </div>
 </form>

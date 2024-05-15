@@ -32,17 +32,27 @@ class ProductForm extends Component
             'product.name' => 'required|string|min:3|max:100',
             'product.description' => 'required|string|min:3|max:2500',
             'product.category_id' => 'required|exists:categories,id',
-            'product.price' => 'required|integer|min:0',
-//            'product.count' => 'required|integer|min:0|',
+            'product.price' => 'required|numeric|min:1|max:1000000000',
+            'product.count' => 'required|integer|min:0|',
             'product.status' => 'required|boolean',
         ];
     }
 
     public function save()
     {
-        $this->product['price'] = (integer)(floatval(str_replace(' ', '', $this->product['price'])) * 100);
+        $this->product['price'] = (floatval(str_replace(' ', '', $this->product['price'])));
 
-        dd($this->validate());
+        $this->validate();
+
+        $this->product['price'] = (integer)($this->product['price'] * 100);
+
+        Product::updateOrCreate([
+                'id' => $this->product['id'] ?? '',
+            ],
+            $this->product
+        );
+
+        return redirect()->route('admin.products.index');
     }
 
     public function render()
