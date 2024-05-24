@@ -14,7 +14,7 @@ class Shop extends Component
 
     public function mount()
     {
-        $this->products = Product::with('photo')->take(25)->get();
+        $this->products = Product::with('photo')->take(100)->get();
         $this->basketProducts = basket()->get();
     }
 

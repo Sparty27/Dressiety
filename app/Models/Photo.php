@@ -15,6 +15,7 @@ class Photo extends Model
 
     protected $fillable = [
         'url',
+        'priority'
     ];
 
     public function getUrl()

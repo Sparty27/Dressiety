@@ -35,6 +35,12 @@ class Product extends Model
         return $this->morphOne(Photo::class, 'photoble');
     }
 
+    // TO DO: Створити trait для інших моделей в яких є фото
+    public function firstPhoto()
+    {
+        return $this->morphOne(Photo::class, 'photoble')->orderBy('priority')->first();
+    }
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);

@@ -2,13 +2,20 @@
 
 namespace App\Livewire\Admin\Products;
 
+use App\Livewire\Forms\Gallery;
 use App\Models\Category;
+use App\Models\Photo;
 use App\Models\Product;
 use App\Rules\GreatThanZero;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class ProductForm extends Component
 {
+    use WithFileUploads;
+
+    public Gallery $gallery;
+
     public $product;
 
     public $price;
@@ -24,6 +31,26 @@ class ProductForm extends Component
         $this->product['status'] = $this->product['status'] ?? false;
 
         $this->categories = Category::all();
+
+        $this->gallery->setImagable($product);
+    }
+
+    public function updatedGallery()
+    {
+        $this->gallery->updatedUploadPhoto();
+    }
+
+    // TO DO: Перенести в Gallery
+    public function renderImages($orderedIds)
+    {
+        $this->gallery->photos = collect($orderedIds)->map(function ($id) {
+            return collect($this->gallery->photos)->where('id', $id['value'])->first();
+        })->toArray();
+    }
+
+    public function deletePhoto($id)
+    {
+        $this->gallery->deletePhoto($id);
     }
 
     public function rules()
@@ -46,11 +73,13 @@ class ProductForm extends Component
 
         $this->product['price'] = (integer)($this->product['price'] * 100);
 
-        Product::updateOrCreate([
+        $model = Product::updateOrCreate([
                 'id' => $this->product['id'] ?? '',
             ],
             $this->product
         );
+
+        $this->gallery->save($model);
 
         return redirect()->route('admin.products.index');
     }
