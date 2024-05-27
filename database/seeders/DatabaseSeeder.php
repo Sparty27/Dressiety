@@ -27,5 +27,7 @@ class DatabaseSeeder extends Seeder
         Product::factory(30)->create();
 
         Tag::factory(10)->create();
+
+
     }
 }
