@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use App\Interfaces\Imaginable;
+use App\Interfaces\Seoble;
+use App\Traits\ImaginableTrait;
+use App\Traits\SeobleTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends Model implements Imaginable, Seoble
 {
     use HasFactory;
+    use ImaginableTrait;
+    use SeobleTrait;
 
     protected $table = 'products';
     protected $fillable = [
@@ -23,22 +29,6 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function photos()
-    {
-        return $this->morphMany(Photo::class, 'photoble');
-    }
-
-    public function photo()
-    {
-        return $this->morphOne(Photo::class, 'photoble');
-    }
-
-    // TO DO: Створити trait для інших моделей в яких є фото
-    public function firstPhoto()
-    {
-        return $this->morphOne(Photo::class, 'photoble')->orderBy('priority')->first();
     }
 
     public function tags()

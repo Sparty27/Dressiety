@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\ImaginableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Category extends Model implements \App\Interfaces\Imaginable
 {
     use HasFactory;
+    use ImaginableTrait;
 
     protected $table = 'categories';
     protected $fillable = [
@@ -17,16 +19,6 @@ class Category extends Model
     public function product()
     {
         return $this->hasMany(Product::class);
-    }
-
-    public function photos()
-    {
-        return $this->morphMany(Photo::class, 'photoble');
-    }
-
-    public function photo()
-    {
-        return $this->morphOne(Photo::class, 'photoble');
     }
 
     public function scopeSearch($query, $search)
