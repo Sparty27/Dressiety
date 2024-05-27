@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Forms;
 
+use App\Interfaces\Imaginable;
 use App\Models\Photo;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -12,21 +14,19 @@ class Gallery extends Form
 {
     public array $photos;
 
-    public array $temporaryPhotos;
-
     public array $deletedPhotos;
 
+    #[Validate('image|max:2048')]
     public $uploadPhoto;
 
-    public function setImagable($model)
+    public function setImagable(Imaginable $model)
     {
-        $this->photos = $model->photos()->orderBy('priority')->get()->toArray();
+        $this->photos = $model->orderPhotos()->get()->toArray();
     }
 
     public function updatedUploadPhoto()
     {
-        $this->temporaryPhotos[] = $this->uploadPhoto;
-
+        $this->validateOnly('uploadPhoto');
         $this->photos[] = [
             'id' => Uuid::uuid4()->toString(),
             'url' => $this->uploadPhoto->temporaryUrl(),
@@ -43,15 +43,21 @@ class Gallery extends Form
         $this->deletedPhotos[] = $deletePhoto;
         $index = array_search($deletePhoto, $this->photos);
         unset($this->photos[$index]);
+        $this->photos = array_values($this->photos);
     }
 
-    public function save($model)
+    public function save(Imaginable $model)
     {
         foreach($this->deletedPhotos as $deletedPhoto)
         {
             if(!isset($deletedPhoto['isTemporary']))
             {
-                Photo::destroy($deletedPhoto['id']);
+                try {
+                    Photo::destroy($deletedPhoto['id']);
+                    Storage::delete($deletedPhoto['url']);
+                } catch (\Exception $ex) {
+                    Log::error($ex->getMessage());
+                }
             }
         }
 
@@ -71,10 +77,7 @@ class Gallery extends Form
                 ]);
             }
             else {
-                Photo::updateOrCreate([
-                    'id' => $photo['id']
-                ],
-                [
+                Photo::where('id', $photo['id'])->update([
                     'priority' => $priority,
                 ]);
             }
