@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\BasketService\BasketService;
+use App\Services\SeoService\SeoService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

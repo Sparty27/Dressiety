@@ -28,7 +28,8 @@
                     </span>
                     <span class="flex-1">{{ trans('pages.products.index') }}</span>
                 </a>
-            </li>            <li>
+            </li>
+            <li>
                 <a href="{{ route('admin.tags.index') }}" class="flex gap-4 {{request()->routeIs('admin.tags.*') ? 'active':''}}">
                     <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
                         <i class="ri-home-8-line"></i>

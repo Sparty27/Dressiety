@@ -141,7 +141,10 @@
                     <td>{{ $product->status ? 'Yes' : 'No' }}</td>
                     <td>{{ $product->created_at }}</td>
                     <td>
-                        <div class="flex gap-3 items-center">
+                        <div class="flex gap-1 items-center">
+                            <a  class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.products.seo', compact('product')) }}">
+                                <img src="{{ asset('images/icons/seo-fill.svg') }}" alt="SEO" width="14" height="14">
+                            </a>
                             <a class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.products.show', compact('product')) }}">
                                 <i class="ri-eye-line"></i>
                             </a>

@@ -16,7 +16,7 @@ class Gallery extends Form
 
     public array $deletedPhotos;
 
-    #[Validate('image|max:2048')]
+    #[Validate('image|max:10000')]
     public $uploadPhoto;
 
     public function setImagable(Imaginable $model)

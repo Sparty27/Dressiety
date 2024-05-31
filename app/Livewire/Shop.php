@@ -18,6 +18,10 @@ class Shop extends Component
         $this->basketProducts = basket()->get();
     }
 
+    public function redirectToProduct(Product $product)
+    {
+        return redirect()->route('products.show', $product);
+    }
 
     #[On('basketUpdated')]
     public function updateBasketProducts()
@@ -48,6 +52,7 @@ class Shop extends Component
     #[On('basketUpdated')]
     public function render()
     {
-        return view('livewire.shop');
+        return view('livewire.shop')
+            ->layout('components.layouts.app');
     }
 }
