@@ -63,4 +63,13 @@ class Product extends Model implements Imaginable, Seoble
     {
         return (float)($this->price / 100);
     }
+
+    public function getSeoData(): array
+    {
+        return [
+            '{title}' => $this->name,
+            '{description}' => $this->description,
+            '{categoryName}' => $this->category->name
+        ];
+    }
 }

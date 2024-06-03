@@ -10,6 +10,5 @@ trait SeobleTrait
     public function seo(): MorphOne
     {
         return $this->morphOne(Seo::class, 'seoble');
-
     }
 }

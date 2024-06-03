@@ -7,4 +7,6 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 interface Seoble
 {
     public function seo(): MorphOne;
+
+    public function getSeoData(): array;
 }

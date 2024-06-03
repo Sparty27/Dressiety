@@ -8,6 +8,7 @@
 
 {{--        {{ seo()->getMeta($model) }}--}}
 
+
         @stack('meta-data')
 
         <!-- Fonts -->

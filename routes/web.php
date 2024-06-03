@@ -30,4 +30,4 @@ Route::get('/order/make', MakeOrder::class)->name('order.make');
 
 Route::prefix('/products')->name('products.')->group(function() {
     Route::get('/{product}', \App\Livewire\ShowProduct::class)->name('show');
-});
+}); 
