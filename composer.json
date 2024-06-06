@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.1",
         "ext-openssl": "*",
-        "barryvdh/laravel-debugbar": "^3.11",
+        "barryvdh/laravel-debugbar": "^3.12",
         "cloudipsp/php-sdk-v2": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
