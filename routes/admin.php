@@ -9,13 +9,17 @@ use App\Livewire\Admin\Categories\EditCategory;
 use App\Livewire\Admin\Categories\ShowCategory;
 use App\Livewire\Admin\Home;
 use App\Livewire\Admin\Orders\Orders;
+use App\Livewire\Admin\Pages\PageForm;
+use App\Livewire\Admin\Pages\Pages;
+use App\Livewire\Admin\Pages\SeoPage;
 use App\Livewire\Admin\Products\CreateProduct;
 use App\Livewire\Admin\Products\EditProduct;
 use App\Livewire\Admin\Products\ProductForm;
 use App\Livewire\Admin\Products\Products;
 use App\Livewire\Admin\Products\SeoProduct;
 use App\Livewire\Admin\Products\ShowProduct;
-use App\Livewire\Admin\SeoPage;
+use App\Livewire\Admin\Seo\EditSeoTemplate;
+use App\Livewire\Admin\Seo\SeoTemplates;
 use App\Livewire\Admin\Tags\CreateTag;
 use App\Livewire\Admin\Tags\EditTag;
 use App\Livewire\Admin\Tags\ShowTag;
@@ -60,10 +64,20 @@ Route::prefix('/tags')->name('tags.')->group(function() {
     Route::get('/{tag}/edit', TagForm::class)->name('edit');
 });
 
+Route::prefix('/pages')->name('pages.')->group(function() {
+    Route::get('/', Pages::class)->name('index');
+    Route::get('/create', PageForm::class)->name('create');
+    Route::get('/{page}/edit', PageForm::class)->name('edit');
+    Route::get('/{page}/seo', SeoPage::class)->name('seo');
+
+});
+
 
 Route::prefix('/orders')->name('orders.')->group(function() {
     Route::get('/', Orders::class)->name('index');
 });
 
-Route::get('/seo', SeoPage::class)->name('seo.index');
-
+Route::prefix('/seo')->name('seo.')->group(function() {
+    Route::get('/', SeoTemplates::class)->name('index');
+    Route::get('/{type}/edit', EditSeoTemplate::class)->name('edit');
+});

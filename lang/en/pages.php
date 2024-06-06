@@ -22,11 +22,19 @@ return [
             'index' => 'Tags',
             'create' => 'Create Tag',
             'edit' => 'Edit Tag',
+
             'show' => 'Tag',
             'delete' => 'Delete Tag'
         ],
+        'pages' => [
+            'index' => 'Pages'
+        ],
         'orders' => [
             'index' => 'Orders'
+        ],
+        'seo' => [
+            'index' => 'SEO',
+            'edit' => 'SEO Edit Template'
         ]
     ]
 ];

@@ -1,3 +1,7 @@
+@push('meta-data')
+    {{ seo()->getMeta($page) }}
+@endpush
+
 <div class="mx-auto p-6 container mt-5 gap-4 flex flex-wrap">
 {{--    @foreach(App\Models\Product::with('photo')->take(25)->get() as $product)--}}
     @foreach($products as $product)

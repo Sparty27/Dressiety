@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Admin\Seo;
 
 use App\Models\Product;
 use App\Models\SeoTemplate;
 use Livewire\Component;
 
-class SeoPage extends Component
+class SeoTemplates extends Component
 {
     public $title;
 
@@ -34,7 +34,7 @@ class SeoPage extends Component
 
     public function render()
     {
-        return view('livewire.admin.seo-page')
+        return view('livewire.admin.seo.seo-templates')
             ->layout('components.layouts.admin');
     }
 }

@@ -12,10 +12,19 @@ class Shop extends Component
     public $products;
     public $basketProducts;
 
+    public $page;
+
     public function mount()
     {
+        $this->page = page()->getPage('shop');
+
         $this->products = Product::with('photo')->take(100)->get();
         $this->basketProducts = basket()->get();
+    }
+
+    protected function getPageIdentifier()
+    {
+        return 'shop';
     }
 
     public function redirectToProduct(Product $product)

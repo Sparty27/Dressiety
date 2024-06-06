@@ -45,6 +45,16 @@
                 </a>
             </li>
             <li class="mt-3">
+                <a href="{{ route('admin.pages.index') }}" class="flex gap-4 {{request()->routeIs('admin.pages.*') ? 'active':''}}">
+                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
+                        <i class="ri-pages-line"></i>
+                    </span>
+                    <span class="flex-1">
+                        {{ trans('pages.admin.pages.index') }}
+                    </span>
+                </a>
+            </li>
+            <li class="mt-3">
                 <a href="{{ route('admin.seo.index') }}" class="flex gap-4 {{request()->routeIs('admin.seo.*') ? 'active':''}}">
                     <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-[9px] rounded-lg flex items-center">
                         <img src="{{ asset('images/icons/seo-fill.svg') }}" alt="SEO">

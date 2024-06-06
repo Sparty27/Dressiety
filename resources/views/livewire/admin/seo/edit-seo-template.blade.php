@@ -2,7 +2,7 @@
     @component('parts.layouts.card', [
         'class' => 'mb-6 border-[1px] border-gray-100'
     ])
-        <p class="card-title">SEO Product Template</p>
+        <p class="card-title">{{ trans('seo.'.$seoTemplate->seoble_type) }}</p>
         <p class="text-base">
             <span class="font-bold">{title}</span> - it's a placeholder for title<br/>
             <span class="font-bold">{description}</span> - it's a placeholder for description
@@ -21,5 +21,8 @@
 
     <div class="flex items-center justify-center gap-3">
         <button class="btn btn-primary">Save</button>
+        @include('parts.back', [
+            'route' => 'admin.seo.index',
+        ])
     </div>
 </form>

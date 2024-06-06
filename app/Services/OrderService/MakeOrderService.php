@@ -5,10 +5,12 @@ namespace App\Services\OrderService;
 use App\Enums\DeliveryStatusEnum;
 use App\Enums\PaymentMethodEnum;
 use App\Enums\PaymentStatusEnum;
+use App\Events\ProductOrdered;
 use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\Warehouse;
 use App\Services\OrderService\Models\Customer;
+use Illuminate\Support\Facades\Log;
 
 class MakeOrderService
 {
@@ -52,6 +54,9 @@ class MakeOrderService
                 'warehouse_id' => $warehouse->ref,
             ]
         );
+
+        Log::channel('daily')->info('ProductOrdered event called');
+        ProductOrdered::dispatch($order);
 
         return $order;
     }

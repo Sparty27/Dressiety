@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ProductOrdered;
+use App\Mail\Mailer;
+use App\Mail\ProductOrderedMail;
 use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Services\PaymentServices\FondyService\FondyService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class TestController extends Controller
 {
@@ -14,8 +19,14 @@ class TestController extends Controller
      */
     public function index(FondyService $service)
     {
-        $order = Order::latest()->first();
-        dd(route('payments.fondy.webhook', compact('order')));
+        ProductOrdered::dispatch(Order::first());
+
+//        Mail::to('recipient@example.com')->send(new ProductOrderedMail(Order::first()));
+
+        return 'Email has been sent';
+
+//        $order = Order::latest()->first();
+//        dd(route('payments.fondy.webhook', compact('order')));
     }
 
     /**
