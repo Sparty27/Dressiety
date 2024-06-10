@@ -21,8 +21,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-<h1>Thank you for ordering!</h1>
-<p>Your order:</p>
+<h1>{{ $subject }}</h1>
+<p>{{ $body }}</p>
 
 @foreach($order->orderProducts as $product)
     <div class="border-bottom-2 border-gray-400">

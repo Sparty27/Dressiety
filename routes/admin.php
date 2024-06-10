@@ -7,6 +7,7 @@ use App\Livewire\Admin\Categories\CategoryForm;
 use App\Livewire\Admin\Categories\CreateCategory;
 use App\Livewire\Admin\Categories\EditCategory;
 use App\Livewire\Admin\Categories\ShowCategory;
+use App\Livewire\Admin\Email\EmailTemplates;
 use App\Livewire\Admin\Home;
 use App\Livewire\Admin\Orders\Orders;
 use App\Livewire\Admin\Pages\PageForm;
@@ -80,4 +81,8 @@ Route::prefix('/orders')->name('orders.')->group(function() {
 Route::prefix('/seo')->name('seo.')->group(function() {
     Route::get('/', SeoTemplates::class)->name('index');
     Route::get('/{type}/edit', EditSeoTemplate::class)->name('edit');
+});
+
+Route::prefix('/email')->name('email.')->group(function() {
+    Route::get('/', EmailTemplates::class)->name('index');
 });

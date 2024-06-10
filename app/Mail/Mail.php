@@ -2,8 +2,6 @@
 
 namespace App\Mail;
 
-use App\Services\EmailServices\EmailService;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,35 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ProductOrderedMail extends Mailable
+class Mail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $order;
-
-    public $subject;
-
-    public $body;
     /**
      * Create a new message instance.
      */
-    public function __construct($order)
+    public function __construct()
     {
-        $service = app(EmailService::class);
-        $this->order = $order;
-
-        $template = $service->getEmailTemplate('Ordered');
-
-        $userName = $order->name;
-        $date = Carbon::now();
-
-        $array = [
-            '{userName}' => $userName,
-            '{date}' => $date,
-        ];
-
-        $this->subject = $service->replacePlaceholders($array, $template->subject);
-        $this->body = $service->replacePlaceholders($array, $template->body);
+        //
     }
 
     /**
@@ -48,7 +27,7 @@ class ProductOrderedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject,
+            subject: 'Mail',
         );
     }
 
@@ -58,7 +37,7 @@ class ProductOrderedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.product-ordered',
+            view: 'view.name',
         );
     }
 

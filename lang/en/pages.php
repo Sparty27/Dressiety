@@ -35,6 +35,9 @@ return [
         'seo' => [
             'index' => 'SEO',
             'edit' => 'SEO Edit Template'
+        ],
+        'email' => [
+            'index' => 'Email Templates'
         ]
     ]
 ];

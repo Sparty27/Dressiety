@@ -62,6 +62,14 @@
                     <span class="flex-1">{{ trans('pages.admin.seo.index') }}</span>
                 </a>
             </li>
+            <li class="mt-3">
+                <a href="{{ route('admin.email.index') }}" class="flex gap-4 {{request()->routeIs('admin.email.*') ? 'active':''}}">
+                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-[9px] rounded-lg flex items-center">
+                        <i class="ri-mail-line"></i>
+                    </span>
+                    <span class="flex-1">{{ trans('pages.admin.email.index') }}</span>
+                </a>
+            </li>
             {{--            <li>--}}
             {{--                <a href="https://remixicon.com/" target="_blank" class="flex gap-4">--}}
             {{--                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">--}}

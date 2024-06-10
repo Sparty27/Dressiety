@@ -7,6 +7,7 @@ use App\Mail\Mailer;
 use App\Mail\ProductOrderedMail;
 use App\Models\Order;
 use App\Models\OrderTransaction;
+use App\Services\EmailServices\EmailService;
 use App\Services\PaymentServices\FondyService\FondyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -17,9 +18,11 @@ class TestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(FondyService $service)
+    public function index(EmailService $service)
     {
-        ProductOrdered::dispatch(Order::first());
+        $service->getData();
+
+//        ProductOrdered::dispatch(Order::first());
 
 //        Mail::to('recipient@example.com')->send(new ProductOrderedMail(Order::first()));
 

@@ -26,6 +26,6 @@ class ProductOrderedNotification
     public function handle(ProductOrdered $event): void
     {
         Log::channel('daily')->info('Product Ordered Notification entered');
-        Mail::to('recipient@example.com')->send(new ProductOrderedMail($event->order));
+        Mail::to($event->order->email)->send(new ProductOrderedMail($event->order));
     }
 }
