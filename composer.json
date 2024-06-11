@@ -9,7 +9,7 @@
         "ext-openssl": "*",
         "barryvdh/laravel-debugbar": "^3.12",
         "cloudipsp/php-sdk-v2": "^1.0",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/telescope": "^5.0",

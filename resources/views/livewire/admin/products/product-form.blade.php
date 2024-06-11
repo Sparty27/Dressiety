@@ -62,6 +62,11 @@
             @endforeach
         </ul>
         <input type="file" class="file-input file-input-bordered w-full max-w-xs" wire:model="gallery.uploadPhoto"/>
+        @error($gallery->uploadPhoto)
+        <div class="label">
+            <span class="label-text-alt text-red-500">{{ $message }}</span>
+        </div>
+        @enderror
     @endcomponent
 
 

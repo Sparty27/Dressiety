@@ -23,20 +23,12 @@ class ProductOrderedMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($order)
+    public function __construct($order, $array)
     {
         $service = app(EmailService::class);
         $this->order = $order;
 
         $template = $service->getEmailTemplate('Ordered');
-
-        $userName = $order->name;
-        $date = Carbon::now();
-
-        $array = [
-            '{userName}' => $userName,
-            '{date}' => $date,
-        ];
 
         $this->subject = $service->replacePlaceholders($array, $template->subject);
         $this->body = $service->replacePlaceholders($array, $template->body);

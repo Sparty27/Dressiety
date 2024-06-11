@@ -21,6 +21,7 @@ use App\Livewire\Admin\Products\SeoProduct;
 use App\Livewire\Admin\Products\ShowProduct;
 use App\Livewire\Admin\Seo\EditSeoTemplate;
 use App\Livewire\Admin\Seo\SeoTemplates;
+use App\Livewire\Admin\Sms\SmsTemplates;
 use App\Livewire\Admin\Tags\CreateTag;
 use App\Livewire\Admin\Tags\EditTag;
 use App\Livewire\Admin\Tags\ShowTag;
@@ -85,4 +86,8 @@ Route::prefix('/seo')->name('seo.')->group(function() {
 
 Route::prefix('/email')->name('email.')->group(function() {
     Route::get('/', EmailTemplates::class)->name('index');
+});
+
+Route::prefix('/sms')->name('sms.')->group(function() {
+    Route::get('/', SmsTemplates::class)->name('index');
 });

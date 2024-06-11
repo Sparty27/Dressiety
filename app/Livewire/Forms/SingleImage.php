@@ -15,7 +15,9 @@ class SingleImage extends Form
     public $photo;
 
     #[Validate('image|max:2048')]
-    public $uploadPhoto;
+    public $uploadPhoto = '';
+
+    public $previousPhoto;
 
     public $oldPhoto;
 
@@ -40,7 +42,7 @@ class SingleImage extends Form
 
     public function save(Imaginable $model)
     {
-        if(isset($this->uploadPhoto))
+        if(isset($this->uploadPhoto) && $this->uploadPhoto != '')
         {
             $model->photo()->delete();
             try {

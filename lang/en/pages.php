@@ -38,6 +38,9 @@ return [
         ],
         'email' => [
             'index' => 'Email Templates'
+        ],
+        'sms' => [
+            'index' => 'SMS',
         ]
     ]
 ];
