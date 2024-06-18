@@ -32,8 +32,12 @@ class SmsService
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function sendMessage($recipient, $text)
+    public function sendMessage($recipient, $templateName, $array)
     {
+        $template = $this->getSmsTemplate($templateName);
+
+        $text = $this->replacePlaceholders($template->text, $array);
+
         $response = $this->client->post('/service/message/sendsmsmessage', [
             'query' => [
                 'apiKey' => $this->token,
@@ -45,12 +49,12 @@ class SmsService
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getSmsTemplate($name)
+    private function getSmsTemplate($name)
     {
         return SmsTemplate::where('name', $name)->first() ?? null;
     }
 
-    public function replacePlaceholders($data, $template)
+    private function replacePlaceholders($template, $data)
     {
         foreach($data as $key => $value)
         {

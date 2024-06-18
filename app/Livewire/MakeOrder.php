@@ -46,6 +46,7 @@ class MakeOrder extends Component
         $this->cities = City::take(10)->get();
         $this->warehouses = Warehouse::take(10)->get();
 
+        //TODO: clear this template
         $this->email = 'testemail@gmail.com';
         $this->phone = '380500243492';
         $this->name = 'Nazar';

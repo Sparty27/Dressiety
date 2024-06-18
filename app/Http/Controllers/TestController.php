@@ -22,12 +22,16 @@ class TestController extends Controller
      */
     public function index(SmsService $service)
     {
-        $order = Order::first();
 
-        $number = $order->phone;
-        $number = str_replace(['+', ' '], '', $number);
 
-        dd($number);
+        $order = Order::latest()->first();
+
+        dd($order->formatted_phone);
+//
+//        $number = $order->phone;
+//        $number = str_replace(['+', ' '], '', $number);
+//
+//        dd($number);
 
 
         $response = $service->getList();

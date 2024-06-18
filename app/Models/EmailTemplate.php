@@ -14,4 +14,9 @@ class EmailTemplate extends Model
         'subject',
         'body',
     ];
+
+    public static function getPlaceholders($name)
+    {
+
+    }
 }

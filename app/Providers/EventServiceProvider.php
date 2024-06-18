@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\ProductOrdered;
+use App\Listeners\ProductOrderedEmailNotification;
 use App\Listeners\ProductOrderedNotification;
+use App\Listeners\ProductOrderedSmsNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -21,7 +23,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         ProductOrdered::class => [
-            ProductOrderedNotification::class
+            ProductOrderedEmailNotification::class,
+            ProductOrderedSmsNotification::class,
         ],
     ];
 

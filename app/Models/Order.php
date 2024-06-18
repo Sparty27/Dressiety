@@ -43,4 +43,9 @@ class Order extends Model
     {
         return (float)($this->total / 100);
     }
+
+    public function getFormattedPhoneAttribute()
+    {
+        return str_replace(['+', ' '], '', $this->phone);
+    }
 }
