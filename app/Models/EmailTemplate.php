@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\EmailTemplateEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,8 +16,7 @@ class EmailTemplate extends Model
         'body',
     ];
 
-    public static function getPlaceholders($name)
-    {
-
-    }
+    protected $casts = [
+        'name' => EmailTemplateEnum::class
+    ];
 }

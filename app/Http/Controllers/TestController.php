@@ -9,9 +9,13 @@ use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\SmsTemplate;
 use App\Services\EmailServices\EmailService;
+use App\Services\MyDropServices\MyDropProductService;
 use App\Services\PaymentServices\FondyService\FondyService;
 use App\Services\SmsServices\SmsService;
+use Cloudipsp\HttpClient\HttpGuzzle;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,32 +24,10 @@ class TestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SmsService $service)
+    public function index(MyDropProductService $service)
     {
+        $service->parse();
 
-
-        $order = Order::latest()->first();
-
-        dd($order->formatted_phone);
-//
-//        $number = $order->phone;
-//        $number = str_replace(['+', ' '], '', $number);
-//
-//        dd($number);
-
-
-        $response = $service->getList();
-
-        dd(json_decode($response->getBody()->getContents(), true));
-
-//        ProductOrdered::dispatch(Order::first());
-
-//        Mail::to('recipient@example.com')->send(new ProductOrderedMail(Order::first()));
-
-        return 'Email has been sent';
-
-//        $order = Order::latest()->first();
-//        dd(route('payments.fondy.webhook', compact('order')));
     }
 
     /**
