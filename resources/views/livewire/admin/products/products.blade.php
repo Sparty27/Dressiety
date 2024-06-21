@@ -85,10 +85,10 @@
                         @endif
                     </div>
                 </th>
-                <th class="cursor-pointer" wire:click="toggleSortColumn('status')">
+                <th class="cursor-pointer" wire:click="toggleSortColumn('available')">
                     <div class="flex items-center gap-1">
                         Visible
-                        @if($sortColumn == 'status')
+                        @if($sortColumn == 'available')
                             @if($sortDirection == 'asc')
                                 <i class="ri-arrow-up-line mt-0.5"></i>
                             @else
@@ -132,13 +132,13 @@
                     <td>
                         <div class="avatar">
                             <div class="w-12 rounded-xl">
-                                <img src="{{ $product->firstPhoto()->url }}" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
+                                <img src="{{ $product->firstPhoto()->url ?? '' }}" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
                             </div>
                         </div>
                     </td>
                     <td>{{ $product->count }}</td>
                     <td class="font-bold">{{ $product->formatted_price }} ₴</td>
-                    <td>{{ $product->status ? 'Yes' : 'No' }}</td>
+                    <td>{{ $product->available ? 'Yes' : 'No' }}</td>
                     <td>{{ $product->created_at }}</td>
                     <td>
                         <div class="flex gap-1 items-center">

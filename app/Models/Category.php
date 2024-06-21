@@ -13,7 +13,9 @@ class Category extends Model implements \App\Interfaces\Imaginable
 
     protected $table = 'categories';
     protected $fillable = [
-        'name'
+        'name',
+        'category_id',
+        'parent_id',
     ];
 
     public function product()

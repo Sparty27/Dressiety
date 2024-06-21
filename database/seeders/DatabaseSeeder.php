@@ -23,22 +23,22 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Category::factory(10)->create();
+//        Category::factory(10)->create();
+//
+//        Product::factory(30)->create();
 
-        Product::factory(30)->create();
-
-        Tag::factory(10)->create();
-
-        $this->call([
-            SeoTemplateSeeder::class,
-        ]);
-
-        $this->call([
-            EmailTemplateSeeder::class,
-        ]);
-
-        $this->call([
-            SmsTemplateSeeder::class,
-        ]);
+//        Tag::factory(10)->create();
+//
+//        $this->call([
+//            SeoTemplateSeeder::class,
+//        ]);
+//
+//        $this->call([
+//            EmailTemplateSeeder::class,
+//        ]);
+//
+//        $this->call([
+//            SmsTemplateSeeder::class,
+//        ]);
     }
 }

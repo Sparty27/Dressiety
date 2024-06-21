@@ -2,6 +2,8 @@
 
 namespace App\Services\MyDropServices;
 
+use App\Models\Category;
+use App\Models\Product;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Storage;
 use Orchestra\Parser\Xml\Facade as XmlParser;
@@ -55,9 +57,30 @@ class MyDropProductService
 
         foreach($xml->shop->categories->category as $category)
         {
-            $id = (string)$category['parentId'];
+            $parentId = (int)$category['parentId'] ? (int)$category['parentId'] : null;
 
-            dump($id);
+            Category::updateOrCreate([
+                'category_id' => (integer)$category['id'],
+            ], [
+                'name' => (string)$category,
+                'parent_id' => $parentId
+            ]);
+        }
+
+        foreach($xml->shop->offers->offer as $offer)
+        {
+            $product = Product::updateOrCreate([
+                'product_id' => (string)$offer['id']
+            ], [
+                'category_id' => (int)$offer->categoryId,
+                'name' => (string)$offer->name,
+                'description' => (string)$offer->description,
+                'currency' => (string)$offer->currencyId,
+                'count' => (int)$offer->quantity_in_stock,
+                'vendor_code' => (string)$offer->vendorCode,
+                'available' => (bool)$offer->available,
+                'price' => ((int)$offer->price * 100)
+            ]);
         }
     }
 }

@@ -7,7 +7,7 @@
     @foreach($products as $product)
         <div class="card w-[250px] bg-base-100 shadow-xl mx-auto">
             <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">
-                <img src="{{ $product->firstPhoto()->url }}" alt="Shoes" class="object-cover w-[250px] h-[250px]"/>
+                <img src="{{ $product->firstPhoto()->url ?? '' }}" alt="Shoes" class="object-cover w-[250px] h-[250px]"/>
             </figure>
             <div class="card-body">
                 <h2 class="card-title cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name }}</h2>

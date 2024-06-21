@@ -23,12 +23,21 @@ class Product extends Model implements Imaginable, Seoble
         'status',
         'category_id',
         'count',
-        'price'
+        'price',
+        'vendor_code',
+        'currency',
+        'product_id',
+        'available'
     ];
+
+    public function clothing()
+    {
+        return $this->hasOne(Clothing::class);
+    }
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'category_id');
     }
 
     public function tags()
