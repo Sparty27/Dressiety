@@ -18,7 +18,12 @@ class Shop extends Component
     {
         $this->page = page()->getPage('shop');
 
-        $this->products = Product::with('photo')->take(100)->get();
+        $this->products = Product::with('photo')
+            ->whereColumn('product_id', 'group_id')
+            ->orWhereNull('group_id')
+            ->where('available', true)
+            ->get();
+
         $this->basketProducts = basket()->get();
     }
 

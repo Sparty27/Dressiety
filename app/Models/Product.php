@@ -27,6 +27,7 @@ class Product extends Model implements Imaginable, Seoble
         'vendor_code',
         'currency',
         'product_id',
+        'group_id',
         'available'
     ];
 

@@ -27,7 +27,7 @@
             'title' => 'Categories',
             'model' => 'product.category_id',
             'options' => $categories,
-            'value' => 'id',
+            'value' => 'category_id',
             'name' => 'name',
             'placeholder' => 'Choose category'
         ])

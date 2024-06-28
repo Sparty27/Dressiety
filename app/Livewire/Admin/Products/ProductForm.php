@@ -28,7 +28,7 @@ class ProductForm extends Component
 
         $this->product['price'] = $product->formatted_price;
 
-        $this->product['status'] = $this->product['status'] ?? false;
+        $this->product['available'] = $this->product['available'] ?? false;
 
         $this->categories = Category::all();
 
@@ -58,10 +58,10 @@ class ProductForm extends Component
         return [
             'product.name' => 'required|string|min:3|max:100',
             'product.description' => 'required|string|min:3|max:2500',
-            'product.category_id' => 'required|exists:categories,id',
+            'product.category_id' => 'required|exists:categories,category_id',
             'product.price' => 'required|numeric|min:1|max:1000000000',
             'product.count' => 'required|integer|min:0|',
-            'product.status' => 'required|boolean',
+            'product.available' => 'required|boolean',
         ];
     }
 

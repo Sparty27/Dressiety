@@ -24,7 +24,7 @@
         </div>
         <div class="w-1/2 border-[1px] shadow-lg px-6">
             <h2 class="font-bold text-2xl mt-3">{{ $product->name }}</h2>
-            <p class="mt-3">If a dog chews shoes whose shoes does he choose?</p>
+            <p class="mt-3">{!! $product->description !!}</p>
         </div>
     </div>
 

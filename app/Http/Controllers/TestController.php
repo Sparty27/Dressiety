@@ -7,6 +7,7 @@ use App\Mail\Mailer;
 use App\Mail\ProductOrderedMail;
 use App\Models\Order;
 use App\Models\OrderTransaction;
+use App\Models\Product;
 use App\Models\SmsTemplate;
 use App\Services\EmailServices\EmailService;
 use App\Services\MyDropServices\MyDropProductService;
@@ -27,7 +28,6 @@ class TestController extends Controller
     public function index(MyDropProductService $service)
     {
         $service->parse();
-
     }
 
     /**

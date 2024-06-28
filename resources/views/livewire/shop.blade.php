@@ -9,7 +9,7 @@
             <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">
                 <img src="{{ $product->firstPhoto()->url ?? '' }}" alt="Shoes" class="object-cover w-[250px] h-[250px]"/>
             </figure>
-            <div class="card-body">
+            <div class="card-body flex flex-column justify-between">
                 <h2 class="card-title cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name }}</h2>
                 <div class="card-actions justify-between items-center mt-2">
                     <p class="font-bold my-auto">{{ number_format($product->formatted_price, 2, '.', ' ') }} грн</p>
