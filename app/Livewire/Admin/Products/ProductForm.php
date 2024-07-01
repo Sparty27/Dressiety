@@ -28,8 +28,9 @@ class ProductForm extends Component
 
         $this->product['price'] = $product->formatted_price;
 
-        $this->product['available'] = $this->product['available'] ?? false;
+        $this->product['available'] = (boolean)$this->product['available'] ?? false;
 
+//        dd($this->product['available']);
         $this->categories = Category::all();
 
         $this->gallery->setImagable($product);

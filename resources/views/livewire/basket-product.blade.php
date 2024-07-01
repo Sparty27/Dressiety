@@ -6,7 +6,7 @@
             </div>
         </div>
     </td>
-    <td>
+    <td class="max-w-[200px] whitespace-normal break-words">
     <span class="font-medium">
         {{ $basketProduct->product->name ?? '' }}
     </span>

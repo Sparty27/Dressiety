@@ -53,7 +53,7 @@ class MyDropProductService
             $parentId = (int)$category['parentId'] ? (int)$category['parentId'] : null;
 
             Category::updateOrCreate([
-                'category_id' => (integer)$category['id'],
+                'category_id' => (int)$category['id'],
             ], [
                 'name' => (string)$category,
                 'parent_id' => $parentId
@@ -129,7 +129,7 @@ class MyDropProductService
 
                     $newUrl = $this->saveImage($url);
 
-                    if($newUrl == '')
+                    if(!$newUrl)
                         continue;
 
                     $product->photos()->updateOrCreate([
@@ -185,7 +185,7 @@ class MyDropProductService
             $response = Http::get($url);
 
             if($response->status() != 200)
-                return '';
+                return false;
 
             Log::channel('daily')->info('entered to method file_get_contents url: '.$url);
             $contents = file_get_contents($url);
@@ -195,7 +195,7 @@ class MyDropProductService
         }
 
         if(!isset($contents))
-            return '';
+            return false;
 
         if(Storage::put($filePath, $contents))
             return Storage::url($filePath);

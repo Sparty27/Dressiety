@@ -34,7 +34,7 @@
         <div class="max-w-32">
             @include('parts.form.toggle', [
                 'title' => 'Visible',
-                'model' => 'product.status'
+                'model' => 'product.available'
             ])
         </div>
 

@@ -20,7 +20,7 @@ trait ImaginableTrait
 
     public function firstPhoto()
     {
-        return $this->morphOne(Photo::class, 'photoble')->orderBy('priority')->first();
+        return $this->morphOne(Photo::class, 'photoble')->orderBy('priority')->where('priority', 1);
     }
 
     public function orderPhotos()

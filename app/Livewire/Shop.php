@@ -6,10 +6,13 @@ use App\Models\BasketProduct;
 use App\Models\Product;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Shop extends Component
 {
-    public $products;
+    use WithPagination;
+
+//    public $products;
     public $basketProducts;
 
     public $page;
@@ -18,11 +21,11 @@ class Shop extends Component
     {
         $this->page = page()->getPage('shop');
 
-        $this->products = Product::with('photo')
-            ->whereColumn('product_id', 'group_id')
-            ->orWhereNull('group_id')
-            ->where('available', true)
-            ->get();
+//        $this->products = Product::with('photo')
+//            ->whereColumn('product_id', 'group_id')
+//            ->orWhereNull('group_id')
+//            ->where('available', true)
+//            ->get();
 
         $this->basketProducts = basket()->get();
     }
@@ -63,10 +66,20 @@ class Shop extends Component
         $this->dispatch('basketUpdated');
     }
 
+    public function products()
+    {
+        return Product::whereColumn('product_id', 'group_id')
+            ->orWhereNull('group_id')
+            ->where('available', true)
+            ->with('firstPhoto')
+            ->paginate(25);
+
+    }
+
     #[On('basketUpdated')]
     public function render()
     {
-        return view('livewire.shop')
+        return view('livewire.shop', [ 'products' => $this->products()])
             ->layout('components.layouts.app');
     }
 }

@@ -43,7 +43,7 @@ class BasketService
             ['session_id' => $session]
         );
 
-        $this->instance->load('basketProducts');
+        $this->instance->load('basketProducts', 'basketProducts.product', 'basketProducts.product.photo');
 
         return $this->instance;
     }
