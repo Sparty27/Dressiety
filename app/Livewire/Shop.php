@@ -3,7 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\BasketProduct;
+use App\Models\Clothing;
 use App\Models\Product;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,7 +17,14 @@ class Shop extends Component
 //    public $products;
     public $basketProducts;
 
+    public $searchText;
+
     public $page;
+
+    public $sizes;
+
+    public $minPrice;
+    public $maxPrice;
 
     public function mount()
     {
@@ -28,6 +37,8 @@ class Shop extends Component
 //            ->get();
 
         $this->basketProducts = basket()->get();
+
+        $this->sizes = Clothing::getSizes();
     }
 
     protected function getPageIdentifier()
@@ -66,13 +77,30 @@ class Shop extends Component
         $this->dispatch('basketUpdated');
     }
 
+    public function searchQuery(Builder $builder)
+    {
+        $builder->search($this->searchText);
+    }
+
     public function products()
     {
-        return Product::whereColumn('product_id', 'group_id')
-            ->orWhereNull('group_id')
-            ->where('available', true)
-            ->with('firstPhoto')
-            ->paginate(25);
+//        $builder = Product::whereColumn('product_id', 'group_id')
+//            ->where('available', true)
+//            ->orWhereNull('group_id')
+//            ->with('firstPhoto');
+
+//        $builder = Product::where(function ($query) {
+//            $query->where('available', true);
+//        })->where(function ($query) {
+//            $query->whereColumn('product_id', 'group_id')
+//                ->orWhereNull('group_id');
+//        });
+
+        $builder = Product::publicAvailable();
+
+        $this->searchQuery($builder);
+
+        return $builder->paginate(25);
 
     }
 

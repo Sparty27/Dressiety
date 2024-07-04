@@ -20,7 +20,7 @@ class MonobankController extends Controller
 
             return view('payments.success', compact('orderTransaction'));
         } catch(Exception $ex) {
-            Log::error($ex->getMessage());
+            Log::channel('daily')->error($ex->getMessage());
 
             return view('payments.success', compact('orderTransaction'));
         }
@@ -33,7 +33,7 @@ class MonobankController extends Controller
 
             return response(status: 200, headers: ['x-sign' => $request->header('x-sign')]);
         } catch(Exception $ex) {
-            Log::error($ex->getMessage());
+            Log::channel('daily')->error($ex->getMessage());
 
             return response(status: 200, headers: ['x-sign' => $request->header('x-sign')]);
         }

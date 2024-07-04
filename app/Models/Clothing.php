@@ -19,4 +19,15 @@ class Clothing extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public static function getSizes()
+    {
+        return [
+            'S',
+            'M',
+            'L',
+            'XL',
+            'XXL',
+        ];
+    }
 }

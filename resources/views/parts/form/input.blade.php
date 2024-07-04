@@ -1,13 +1,19 @@
-<label class="form-control w-full @if(isset($small)) max-w-xs @endif">
+<label class="
+            @if(!isset($range))form-control w-full @endif
+            @if(isset($small)) max-w-xs @endif">
     @if(isset($title))
     <div class="label">
         <span class="label-text">{{ $title }}</span>
     </div>
     @endif
     <div class="flex items-center relative">
-        <input type="text" placeholder="{{ $title ?? 'Type here' }}" class="{{ $class ?? '' }} input input-bordered w-full
+        <input type="text" placeholder="{{ $placeholder ?? 'Type here' }}"
+
+                class="input input-bordered w-full
                 @if(isset($small)) input-sm max-w-xs @endif
-                @error($model) input-error @enderror"
+                @error($model) input-error @enderror
+                {{ $class ?? '' }}"
+
                 @if(isset($type) && $type == 'money')
                     x-mask:dynamic="$money($input, '.', ' ')"
                 @endif

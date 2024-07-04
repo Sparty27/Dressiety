@@ -60,59 +60,59 @@ class MyDropProductService
             ]);
         }
 
-        foreach($xml->shop->offers->offer as $offer)
-        {
-            try {
-                $params = [];
-                foreach ($offer->param as $param) {
-                    $name = (string) $param['name'];
-                    $value = (string) $param;
-                    $params[$name] = $value;
-                }
-
-                $product = Product::updateOrCreate([
-                    'product_id' => (string)$offer['id']
-                ], [
-                    'group_id' => (string) $offer['group_id'] === '' ? null : (string) $offer['group_id'],
-                    'category_id' => (int)$offer->categoryId,
-                    'name' => (string)$offer->name,
-                    'description' => (string)$offer->description,
-                    'currency' => (string)$offer->currencyId,
-                    'count' => (int)$offer->quantity_in_stock,
-                    'vendor_code' => (string)$offer->vendorCode,
-                    'available' => (bool)$offer->available,
-                    'price' => ((int)$offer->price * 100)
-                ]);
-
-//                for($i = 0; $i < count($offer->picture);$i++)
-//                {
-//                    $url = (string)$offer->picture[$i];
-//
-//                    $newUrl = $this->saveImage($url);
-//
-//                    $product->photos()->updateOrCreate([
-//                        'url' => $newUrl
-//                    ],[
-//                        'priority' => ($i + 1)
-//                    ]);
-//
-//                    Log::channel('daily')->info('image '.($i + 1));
+//        foreach($xml->shop->offers->offer as $offer)
+//        {
+//            try {
+//                $params = [];
+//                foreach ($offer->param as $param) {
+//                    $name = (string) $param['name'];
+//                    $value = (string) $param;
+//                    $params[$name] = $value;
 //                }
-
-                $product->clothing()->updateOrCreate([
-                    'product_id' => $product->id
-                ],[
-                    'size' => $params['Размер'] ?? null,
-                    'color' => $params['Колір'] ?? null,
-                    'material' => $params['Матеріал'] ?? null,
-                ]);
-
-                Log::channel('daily')->info((string)$offer['id']);
-
-            } catch(Exception $ex) {
-                Log::channel('daily')->error($ex->getMessage());
-            }
-        }
+//
+//                $product = Product::updateOrCreate([
+//                    'product_id' => (string)$offer['id']
+//                ], [
+//                    'group_id' => (string) $offer['group_id'] === '' ? null : (string) $offer['group_id'],
+//                    'category_id' => (int)$offer->categoryId,
+//                    'name' => (string)$offer->name,
+//                    'description' => (string)$offer->description,
+//                    'currency' => (string)$offer->currencyId,
+//                    'count' => (int)$offer->quantity_in_stock,
+//                    'vendor_code' => (string)$offer->vendorCode,
+//                    'available' => (bool)$offer->available,
+//                    'price' => ((int)$offer->price * 100)
+//                ]);
+//
+////                for($i = 0; $i < count($offer->picture);$i++)
+////                {
+////                    $url = (string)$offer->picture[$i];
+////
+////                    $newUrl = $this->saveImage($url);
+////
+////                    $product->photos()->updateOrCreate([
+////                        'url' => $newUrl
+////                    ],[
+////                        'priority' => ($i + 1)
+////                    ]);
+////
+////                    Log::channel('daily')->info('image '.($i + 1));
+////                }
+//
+//                $product->clothing()->updateOrCreate([
+//                    'product_id' => $product->id
+//                ],[
+//                    'size' => $params['Размер'] ?? null,
+//                    'color' => $params['Колір'] ?? null,
+//                    'material' => $params['Матеріал'] ?? null,
+//                ]);
+//
+//                Log::channel('daily')->info((string)$offer['id']);
+//
+//            } catch(Exception $ex) {
+//                Log::channel('daily')->error($ex->getMessage());
+//            }
+//        }
 
         foreach($xml->shop->offers->offer as $offer)
         {

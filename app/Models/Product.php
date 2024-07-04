@@ -61,6 +61,16 @@ class Product extends Model implements Imaginable, Seoble
         $query->where('category_id', $categoryId);
     }
 
+    public function scopePublicAvailable($query)
+    {
+        $query->where(function ($query) {
+            $query->where('available', true);
+        })->where(function ($query) {
+            $query->whereColumn('product_id', 'group_id')
+                ->orWhereNull('group_id');
+        });
+    }
+
 //    public function price():Attribute
 //    {
 //        return Attribute::make(

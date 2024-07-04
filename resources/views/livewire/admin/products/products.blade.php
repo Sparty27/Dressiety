@@ -132,7 +132,7 @@
                     <td>
                         <div class="avatar">
                             <div class="w-12 rounded-xl">
-                                <img src="{{ $product->firstPhoto()->url ?? '' }}" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
+                                <img src="{{ $product->firstPhoto->url ?? '' }}" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
                             </div>
                         </div>
                     </td>
