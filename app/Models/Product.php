@@ -61,6 +61,21 @@ class Product extends Model implements Imaginable, Seoble
         $query->where('category_id', $categoryId);
     }
 
+    public function availableSizes()
+    {
+        $sizes = Clothing::whereHas('product', function($query) {
+            $query->where('group_id', $this->group_id)
+                ->where('available', true);
+        })->get()->map(function ($clothing) {
+            return [
+                'product_id' => $clothing->product_id,
+                'size' => $clothing->size,
+            ];
+        });
+
+        return $sizes;
+    }
+
     public function scopePublicAvailable($query)
     {
         $query->where(function ($query) {

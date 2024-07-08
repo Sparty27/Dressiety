@@ -15,6 +15,8 @@
                             'placeholder' => '0',
                             'class' => '!w-[70px] h-8 text-sm',
                             'range' => 'true',
+                            'static' => 'true',
+                            'customModel' => '.live.debounce.999ms'
                         ])
                         <span class="">
                             -
@@ -24,6 +26,8 @@
                             'placeholder' => '3 000',
                             'class' => '!w-[70px] h-8 text-sm',
                             'range' => 'true',
+                            'static' => 'true',
+                            'customModel' => '.live.debounce.999ms'
                         ])
                         <button class="btn btn-primary !min-h-8 !h-8 w-8" wire:click="products">OK</button>
                     </div>
@@ -38,7 +42,7 @@
                             @foreach($sizes as $size)
                                 <label class="label cursor-pointer">
                                     <span class="label-text">{{ $size }}</span>
-                                    <input type="checkbox" class="checkbox" />
+                                    <input type="checkbox" class="checkbox" value="{{ $size }}" wire:model.live="shopSizes"/>
                                 </label>
                             @endforeach
                         </div>
@@ -109,7 +113,16 @@
                         <img src="{{ $product->firstPhoto->url ?? '' }}" alt="Shoes" class="object-cover w-[220px] h-[220px]"/>
                     </figure>
                     <div class="card-body p-4 flex flex-column justify-between">
-                        <h2 title="{{ $product->name }}" data-full-text="test" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name }}</h2>
+                        <div>
+                            <h2 title="{{ $product->name }}" data-full-text="test" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name }}</h2>
+                            <div class="mt-2">
+                                @foreach($product->availableSizes() as $size)
+                                    <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline text-xs">
+                                        {{ $size['size'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
                         <div class="card-actions justify-between items-center mt-2">
                             <p class="font-bold my-auto">{{ number_format($product->formatted_price, 2, '.', ' ') }} грн</p>
                             <div class="justify-end">
