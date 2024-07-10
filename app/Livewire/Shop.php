@@ -131,13 +131,21 @@ class Shop extends Component
 //            ->orWhereNull('group_id')
 //            ->with('firstPhoto');
 
-        $builder = Product::where(function ($query) {
-            $query->where('available', true);
-        })->where(function ($query) {
-            $query->whereColumn('product_id', 'group_id')
-                ->orWhereNull('group_id');
-        });
-//        $builder = Product::query();
+//        $builder = Product::where(function ($query) {
+//            $query->where('available', true);
+//        })->where(function ($query) {
+//            $query->whereColumn('product_id', 'group_id')
+//                ->orWhereNull('group_id');
+//        });
+
+        $builder = Product::query();
+        $builder->where('available', true);
+
+//        if(empty($this->shopSizes))
+//        {
+//            $builder->orderBy('id')
+//                    ->groupBy('name');
+//        }
 
         $this->searchQuery($builder);
         $this->priceQuery($builder);
@@ -149,11 +157,20 @@ class Shop extends Component
 //                ->groupBy('name');
 //        });
 
-        return $builder->paginate(25);
+        $builder->orderBy('id')
+                ->groupBy('name');
+
+        $products = $builder->paginate(25);
+
+        foreach($products as $product)
+        {
+            $product->sizes = $product->availableSizes();
+        }
+
+        return $products;
 
     }
 
-    #[On('basketUpdated')]
     public function render()
     {
         return view('livewire.shop', [ 'products' => $this->products()])

@@ -114,9 +114,9 @@
                     </figure>
                     <div class="card-body p-4 flex flex-column justify-between">
                         <div>
-                            <h2 title="{{ $product->name }}" data-full-text="test" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name }}</h2>
+                            <h2 title="{{ $product->name.' '.$product->clothing->size }}" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name.' '.$product->clothing->size }}</h2>
                             <div class="mt-2">
-                                @foreach($product->availableSizes() as $size)
+                                @foreach($product->sizes as $size)
                                     <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline text-xs">
                                         {{ $size['size'] }}
                                     </a>

@@ -20,6 +20,20 @@ class Clothing extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function getInfo()
+    {
+        $info = '';
+
+        if($this->size)
+            $info = $info.$this->size.' ';
+        if($this->color)
+            $info = $info.$this->color.' ';
+        if($this->material)
+            $info = $info.$this->material.' ';
+
+        return $info;
+    }
+
     public static function getSizes()
     {
         return [

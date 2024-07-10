@@ -63,9 +63,11 @@ class Products extends Component
 
     public function products()
     {
-        $builder = Product::with('category','firstPhoto','category.photo')
-            ->whereColumn('product_id', 'group_id')
-            ->orWhereNull('group_id');
+//        $builder = Product::with('category','firstPhoto','category.photo')
+//            ->whereColumn('product_id', 'group_id')
+//            ->orWhereNull('group_id');
+
+        $builder = Product::query();
 
         $this->sortQuery($builder);
         $this->searchQuery($builder);
