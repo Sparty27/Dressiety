@@ -22,12 +22,14 @@ class Shop extends Component
 
     public $page;
 
-    public $sizes;
-
     public $minPrice;
     public $maxPrice;
 
+    public $sizes;
+    public $colors;
+
     public $shopSizes = [];
+    public $shopColors = [];
 
     public function mount()
     {
@@ -42,6 +44,7 @@ class Shop extends Component
         $this->basketProducts = basket()->get();
 
         $this->sizes = Clothing::getSizes();
+        $this->colors = Clothing::getColors();
     }
 
     public function updatedMinPrice()
@@ -124,6 +127,15 @@ class Shop extends Component
         }
     }
 
+    public function colorQuery(Builder $builder)
+    {
+        if (!empty($this->shopColors)) {
+            $builder->whereHas('clothing', function($query) {
+                $query->whereIn('color', $this->shopColors);
+            })->with('clothing');
+        }
+    }
+
     public function products()
     {
 //        $builder = Product::whereColumn('product_id', 'group_id')
@@ -150,6 +162,7 @@ class Shop extends Component
         $this->searchQuery($builder);
         $this->priceQuery($builder);
         $this->sizeQuery($builder);
+        $this->colorQuery($builder);
 
 //        $builder->whereIn('id', function ($query) {
 //            $query->select(DB::raw('MIN(id)'))

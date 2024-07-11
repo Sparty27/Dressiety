@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="flex gap-4">
-        <div class="carousel w-1/2">
+        <div class="carousel w-1/2 h-[450px]">
             @foreach($product->orderPhotos as $photo)
                 <div id="slide{{ $photo->priority }}" class="carousel-item relative w-full">
                     <img src="{{ $photo->url }}" class="object-cover h-[400px] mx-auto" />
@@ -21,10 +21,57 @@
                     </div>
                 </div>
             @endforeach
+
         </div>
         <div class="w-1/2 border-[1px] shadow-lg px-6">
             <h2 class="font-bold text-2xl mt-3">{{ $product->name }}</h2>
-            <p class="mt-3">{!! $product->description !!}</p>
+            <div class="flex justify-end mt-3">
+                Код: {{ $product->vendor_code }}
+            </div>
+            <div class="mt-3">
+                Розмір виробника: <span class="font-bold">{{ $product->clothing->size }}</span>
+            </div>
+            <div class="mt-3">
+                @foreach($product->availableSizes() as $size)
+                    <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline badge-lg hover:bg-indigo-700 hover:text-white">
+                        {{ $size['size'] }}
+                    </a>
+                @endforeach
+            </div>
+            <div class="flex mt-3">
+                <div>
+                    <span class="font-mono text-xl font-bold">
+                        {{ $product->formatted_price }}₴
+                    </span>
+                    @if($product->count > 0)
+                        <span class="text-green-600">
+                            є в наявності
+                        </span>
+                    @else
+                        <span class="text-red-600">
+                            немає в наявності
+                        </span>
+                    @endif
+                </div>
+            </div>
+            <div class="mt-3">
+                @if(basket()->get()->contains('product_id', $product->id))
+                    <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">
+                        Remove from Basket
+                    </label>
+                @else
+                    <button class="btn btn-primary text-lg" wire:click="addToBasket('{{ $product->id }}')">
+                        <i class="ri-shopping-cart-line"></i>
+                        Add to Basket
+                    </button>
+                @endif
+            </div>
+            <div class="mt-6">
+                <span class="font-bold font-mono text-lg">
+                    Опис:
+                </span>
+                <p class="">{!! $product->description !!}</p>
+            </div>
         </div>
     </div>
 

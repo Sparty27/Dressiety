@@ -44,4 +44,12 @@ class Clothing extends Model
             'XXL',
         ];
     }
+
+    public static function getColors()
+    {
+        return [
+            'Чорний',
+            'Білий',
+        ];
+    }
 }

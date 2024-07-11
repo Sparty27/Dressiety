@@ -3,6 +3,12 @@
 @endpush
 
 <div class="flex w-full">
+    <div wire:loading wire:target="addToBasket"
+        class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
+        <div class="flex justify-center items-center mt-[50vh]">
+            <span class="loading loading-spinner w-[75px] text-neutral"></span>
+        </div>
+    </div>
     <div class="max-w-60 w-full">
         <div class="join join-vertical w-full">
             <div class="collapse collapse-arrow join-item border-base-300 border">
@@ -55,14 +61,12 @@
                 <div class="collapse-content">
                     <div>
                         <div class="form-control">
-                            <label class="label cursor-pointer">
-                                <span class="label-text">Чорний</span>
-                                <input type="checkbox" class="checkbox" />
-                            </label>
-                            <label class="label cursor-pointer">
-                                <span class="label-text">Білий</span>
-                                <input type="checkbox" class="checkbox" />
-                            </label>
+                            @foreach($colors as $color)
+                                <label class="label cursor-pointer">
+                                    <span class="label-text">{{ $color }}</span>
+                                    <input type="checkbox" class="checkbox" value="{{ $color }}" wire:model.live="shopColors"/>
+                                </label>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -129,7 +133,12 @@
                                 @if($basketProducts->contains('product_id', $product->id))
                                     <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">Added</label>
                                 @else
-                                    <button class="btn btn-primary" wire:click="addToBasket('{{ $product->id }}')">Add to Basket</button>
+                                    <button class="btn btn-primary"
+                                            wire:click="addToBasket('{{ $product->id }}')"
+                                            wire:loading.attr="disabled"
+                                            wire:target="addToBasket">
+                                        Add to Basket
+                                    </button>
                                 @endif
                             </div>
                         </div>

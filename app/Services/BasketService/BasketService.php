@@ -65,6 +65,11 @@ class BasketService
             return false;
         }
 
+        $basketProduct = BasketProduct::where('basket_id', $basket->id)->where('product_id', $product->id)->first();
+
+        if($basketProduct)
+            return false;
+
         $basketProduct = BasketProduct::updateOrCreate(
             [
                 'product_id' => $product->id,
