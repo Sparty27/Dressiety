@@ -39,7 +39,7 @@
                 </div>
             </div>
             @livewire('basket')
-            <footer class="footer footer-center bg-base-200 text-base-content rounded p-10">
+            <footer class="footer footer-center bg-[#5A72A0] text-base-content rounded p-10 text-white">
                 <nav class="grid grid-flow-col gap-4">
                     <a class="link link-hover">About me</a>
                     <a class="link link-hover">Contact</a>

@@ -3,7 +3,7 @@
             @if(isset($small)) max-w-xs @endif">
     @if(isset($title))
     <div class="label">
-        <span class="label-text">{{ $title }}</span>
+        <span class="label-text {{ $titleClass ?? '' }}">{{ $title }}</span>
     </div>
     @endif
     <div class="flex items-center relative">

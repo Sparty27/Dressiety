@@ -102,7 +102,7 @@
 {{--            </div>--}}
 {{--        </div>--}}
     </div>
-    <div class="p-6 pt-0">
+    <div class="ml-6">
         <div class="flex gap-8 w-full">
             @include('parts.form.input', [
                 'model' => 'searchText',
@@ -114,7 +114,7 @@
             @foreach($products as $product)
                 <div class="card w-[220px] bg-base-100 shadow-xl">
                     <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">
-                        <img src="{{ $product->firstPhoto->url ?? '' }}" alt="Shoes" class="object-cover w-[220px] h-[220px]"/>
+                        <img src="{{ $product->firstPhoto->url ?? '' }}" alt="Clothes" class="object-cover w-[220px] h-[220px]"/>
                     </figure>
                     <div class="card-body p-4 flex flex-column justify-between">
                         <div>

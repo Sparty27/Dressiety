@@ -25,7 +25,7 @@
             <div class="float-right mt-3">
                 <p class="text-2xl font-bold">Total: <span class="font-normal">{{ number_format(basket()->formattedTotal(), 2, '.', ' ').' ₴' }}</span></p>
                 <div class="">
-                    <a class="btn btn-primary mt-3 w-full" href="{{ route('order.make') }}">Make order</a>
+                    <a class="btn btn-primary mt-3 w-full font-mono text-lg" href="{{ route('order.make') }}">Make Order</a>
                 </div>
             </div>
         </div>

@@ -26,6 +26,9 @@ class MakeOrder extends Component
     #[Validate('required|string|min:5|max:190')]
     public $name = '';
 
+    #[Validate('required|string|min:5|max:190')]
+    public $lastName = '';
+
     #[Validate('required')]
     public PaymentMethodEnum $selectedPaymentMethod;
 
@@ -41,15 +44,20 @@ class MakeOrder extends Component
     public $cities;
     public $warehouses;
 
+    public $basketProducts;
+
     public function mount()
     {
         $this->cities = City::take(10)->get();
         $this->warehouses = Warehouse::take(10)->get();
 
+        $this->basketProducts = basket()->get();
+
         //TODO: clear this template
-        $this->email = 'testemail@gmail.com';
+        $this->email = 'nazarzadrot8@gmail.com';
         $this->phone = '380500243492';
         $this->name = 'Nazar';
+        $this->lastName = 'Nyshchyi';
         $this->selectedWarehouse = Warehouse::first();
     }
 

@@ -1,4 +1,5 @@
-<div class="w-full bg-base-300 flex justify-center">
+{{--<div class="w-full bg-base-300 flex justify-center">--}}
+<div class="w-full bg-[#5A72A0] flex justify-center">
     <div class="navbar max-w-screen-2xl">
         <div class="flex-none lg:hidden">
             <label for="my-drawer-" aria-label="open sidebar" class="btn btn-square btn-ghost">
@@ -6,7 +7,9 @@
             </label>
         </div>
         <div class="flex-1 px-2 mx-2">
-            <a href="/shop" class="cursor-pointer">Pet project</a>
+            <a href="/shop" class="cursor-pointer">
+                <img src="{{ asset('images/logo.svg') }}" alt="logo" width="200">
+            </a>
         </div>
         <div class="flex-none lg:block">
             <ul class="menu menu-horizontal">
