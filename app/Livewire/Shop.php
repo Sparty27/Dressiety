@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,6 +19,7 @@ class Shop extends Component
 //    public $products;
     public $basketProducts;
 
+    #[Url]
     public $searchText;
 
     public $page;

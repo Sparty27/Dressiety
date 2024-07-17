@@ -10,7 +10,7 @@
                 'title' => 'Categories',
                 'model' => 'selectedCategory',
                 'options' => $categories,
-                'value' => 'id',
+                'value' => 'category_id',
                 'name' => 'name',
                 'small' => true,
                 'placeholder' => 'All'
@@ -99,10 +99,10 @@
                         @endif
                     </div>
                 </th>
-                <th class="cursor-pointer" wire:click="toggleSortColumn('created_at')">
+                <th class="cursor-pointer" wire:click="toggleSortColumn('vendor_code')">
                     <div class="flex items-center gap-1">
-                        Created at
-                        @if($sortColumn == 'created_at')
+                        Vendor code
+                        @if($sortColumn == 'vendor_code')
                             @if($sortDirection == 'asc')
                                 <i class="ri-arrow-up-line mt-0.5"></i>
                             @else
@@ -139,7 +139,7 @@
                     <td>{{ $product->count }}</td>
                     <td class="font-bold">{{ $product->formatted_price }} ₴</td>
                     <td>{{ $product->available ? 'Yes' : 'No' }}</td>
-                    <td>{{ $product->created_at }}</td>
+                    <td>{{ $product->vendor_code }}</td>
                     <td>
                         <div class="flex gap-1 items-center">
                             <a  class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.products.seo', compact('product')) }}">

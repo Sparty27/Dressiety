@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\ProductOrdered;
 use App\Mail\Mailer;
 use App\Mail\ProductOrderedMail;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderTransaction;
 use App\Models\Product;
@@ -27,7 +28,10 @@ class TestController extends Controller
      */
     public function index(MyDropProductService $service)
     {
-        $service->parse();
+        $category = Category::where('id', 189)->first();
+
+
+        dd($category->parent->children);
     }
 
     /**

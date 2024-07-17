@@ -29,7 +29,54 @@ class Products extends Component
 
     public function mount()
     {
-        $this->categories = Category::all();
+//        $this->categories = Category::all();
+
+        $categories = Category::whereNull('parent_id')->with('children')->get();
+
+        $this->categories = $this->sortCategories($categories);
+    }
+
+    private function sortArray($collection) {
+
+//        $collection->splice($index, 0, [$someElement]);
+
+        $categories = clone $collection;
+
+        foreach($categories as $key => $category)
+        {
+            $index = $categories->search(function($item, $key) use($category) {
+                if (is_object($item) && isset($item->category_id)) {
+                    return ($item->category_id == $category->parent_id);
+                }
+
+                return false;
+            });
+
+            if($index)
+            {
+                $categories->forget($key);
+
+                $categories->splice($index, 0, [$category]);
+            }
+        }
+
+        return $categories;
+    }
+
+    private function sortCategories($categories, $level = 0)
+    {
+        $sorted = [];
+
+        foreach ($categories as $category) {
+            $category->name = str_repeat('——', $level) . ' ' . $category->name;
+            $sorted[] = $category;
+
+            if ($category->children->isNotEmpty()) {
+                $sorted = array_merge($sorted, $this->sortCategories($category->children, $level + 1));
+            }
+        }
+
+        return $sorted;
     }
 
     public function toggleSortColumn($column)
@@ -66,6 +113,9 @@ class Products extends Component
 //        $builder = Product::with('category','firstPhoto','category.photo')
 //            ->whereColumn('product_id', 'group_id')
 //            ->orWhereNull('group_id');
+        $categories = Category::whereNull('parent_id')->with('children')->get();
+
+        $this->categories = $this->sortCategories($categories);
 
         $builder = Product::query();
 

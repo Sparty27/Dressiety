@@ -58,7 +58,17 @@ class Product extends Model implements Imaginable, Seoble
 
     public function scopeFilter($query, $categoryId)
     {
-        $query->where('category_id', $categoryId);
+        $category = Category::where('category_id', $categoryId)->first();
+
+        if ($category) {
+            $subcategoryIds = $category->getAllSubcategoryIds();
+
+            $allCategoryIds = array_merge([$categoryId], $subcategoryIds);
+
+            $query->whereIn('category_id', $allCategoryIds);
+        } else {
+            $query->where('category_id', $categoryId);
+        }
     }
 
     public function availableSizes()
@@ -107,4 +117,16 @@ class Product extends Model implements Imaginable, Seoble
             '{categoryName}' => $this->category->name
         ];
     }
+
+//    public function getInfo()
+//    {
+//        $info = $this->name;
+//
+//        if($this->clothing->size)
+//            $info = $info.' '.$this->clothing->size;
+//        if($this->clothing->color)
+//            $info = $info.' '.$this->clothing->color;
+//
+//        return $info;
+//    }
 }

@@ -18,6 +18,27 @@ class Category extends Model implements \App\Interfaces\Imaginable
         'parent_id',
     ];
 
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id','category_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id','category_id');
+    }
+
+    public function getAllSubcategoryIds()
+    {
+        $ids = $this->children()->pluck('category_id')->toArray();
+
+        foreach ($this->children as $child) {
+            $ids = array_merge($ids, $child->getAllSubcategoryIds());
+        }
+
+        return $ids;
+    }
+
     public function product()
     {
         return $this->hasMany(Product::class);
