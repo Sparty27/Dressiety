@@ -29,6 +29,7 @@
             'options' => $categories,
             'value' => 'category_id',
             'name' => 'name',
+            'showPlaceholder' => true,
             'placeholder' => 'Choose category'
         ])
         <div class="max-w-32">

@@ -102,13 +102,35 @@
 {{--            </div>--}}
 {{--        </div>--}}
     </div>
-    <div class="ml-6">
-        <div class="flex gap-8 w-full">
+    <div class="ml-6 w-full">
+        <div class="flex gap-8 w-full justify-between">
             @include('parts.form.input', [
                 'model' => 'searchText',
                 'class' => '!w-[500px]',
                 'placeholder' => 'Search'
             ])
+
+            @include('parts.form.select', [
+                'model' => 'selectedSort',
+                'options' => $sortOptions,
+                'value' => 'value',
+                'name' => 'name',
+                'placeholder' => '',
+                'class' => 'font-mono font-bold tracking-wider'
+            ])
+{{--            <div class="relative">--}}
+{{--                За популярністю--}}
+{{--                <button wire:click="toggleSortPopup" class="btn btn-primary">aboba</button>--}}
+{{--                <dialog id="my_modal_2" class="modal absolute top-0 left-0" @if($openSortPopup) open @endif>--}}
+{{--                    <div class="modal-box">--}}
+{{--                        <h3 class="text-sm font-bold">Hello!</h3>--}}
+{{--                        <p class="text-sm">Press ESC key or click outside to close</p>--}}
+{{--                    </div>--}}
+{{--                    <form method="dialog" class="modal-backdrop">--}}
+{{--                        <button wire:click="toggleSortPopup">close</button>--}}
+{{--                    </form>--}}
+{{--                </dialog>--}}
+{{--            </div>--}}
         </div>
         <div class="mx-auto container mt-5 gap-4 flex flex-wrap justify-between">
             @foreach($products as $product)

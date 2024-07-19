@@ -4,11 +4,14 @@
         <span class="label-text">{{ $title }}</span>
     </div>
     @endif
-    <select class="{{ $class ?? '' }} select select-bordered w-full max-w-xs
+    <select class="select select-bordered w-full max-w-xs
                 @error($model) select-error @enderror
-                @if(isset($small)) select-sm @endif"
+                @if(isset($small)) select-sm @endif
+                {{ $class ?? '' }} "
                 wire:model.live="{{ $model }}">
-        <option value="" selected>{{ $placeholder }}</option>
+        @if(isset($showPlaceholder))
+            <option value="" selected>{{ $placeholder }}</option>
+        @endif
         @foreach($options as $option)
             <option value="{{ $option->$value }}" style="background-image: url('https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=')">
                 {{ $option->$name }}</option>

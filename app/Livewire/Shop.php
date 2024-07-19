@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\SortProductEnum;
 use App\Models\BasketProduct;
 use App\Models\Clothing;
 use App\Models\Product;
@@ -22,6 +23,12 @@ class Shop extends Component
     #[Url]
     public $searchText;
 
+    #[Url]
+    public $dir;
+
+    public SortProductEnum $selectedSort;
+    public $sortOptions;
+
     public $page;
 
     public $minPrice;
@@ -32,6 +39,8 @@ class Shop extends Component
 
     public $shopSizes = [];
     public $shopColors = [];
+
+//    public $openSortPopup = false;
 
     public function mount()
     {
@@ -44,6 +53,13 @@ class Shop extends Component
 //            ->get();
 
         $this->basketProducts = basket()->get();
+
+        $this->sortOptions = [
+            (object) ['value' => SortProductEnum::POPULARITY, 'name' => 'За популярністю'],
+            (object) ['value' => SortProductEnum::CHEAP, 'name' => 'Від дешевих до дорогих'],
+            (object) ['value' => SortProductEnum::EXPENSIVE, 'name' => 'Від дорогих до дешевих'],
+        ];
+
 
         $this->sizes = Clothing::getSizes();
         $this->colors = Clothing::getColors();
@@ -61,9 +77,32 @@ class Shop extends Component
             $this->maxPrice = $this->minPrice;
     }
 
+    public function updatedSelectedSort()
+    {
+        switch ($this->selectedSort) {
+            case SortProductEnum::POPULARITY:
+                unset($this->dir);
+                break;
+            case SortProductEnum::EXPENSIVE:
+                $this->dir = 'desc';
+                break;
+            case SortProductEnum::CHEAP:
+                $this->dir = 'asc';
+                break;
+            default:
+                $this->dir = null;
+                break;
+        }
+    }
+
     public function updatedShopSizes()
     {
     }
+
+//    public function toggleSortPopup()
+//    {
+//        $this->openSortPopup = !$this->openSortPopup;
+//    }
 
     protected function getPageIdentifier()
     {
@@ -172,8 +211,16 @@ class Shop extends Component
 //                ->groupBy('name');
 //        });
 
-        $builder->orderBy('id')
-                ->groupBy('name');
+//        $builder->orderBy('id');
+
+        if(isset($this->dir) && $this->dir == 'asc')
+            $builder->orderBy('price', $this->dir);
+        else if(isset($this->dir) && $this->dir == 'desc')
+            $builder->orderBy('price', $this->dir);
+        else
+            $builder->orderBy('id');
+
+        $builder->groupBy('name');
 
         $products = $builder->paginate(25);
 
