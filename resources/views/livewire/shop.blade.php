@@ -133,7 +133,7 @@
 {{--            </div>--}}
         </div>
         <div class="">
-            <div wire:loading class="h-screen w-full bg-white">
+            <div wire:loading wire:target.except="addToBasket" class="h-screen w-full bg-white">
                 <div class="flex justify-center items-center mt-[50vh]">
                     <span class="loading loading-spinner w-[75px] text-neutral"></span>
                 </div>
@@ -143,7 +143,7 @@
                     <h2 class="text-2xl font-bold font-mono">Not Found</h2>
                 </div>
             @endif
-            <div wire:loading.remove class="mx-auto container mt-5 gap-4 flex flex-wrap justify-between relative">
+            <div wire:loading.remove wire:target.except="addToBasket" class="mx-auto container mt-5 gap-4 flex flex-wrap justify-between relative">
                 @foreach($products as $product)
                     <div class="card w-[220px] bg-base-100 shadow-xl">
                         <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">

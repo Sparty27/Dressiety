@@ -18,6 +18,7 @@ class BasketProduct extends Component
         basket()->remove($this->basketProduct);
 
         $this->dispatch('basketUpdated');
+        $this->dispatch('basketProductRemoved');
     }
 
     public function increment()
@@ -25,6 +26,7 @@ class BasketProduct extends Component
         basket()->increment($this->basketProduct);
 
         $this->dispatch('basketUpdated');
+        $this->dispatch('basketProductRemoved');
     }
 
     public function decrement()
@@ -32,6 +34,7 @@ class BasketProduct extends Component
         basket()->decrement($this->basketProduct);
 
         $this->dispatch('basketUpdated');
+        $this->dispatch('basketProductRemoved');
     }
 
     public function render()

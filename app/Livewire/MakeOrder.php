@@ -60,6 +60,8 @@ class MakeOrder extends Component
         $this->name = 'Nazar';
         $this->lastName = 'Nyshchyi';
 //        $this->selectedWarehouse = Warehouse::first();
+
+//        dd($this->selectedWarehouse);
     }
 
     public function setPaymentMethod(PaymentMethodEnum $method)
@@ -84,7 +86,12 @@ class MakeOrder extends Component
         $this->searchCity = $city->name;
         $this->selectedCity = $city;
 
-        $this->warehouses = Warehouse::take(10)->where('city_ref', $city->ref)->get();
+//        $this->selectedWarehouse =
+
+        unset($this->selectedWarehouse);
+        $this->searchWarehouse = '';
+
+        $this->warehouses = Warehouse::where('city_ref', $city->ref)->get();
     }
 
     public function selectWarehouse(Warehouse $warehouse)

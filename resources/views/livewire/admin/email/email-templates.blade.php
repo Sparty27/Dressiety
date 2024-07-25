@@ -18,6 +18,11 @@
                         <span class="font-bold">{resetLink}</span> - link to reset password<br/>
                     </p>
                     @break
+                @case(EmailTemplateEnum::ORDERED->value)
+                    <p class="text-base mb-6">
+                        <span class="font-bold">{count}</span> - count of products<br/>
+                    </p>
+                    @break
             @endswitch
 
             @include('parts.form.input', [

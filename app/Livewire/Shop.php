@@ -114,7 +114,7 @@ class Shop extends Component
         return redirect()->route('products.show', $product);
     }
 
-    #[On('basketUpdated')]
+    #[On('basketProductRemoved')]
     public function updateBasketProducts()
     {
         $this->basketProducts = basket()->get();
@@ -125,6 +125,7 @@ class Shop extends Component
     {
         basket()->set($product);
 
+        $this->basketProducts = basket()->get();
         $this->dispatch('basketUpdated');
     }
 
