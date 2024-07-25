@@ -10,6 +10,6 @@ Route::name('monobank.')->prefix('monobank')->controller(MonobankController::cla
 });
 
 Route::name('fondy.')->prefix('fondy')->controller(FondyController::class)->group(function() {
-    Route::get('status/{order:uuid}', 'check')->name('check');
+    Route::post('status/{order:uuid}', 'check')->name('check');
     Route::post('webhook/{order:uuid}', 'webhook')->name('webhook');
 });

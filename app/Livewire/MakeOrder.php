@@ -32,6 +32,7 @@ class MakeOrder extends Component
     #[Validate('required')]
     public PaymentMethodEnum $selectedPaymentMethod;
 
+    #[Validate('required')]
     public City $selectedCity;
 
     #[Validate('required')]
@@ -58,7 +59,7 @@ class MakeOrder extends Component
         $this->phone = '380500243492';
         $this->name = 'Nazar';
         $this->lastName = 'Nyshchyi';
-        $this->selectedWarehouse = Warehouse::first();
+//        $this->selectedWarehouse = Warehouse::first();
     }
 
     public function setPaymentMethod(PaymentMethodEnum $method)
@@ -78,6 +79,8 @@ class MakeOrder extends Component
 
     public function selectCity(City $city)
     {
+        $this->resetErrorBag('selectedCity');
+
         $this->searchCity = $city->name;
         $this->selectedCity = $city;
 
@@ -86,6 +89,8 @@ class MakeOrder extends Component
 
     public function selectWarehouse(Warehouse $warehouse)
     {
+        $this->resetErrorBag('selectedWarehouse');
+
         $this->searchWarehouse = $warehouse->name;
         $this->selectedWarehouse = $warehouse;
     }

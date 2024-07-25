@@ -14,6 +14,13 @@
             <div href="#" wire:click="{{ $select }}('{{ $option->$value }}')" x-on:click="open = ! open" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">{{ $option->$name }}</div>
         @endforeach
     </div>
+    @if(isset($model))
+        @error($model)
+        <div class="label">
+            <span class="label-text-alt text-red-500">{{ $message }}</span>
+        </div>
+        @enderror
+    @endif
 </div>
 
 {{--<div class="relative group" x-data="{ open: false }">--}}

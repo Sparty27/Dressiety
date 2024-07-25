@@ -108,7 +108,8 @@
                         'options' => $cities,
                         'selected' => $selectedCity?->name ?? 'Choose City',
                         'select' => 'selectCity',
-                        'zIndex' => 'z-[5]'
+                        'zIndex' => 'z-[5]',
+                        'model' => 'selectedCity'
                     ])
                 </div>
                 @if($selectedCity)
@@ -120,7 +121,8 @@
                             'options' => $warehouses,
                             'selected' => $selectedWarehouse?->name ?? 'Choose Warehouse',
                             'select' => 'selectWarehouse',
-                            'zIndex' => 'z-[3]'
+                            'zIndex' => 'z-[3]',
+                            'model' => 'selectedWarehouse'
                         ])
                     </div>
                 @endif

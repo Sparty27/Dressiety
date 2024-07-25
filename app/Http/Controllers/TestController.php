@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\SortProductEnum;
 use App\Events\ProductOrdered;
 use App\Mail\Mailer;
 use App\Mail\ProductOrderedMail;
@@ -28,10 +29,7 @@ class TestController extends Controller
      */
     public function index(MyDropProductService $service)
     {
-        $category = Category::where('id', 189)->first();
-
-
-        dd($category->parent->children);
+        dd(SortProductEnum::cases());
     }
 
     /**

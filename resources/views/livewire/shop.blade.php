@@ -132,41 +132,53 @@
 {{--                </dialog>--}}
 {{--            </div>--}}
         </div>
-        <div class="mx-auto container mt-5 gap-4 flex flex-wrap justify-between">
-            @foreach($products as $product)
-                <div class="card w-[220px] bg-base-100 shadow-xl">
-                    <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">
-                        <img src="{{ $product->firstPhoto->url ?? '' }}" alt="Clothes" class="object-cover w-[220px] h-[220px]"/>
-                    </figure>
-                    <div class="card-body p-4 flex flex-column justify-between">
-                        <div>
-                            <h2 title="{{ $product->name.' '.$product->clothing->size }}" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name.' '.$product->clothing->size }}</h2>
-                            <div class="mt-2">
-                                @foreach($product->sizes as $size)
-                                    <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline text-xs">
-                                        {{ $size['size'] }}
-                                    </a>
-                                @endforeach
+        <div class="">
+            <div wire:loading class="h-screen w-full bg-white">
+                <div class="flex justify-center items-center mt-[50vh]">
+                    <span class="loading loading-spinner w-[75px] text-neutral"></span>
+                </div>
+            </div>
+            @if($products->isEmpty())
+                <div class="h-screen flex items-center justify-center">
+                    <h2 class="text-2xl font-bold font-mono">Not Found</h2>
+                </div>
+            @endif
+            <div wire:loading.remove class="mx-auto container mt-5 gap-4 flex flex-wrap justify-between relative">
+                @foreach($products as $product)
+                    <div class="card w-[220px] bg-base-100 shadow-xl">
+                        <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">
+                            <img src="{{ $product->firstPhoto->url ?? '' }}" alt="Clothes" class="object-cover w-[220px] h-[220px]" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
+                        </figure>
+                        <div class="card-body p-4 flex flex-column justify-between">
+                            <div>
+                                <h2 title="{{ $product->name.' '.$product->clothing->size }}" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name.' '.$product->clothing->size }}</h2>
+                                <div class="mt-2">
+                                    @foreach($product->sizes as $size)
+                                        <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline text-xs">
+                                            {{ $size['size'] }}
+                                        </a>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-actions justify-between items-center mt-2">
-                            <p class="font-bold my-auto">{{ number_format($product->formatted_price, 2, '.', ' ') }} грн</p>
-                            <div class="justify-end">
-                                @if($basketProducts->contains('product_id', $product->id))
-                                    <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">Added</label>
-                                @else
-                                    <button class="btn btn-primary"
-                                            wire:click="addToBasket('{{ $product->id }}')"
-                                            wire:loading.attr="disabled"
-                                            wire:target="addToBasket">
-                                        Add to Basket
-                                    </button>
-                                @endif
+                            <div class="card-actions justify-between items-center mt-2">
+                                <p class="font-bold my-auto">{{ number_format($product->formatted_price, 2, '.', ' ') }} грн</p>
+                                <div class="justify-end">
+                                    @if($basketProducts->contains('product_id', $product->id))
+                                        <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">Added</label>
+                                    @else
+                                        <button class="btn btn-primary"
+                                                wire:click="addToBasket('{{ $product->id }}')"
+                                                wire:loading.attr="disabled"
+                                                wire:target="addToBasket">
+                                            Add to Basket
+                                        </button>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
         <div class="mt-12">
             {{ $products->links() }}

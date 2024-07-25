@@ -14,6 +14,8 @@ class FondyController extends Controller
 {
     public function check(Order $order, FondyService $service)
     {
+        return redirect()->route('shop');
+
         $orderTransaction = $order->orderTransaction;
 
         try {

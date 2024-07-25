@@ -9,6 +9,7 @@ use App\Services\EmailServices\EmailService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ProductOrderedEmailNotification
@@ -39,6 +40,10 @@ class ProductOrderedEmailNotification
 
         $emailData = $this->emailService->getEmailData(EmailTemplateEnum::ORDERED, $arrayData);
 
-        Mail::to($order->email)->send(new ProductOrderedMail($order, $emailData['subject'], $emailData['body']));
+        try {
+            Mail::to($order->email)->send(new ProductOrderedMail($order, $emailData['subject'], $emailData['body']));
+        } catch(\Exception $ex) {
+            Log::warning($ex->getMessage(), [$order]);
+        }
     }
 }
