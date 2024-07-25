@@ -99,11 +99,7 @@
                     <td class="font-black">{{$tag->id}}</td>
                     <td>{{$tag->name}}</td>
                     <td>
-                        @if ($tag->status)
-                            True
-                        @else
-                            False
-                        @endif
+                        <input type="checkbox" class="toggle" wire:click="toggleVisible('{{ $tag->id }}')" @if($tag->status) checked @endif/>
                     </td>
                     <td>{{$tag->created_at}}</td>
                     <td>{{$tag->updated_at}}</td>

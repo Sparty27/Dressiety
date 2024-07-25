@@ -37,7 +37,7 @@ return [
             'edit' => 'SEO Edit Template'
         ],
         'email' => [
-            'index' => 'Email Templates'
+            'index' => 'Email'
         ],
         'sms' => [
             'index' => 'SMS',

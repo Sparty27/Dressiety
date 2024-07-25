@@ -7,6 +7,6 @@
         </div>
     </div>
     @if(isset($name))
-        <div class="">{{ $name }}</div>
+        <div class="text-balance break-words max-w-[200px]">{{ $name }}</div>
     @endif
 </div>

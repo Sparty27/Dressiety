@@ -38,6 +38,13 @@ class Tags extends Component
         $this->sortDirection = 'asc';
     }
 
+    public function toggleVisible(Tag $tag)
+    {
+        $tag->update([
+            'status' => !$tag->status,
+        ]);
+    }
+
     public function searchQuery(Builder $builder)
     {
         $builder->search($this->searchText);

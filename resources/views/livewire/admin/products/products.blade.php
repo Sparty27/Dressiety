@@ -13,7 +13,8 @@
                 'value' => 'category_id',
                 'name' => 'name',
                 'small' => true,
-                'placeholder' => 'All'
+                'placeholder' => 'All',
+                'showPlaceholder' => true
             ])
         </div>
 
@@ -23,6 +24,12 @@
     </div>
 
     <div class="overflow-x-auto">
+        <div wire:loading
+             class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
+            <div class="flex justify-center items-center mt-[50vh]">
+                <span class="loading loading-spinner w-[75px] text-neutral"></span>
+            </div>
+        </div>
         <table class="table">
             <!-- head -->
             <thead>
@@ -121,8 +128,8 @@
             @foreach($products as $product)
                 <tr class="hover">
                     <td class="font-black">{{$product->id}}</td>
-                    <td class="font-"><a href="{{ route('admin.products.show', compact('product')) }}">{{$product->name}}</a></td>
-                    <td>
+                    <td class="max-w-[200px]"><a href="{{ route('admin.products.show', compact('product')) }}">{{$product->name}}</a></td>
+                    <td class="">
                         @include('parts.table.photo', [
                             'url' => $product->category?->photo?->url,
                             'alt' => $product->category->name,
@@ -138,8 +145,10 @@
                     </td>
                     <td>{{ $product->count }}</td>
                     <td class="font-bold">{{ $product->formatted_price }} ₴</td>
-                    <td>{{ $product->available ? 'Yes' : 'No' }}</td>
-                    <td>{{ $product->vendor_code }}</td>
+                    <td>
+                        <input type="checkbox" class="toggle" wire:click="toggleVisible('{{ $product->id }}')" @if($product->available) checked @endif/>
+                    </td>
+                    <td class="break-words max-w-[100px]">{{ $product->vendor_code }}</td>
                     <td>
                         <div class="flex gap-1 items-center">
                             <a  class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.products.seo', compact('product')) }}">

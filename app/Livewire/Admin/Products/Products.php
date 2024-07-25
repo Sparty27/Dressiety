@@ -133,6 +133,13 @@ class Products extends Component
         $this->open = !$this->open;
     }
 
+    public function toggleVisible(Product $product)
+    {
+        $product->update([
+            'available' => !$product->available,
+        ]);
+    }
+
     public function delete()
     {
         $this->deleteProduct->delete();
