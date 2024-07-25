@@ -110,7 +110,7 @@
                 'placeholder' => 'Search'
             ])
 
-            @include('parts.form.select', [
+            @include('parts.form.select-enum', [
                 'model' => 'selectedSort',
                 'options' => $sortOptions,
                 'value' => 'value',
@@ -154,7 +154,7 @@
                                 <h2 title="{{ $product->name.' '.$product->clothing->size }}" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name.' '.$product->clothing->size }}</h2>
                                 <div class="mt-2">
                                     @foreach($product->sizes as $size)
-                                        <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline text-xs">
+                                        <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline text-xs hover:bg-[#4A00FF] hover:text-[#D1DBFF] transition duration-200">
                                             {{ $size['size'] }}
                                         </a>
                                     @endforeach

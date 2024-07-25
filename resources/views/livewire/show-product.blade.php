@@ -33,7 +33,7 @@
             </div>
             <div class="mt-3">
                 @foreach($product->availableSizes() as $size)
-                    <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline badge-lg hover:bg-indigo-700 hover:text-white">
+                    <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary @if($product->clothing->size != $size['size']) badge-outline @endif badge-lg hover:bg-[#4A00FF] hover:text-[#D1DBFF]">
                         {{ $size['size'] }}
                     </a>
                 @endforeach

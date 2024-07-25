@@ -55,14 +55,14 @@ class Shop extends Component
         $this->basketProducts = basket()->get();
 
         $this->sortOptions = [
-            (object) ['value' => SortProductEnum::POPULARITY, 'name' => 'За популярністю'],
-            (object) ['value' => SortProductEnum::CHEAP, 'name' => 'Від дешевих до дорогих'],
-            (object) ['value' => SortProductEnum::EXPENSIVE, 'name' => 'Від дорогих до дешевих'],
+            ['value' => SortProductEnum::POPULARITY, 'name' => 'За популярністю'],
+            ['value' => SortProductEnum::CHEAP, 'name' => 'Від дешевих до дорогих'],
+            ['value' => SortProductEnum::EXPENSIVE, 'name' => 'Від дорогих до дешевих'],
         ];
 
 
-        $this->sizes = Clothing::getSizes();
-        $this->colors = Clothing::getColors();
+        $this->sizes = Clothing::SIZES;
+        $this->colors = Clothing::COLORS;
     }
 
     public function updatedMinPrice()

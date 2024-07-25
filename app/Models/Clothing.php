@@ -15,6 +15,19 @@ class Clothing extends Model
         'material',
     ];
 
+    const COLORS = [
+        'Чорний',
+        'Білий',
+    ];
+
+    const SIZES = [
+        'S',
+        'M',
+        'L',
+        'XL',
+        'XXL',
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -32,24 +45,5 @@ class Clothing extends Model
             $info = $info.$this->material.' ';
 
         return $info;
-    }
-
-    public static function getSizes()
-    {
-        return [
-            'S',
-            'M',
-            'L',
-            'XL',
-            'XXL',
-        ];
-    }
-
-    public static function getColors()
-    {
-        return [
-            'Чорний',
-            'Білий',
-        ];
     }
 }
