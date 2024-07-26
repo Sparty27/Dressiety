@@ -4,19 +4,27 @@ namespace App\Livewire\Admin\Orders;
 
 use App\Models\Order;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Orders extends Component
 {
-    public $orders;
+    use WithPagination;
 
     public function mount()
     {
-        $this->orders = Order::get();
+
+    }
+
+    public function orders()
+    {
+        $builder = Order::query();
+
+        return $builder->paginate(10);
     }
 
     public function render()
     {
-        return view('livewire.admin.orders.orders')
+        return view('livewire.admin.orders.orders', ['orders' => $this->orders()])
             ->layout('components.layouts.admin');
     }
 }

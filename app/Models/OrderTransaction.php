@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentMethodEnum;
 use App\Enums\PaymentStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +23,8 @@ class OrderTransaction extends Model
     ];
 
     protected $casts = [
-        'status' => PaymentStatusEnum::class
+        'status' => PaymentStatusEnum::class,
+        'type' => PaymentMethodEnum::class,
     ];
 
     public function order()

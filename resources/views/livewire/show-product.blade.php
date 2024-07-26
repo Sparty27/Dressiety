@@ -3,6 +3,12 @@
 @endpush
 
 <div class="relative">
+    <div wire:loading
+         class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
+        <div class="flex justify-center items-center mt-[50vh]">
+            <span class="loading loading-spinner w-[75px] text-neutral"></span>
+        </div>
+    </div>
     <div class="relative h-16">
         <a class="btn float-right" href="#" onclick="javascript:window.history.back(-1);return false;">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -16,8 +22,8 @@
                 <div id="slide{{ $photo->priority }}" class="carousel-item relative w-full">
                     <img src="{{ $photo->url }}" class="object-cover h-[400px] mx-auto my-auto" />
                     <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href="#slide{{ $photo->priority - 1 }}" class="btn btn-circle">❮</a>
-                        <a href="#slide{{ $photo->priority + 1 }}" class="btn btn-circle">❯</a>
+                        <a id="test" href="#slide{{ $photo->priority - 1 }}" class="btn btn-circle">❮</a>
+                        <a id="test" href="#slide{{ $photo->priority + 1 }}" class="btn btn-circle">❯</a>
                     </div>
                 </div>
             @endforeach
