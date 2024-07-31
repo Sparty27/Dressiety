@@ -34,7 +34,7 @@ class BasketService
                 ]
             );
 
-            $this->instance->load('basketProducts');
+            $this->instance = $this->instance->load('basketProducts');
 
             return $this->instance;
         }
@@ -43,9 +43,15 @@ class BasketService
             ['session_id' => $session]
         );
 
-        $this->instance->load('basketProducts', 'basketProducts.product', 'basketProducts.product.photo');
+
+        $this->instance = $this->instance->load('basketProducts', 'basketProducts.product', 'basketProducts.product.photo');
 
         return $this->instance;
+    }
+
+    private function clearInstance()
+    {
+        unset($this->instance);
     }
 
     public function get()
@@ -82,6 +88,8 @@ class BasketService
 
         $product->decrement('count', $count);
 
+
+        $this->clearInstance();
         return $basketProduct;
     }
 
@@ -109,6 +117,7 @@ class BasketService
             'count' => $product->count - $count,
         ]);
 
+        $this->clearInstance();
         return $basketProduct;
     }
 
@@ -122,6 +131,13 @@ class BasketService
         ]);
 
         $basketProduct->delete();
+
+        $this->clearInstance();
+    }
+
+    public function contains(Product $product)
+    {
+        return $this->get()->contains('product_id', $product->id);
     }
 
     public function count()

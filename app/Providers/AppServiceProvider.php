@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register('App\Providers\FakerServiceProvider');
         }
 
-        $this->app->bind(BasketService::class);
+        $this->app->singleton(BasketService::class);
     }
 
     /**

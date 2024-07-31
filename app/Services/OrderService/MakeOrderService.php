@@ -17,17 +17,14 @@ class MakeOrderService
 
     public function make(Customer $customer, Warehouse $warehouse, PaymentMethodEnum $paymentMethod): Order
     {
-        if(!auth()->check())
-        {
-            throw new \Exception("Customer is not authorized");
-        }
-
-        $order = auth()->user()->orders()->create(array_merge(
+        $order = Order::create(array_merge(
             [
+                'user_id' => auth()->id(),
                 'total' => basket()->total(),
             ],
             $customer->toArray()
         ));
+
 
         foreach (basket()->get() as $basketProduct)
         {
@@ -50,7 +47,7 @@ class MakeOrderService
 
         $order->orderDelivery()->create(
             [
-                'status' => DeliveryStatusEnum::PROCESS,
+                'status' => DeliveryStatusEnum::NOT_SENT,
                 'warehouse_id' => $warehouse->ref,
             ]
         );
