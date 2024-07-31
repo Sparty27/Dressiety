@@ -93,8 +93,15 @@
                         </td>
                         <td class="max-w-[200px]">
                             <div class="font-semibold text-xs tracking-wider font-mono">
-                                <div>
-                                    Новою Поштою
+                                <div class="flex justify-between">
+                                    <div>
+                                        Новою Поштою
+                                    </div>
+                                    <div>
+                                        <button wire:click="toggleModal('{{ $order->id }}')" class="px-2 py-0.5 rounded border-[1px] border-gray-400 shadow hover:bg-gray-200">
+                                            <i class="ri-file-list-3-line text-base"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="font-normal text-[10px] text-gray-500" title="{{ $order->orderDelivery?->warehouse->city->name.', '.$order->orderDelivery?->warehouse->name }}">
                                     <div>
@@ -104,6 +111,11 @@
                                         {{ $order->orderDelivery?->warehouse->name }}
                                     </div>
                                 </div>
+                                @if($order->orderDelivery?->ttn != null)
+                                    <div class="mt-3 font-bold text-[14px] text-gray-800">
+                                        ТТН: {{ $order->orderDelivery?->ttn }}
+                                    </div>
+                                @endif
                                 <div class="mt-3">
                                     {{ trans('delivery.'.$order->orderDelivery?->status->value) }}
                                 </div>
@@ -166,7 +178,40 @@
             </tbody>
         </table>
 
-{{--        @include('parts.delete-modal', [--}}
+        <div class="flex gap-3 justify-end my-5">
+            <dialog id="modal" class="modal modal-vertical modal-sm" @if($open) open @endif>
+                <div class="w-screen h-screen relative  bg-base-content opacity-40">
+                </div>
+                <form wire:submit="saveTTN" method="dialog" class="modal-box absolute top-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-100">
+                    <div class="mt-2 flex justify-center">
+                        <button type="button" wire:click="toggleModal" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </div>
+                    <div class="flex flex-wrap justify-start gap-5">
+                        <div class="font-extrabold text-xl flex">
+                            {{ trans( 'pages.admin.orders.save_ttn') }}
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center text-lg flex font-bold gap-3">
+                        <div class="mt-[9px]">
+                            ТТН:
+                        </div>
+                        @include('parts.form.input', [
+                        'model' => 'ttn',
+                        'placeholder' => '',
+                        'attributes' => 'maxLength=17',
+                        'mask' => '99 9999 9999 9999'
+                    ])
+                    </div>
+                    <div class="flex gap-3 justify-center mt-6">
+                        <button type="submit" class="btn bg-green-600 hover:bg-green-700 text-white">Save</button>
+                        <button type="button" wire:click="toggleModal" class="btn">Cancel</button>
+                    </div>
+                </form>
+            </dialog>
+        </div>
+
+
+        {{--        @include('parts.delete-modal', [--}}
 {{--            'model' => $deleteTag,--}}
 {{--            'open' => $open,--}}
 {{--            'deleteMethod' => 'delete',--}}

@@ -30,7 +30,8 @@ return [
             'index' => 'Pages'
         ],
         'orders' => [
-            'index' => 'Orders'
+            'index' => 'Orders',
+            'save_ttn' => 'Зберегти ТТН'
         ],
         'seo' => [
             'index' => 'SEO',

@@ -27,6 +27,13 @@
             @else
                wire:model.live="{{$model}}"
             @endif
+
+            @if(isset($attributes))
+                {{ $attributes }}
+            @endif
+            @if(isset($mask))
+                x-mask="{{ $mask }}"
+            @endif
         />
         @if(isset($type) && $type == 'money')
             <span class="absolute right-3 text-2xl">₴</span>

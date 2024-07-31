@@ -5,4 +5,5 @@ return [
     'deliveried' => 'Доставлено',
     'canceled' => 'Скасовано',
     'returned' => 'Повернено',
+    'not_sent' => 'Не відправлено'
 ];

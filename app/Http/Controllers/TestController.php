@@ -29,9 +29,7 @@ class TestController extends Controller
      */
     public function index(MyDropProductService $service)
     {
-        $product = Product::first();
 
-        dd($product->availableSizes()->get());
     }
 
     /**
