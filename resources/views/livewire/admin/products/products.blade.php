@@ -128,7 +128,7 @@
             @foreach($products as $product)
                 <tr class="hover">
                     <td class="font-black">{{$product->id}}</td>
-                    <td class="max-w-[200px]"><a href="{{ route('admin.products.show', compact('product')) }}">{{$product->name}}</a></td>
+                    <td class="max-w-[200px]"><a href="{{ route('admin.products.show', compact('product')) }}">{{$product->full_title}}</a></td>
                     <td class="">
                         @include('parts.table.photo', [
                             'url' => $product->category?->photo?->url,

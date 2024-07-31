@@ -8,7 +8,12 @@
                 @error($model) select-error @enderror
                 @if(isset($small)) select-sm @endif
                 {{ $class ?? '' }} "
-                wire:model.live="{{ $model }}">
+            @if(isset($onChange))
+                wire:change="updateStatus({{ $order->id }}, $event.target.value)"
+            @else
+                wire:model.live="{{ $model }}"
+            @endif
+    >
         @if(isset($showPlaceholder))
             <option value="" selected>{{ $placeholder }}</option>
         @endif

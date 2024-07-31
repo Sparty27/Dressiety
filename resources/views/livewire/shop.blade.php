@@ -108,7 +108,10 @@
                     <h2 class="text-2xl font-bold font-mono">Not Found</h2>
                 </div>
             @endif
-            <div wire:loading.remove wire:target.except="addToBasket" class="mx-auto container mt-5 gap-4 flex flex-wrap justify-between relative">
+            <div wire:loading.remove wire:target.except="addToBasket" class="mx-auto container mt-5
+{{--             gap-4 flex flex-wrap justify-between --}}
+             grid gap-4 grid-cols-5
+             relative">
                 @foreach($products as $product)
                     <div class="card w-[220px] bg-base-100 shadow-xl">
                         <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">

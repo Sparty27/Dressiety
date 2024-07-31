@@ -136,7 +136,20 @@
 {{--                                @endswitch--}}
                             </div>
                         </td>
-                        <td></td>
+                        <td>
+                            <label class="form-control w-full max-w-xs">
+                                <select class="select select-bordered w-full max-w-xs
+                                        select-sm font-mono font-bold tracking-wider"
+                                        wire:change="updateStatus({{ $order->id }}, $event.target.value)">
+                                        <option value="" @if(!$order->status) selected @endif disabled>Оберіть стан замовлення</option>
+                                    @foreach(\App\Enums\OrderStatusEnum::cases() as $option)
+                                        <option @if($option == $order->status) selected @endif value="{{ $option->value }}">
+                                            {{ $option->label() }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </label>
+                        </td>
                         <td>
                             <div class="flex gap-1 justify-end items-center">
                                 <a class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="#">

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Orders;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -18,16 +19,21 @@ class Orders extends Component
 
     public Order $selectedOrder;
 
+    public $selectedOrderStatus;
+
     public function mount()
     {
 
     }
 
-    public function orders()
+    public function updateStatus(Order $order, OrderStatusEnum $status)
     {
-        $builder = Order::query();
+        $order->status = $status;
+        $order->save();
+    }
 
-        return $builder->paginate(10);
+    public function updatedSelectedOrderStatus()
+    {
     }
 
     public function toggleModal(Order $order)
@@ -60,6 +66,15 @@ class Orders extends Component
         ]);
 
         $this->open = !$this->open;
+    }
+
+    public function orders()
+    {
+        $builder = Order::query();
+
+        $builder->orderBy('created_at', 'desc');
+
+        return $builder->paginate(10);
     }
 
     public function render()

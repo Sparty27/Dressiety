@@ -16,4 +16,12 @@ return [
             'expensive' => 'desc',
         ]
     ],
+    'order_status' => [
+        'label' => [
+            'new' => 'Новий',
+            'process_order' => 'Прийняти замовлення',
+            'done' => 'Завершено',
+            'failed' => 'Відхилено'
+        ]
+    ]
 ];

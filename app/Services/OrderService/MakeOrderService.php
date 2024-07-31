@@ -3,6 +3,7 @@
 namespace App\Services\OrderService;
 
 use App\Enums\DeliveryStatusEnum;
+use App\Enums\OrderStatusEnum;
 use App\Enums\PaymentMethodEnum;
 use App\Enums\PaymentStatusEnum;
 use App\Events\ProductOrdered;
@@ -21,6 +22,7 @@ class MakeOrderService
             [
                 'user_id' => auth()->id(),
                 'total' => basket()->total(),
+                'status' => OrderStatusEnum::NEW,
             ],
             $customer->toArray()
         ));
