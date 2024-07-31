@@ -13,8 +13,8 @@
             <option value="" selected>{{ $placeholder }}</option>
         @endif
         @foreach($options as $option)
-            <option value="{{ $option[$value] }}">
-                {{ $option[$name] }}
+            <option value="{{ $option->value }}">
+                {{ $option->label() }}
             </option>
         @endforeach
     </select>
