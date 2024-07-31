@@ -10,6 +10,7 @@ class Clothing extends Model
     use HasFactory;
 
     protected $fillable = [
+        'group_id',
         'size',
         'color',
         'material',
@@ -31,6 +32,11 @@ class Clothing extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function availableProduct()
+    {
+        return $this->product()->available();
     }
 
     public function getInfo()

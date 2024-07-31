@@ -36,6 +36,17 @@ class Product extends Model implements Imaginable, Seoble
         return $this->hasOne(Clothing::class);
     }
 
+    public function sizes()
+    {
+        return $this->hasMany(Clothing::class, 'group_id', 'group_id');
+
+    }
+
+    public function availableSizes()
+    {
+        return $this->sizes()->whereHas('availableProduct');
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
@@ -71,20 +82,11 @@ class Product extends Model implements Imaginable, Seoble
         }
     }
 
-    public function availableSizes()
+    public function scopeAvailable($query)
     {
-        $sizes = Clothing::whereHas('product', function($query) {
-            $query->where('group_id', $this->group_id)
-                ->where('available', true);
-        })->get()->map(function ($clothing) {
-            return [
-                'product_id' => $clothing->product_id,
-                'size' => $clothing->size,
-            ];
-        });
-
-        return $sizes;
+        $query->where('available', true);
     }
+
 
     public function scopePublicAvailable($query)
     {
@@ -96,17 +98,38 @@ class Product extends Model implements Imaginable, Seoble
         });
     }
 
-//    public function price():Attribute
-//    {
-//        return Attribute::make(
-//            get: fn(int $value) => (float)($value / 100),
-//            set: fn(float $value) => (int)($value * 100)
-//        );
-//    }
+    public function scopeBySizes($query, $shopSizes)
+    {
+        $query->whereHas('clothing', function($query) use ($shopSizes) {
+            $query->whereIn('size', $shopSizes);
+        });
+    }
+
+    public function scopeByColors($query, $shopColors)
+    {
+        $query->whereHas('clothing', function($query) use ($shopColors) {
+            $query->whereIn('color', $shopColors);
+        });
+    }
+
+    public function scopePriceBetween($query, int $min, int $max)
+    {
+        $query->whereBetween('price', [$min, $max]);
+    }
 
     public function getFormattedPriceAttribute()
     {
         return (float)($this->price / 100);
+    }
+
+    public function getMoneyPriceAttribute()
+    {
+        return number_format($this->formatted_price, 2, '.', ' ');
+    }
+
+    public function getFullTitleAttribute()
+    {
+        return $this->name.' '.$this->clothing->size;
     }
 
     public function getSeoData(): array
@@ -117,16 +140,4 @@ class Product extends Model implements Imaginable, Seoble
             '{categoryName}' => $this->category->name
         ];
     }
-
-//    public function getInfo()
-//    {
-//        $info = $this->name;
-//
-//        if($this->clothing->size)
-//            $info = $info.' '.$this->clothing->size;
-//        if($this->clothing->color)
-//            $info = $info.' '.$this->clothing->color;
-//
-//        return $info;
-//    }
 }
