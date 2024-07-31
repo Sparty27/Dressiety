@@ -100,7 +100,8 @@ class MyDropProductService
 //                }
 
                 $product->clothing()->updateOrCreate([
-                    'product_id' => $product->id
+                    'product_id' => $product->id,
+                    'group_id' => $product->group_id,
                 ],[
                     'size' => $params['Размер'] ?? null,
                     'color' => $params['Колір'] ?? null,

@@ -65,10 +65,10 @@
                             <div class="font-semibold font-mono text-xs uppercase tracking-wider flex flex-col gap-2 items-center">
                                 <div class="border-[1px] rounded p-3 shadow">
                                     @switch($order->orderTransaction?->type)
-                                        @case(\App\Enums\PaymentMethodEnum::FONDY)
+                                        @case(\App\Enums\PaymentMethodEnum::MONOBANK)
                                             <img src="https://asset.brandfetch.io/id-CBRc8NA/idbiSfkx2x.svg" alt="monobank method" class="w-[60px]">
                                         @break
-                                        @case(\App\Enums\PaymentMethodEnum::MONOBANK)
+                                        @case(\App\Enums\PaymentMethodEnum::FONDY)
                                             <img src="{{ asset('images/fondy-main-light.svg') }}" alt="fondy method" class="w-[60px]">
                                         @break
                                     @endswitch

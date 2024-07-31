@@ -71,36 +71,14 @@
                     </div>
                 </div>
             </div>
-            <div class="collapse collapse-arrow join-item border-base-300 border">
-                <input type="checkbox" name="my-accordion-4" />
-                <div class="collapse-title text-base font-medium">Матеріал</div>
-                <div class="collapse-content">
-                    <p>hello</p>
-                </div>
-            </div>
+{{--            <div class="collapse collapse-arrow join-item border-base-300 border">--}}
+{{--                <input type="checkbox" name="my-accordion-4" />--}}
+{{--                <div class="collapse-title text-base font-medium">Матеріал</div>--}}
+{{--                <div class="collapse-content">--}}
+{{--                    <p>hello</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
-
-{{--        <div class="collapse collapse-arrow bg-base-200">--}}
-{{--            <input type="checkbox" name="my-accordion-1" checked="checked" />--}}
-{{--            <div class="collapse-title text-base font-medium">Click to open this one and close others</div>--}}
-{{--            <div class="collapse-content">--}}
-{{--                <p>hello</p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="collapse collapse-arrow bg-base-200">--}}
-{{--            <input type="checkbox" name="my-accordion-2" />--}}
-{{--            <div class="collapse-title text-base font-medium collapse-close">Click to open this one and close others</div>--}}
-{{--            <div class="collapse-content">--}}
-{{--                <p>hello</p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="collapse collapse-arrow bg-base-200">--}}
-{{--            <input type="checkbox" name="my-accordion-3" />--}}
-{{--            <div class="collapse-title text-base font-medium">Click to open this one and close others</div>--}}
-{{--            <div class="collapse-content">--}}
-{{--                <p>hello</p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
     </div>
     <div class="ml-6 w-full">
         <div class="flex gap-8 w-full justify-between">
@@ -109,28 +87,15 @@
                 'class' => '!w-[500px]',
                 'placeholder' => 'Search'
             ])
-
             @include('parts.form.select-enum', [
                 'model' => 'selectedSort',
-                'options' => $sortOptions,
+                'options' => \App\Enums\SortProductEnum::cases(),
                 'value' => 'value',
                 'name' => 'name',
-                'placeholder' => '',
+                'placeholder' => 'Оберіть сортування',
+                'showPlaceholder' => true,
                 'class' => 'font-mono font-bold tracking-wider'
             ])
-{{--            <div class="relative">--}}
-{{--                За популярністю--}}
-{{--                <button wire:click="toggleSortPopup" class="btn btn-primary">aboba</button>--}}
-{{--                <dialog id="my_modal_2" class="modal absolute top-0 left-0" @if($openSortPopup) open @endif>--}}
-{{--                    <div class="modal-box">--}}
-{{--                        <h3 class="text-sm font-bold">Hello!</h3>--}}
-{{--                        <p class="text-sm">Press ESC key or click outside to close</p>--}}
-{{--                    </div>--}}
-{{--                    <form method="dialog" class="modal-backdrop">--}}
-{{--                        <button wire:click="toggleSortPopup">close</button>--}}
-{{--                    </form>--}}
-{{--                </dialog>--}}
-{{--            </div>--}}
         </div>
         <div class="">
             <div wire:loading wire:target.except="addToBasket" class="h-screen w-full bg-white">
@@ -151,19 +116,19 @@
                         </figure>
                         <div class="card-body p-4 flex flex-column justify-between">
                             <div>
-                                <h2 title="{{ $product->name.' '.$product->clothing->size }}" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->name.' '.$product->clothing->size }}</h2>
+                                <h2 title="{{ $product->full_title }}" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->full_title }}</h2>
                                 <div class="mt-2">
-                                    @foreach($product->sizes as $size)
-                                        <a href="/products/{{ $size['product_id'] }}" class="badge badge-primary badge-outline text-xs hover:bg-[#4A00FF] hover:text-[#D1DBFF] transition duration-200">
-                                            {{ $size['size'] }}
+                                    @foreach($product->availableSizes as $availableSize)
+                                        <a href="/products/{{ $availableSize->product_id }}" class="badge badge-primary badge-outline text-xs hover:bg-[#4A00FF] hover:text-[#D1DBFF] transition duration-200">
+                                            {{ $availableSize->size }}
                                         </a>
                                     @endforeach
                                 </div>
                             </div>
                             <div class="card-actions justify-between items-center mt-2">
-                                <p class="font-bold my-auto">{{ number_format($product->formatted_price, 2, '.', ' ') }} грн</p>
+                                <p class="font-bold my-auto">{{ $product->money_price }} грн</p>
                                 <div class="justify-end">
-                                    @if($basketProducts->contains('product_id', $product->id))
+                                    @if(basket()->contains($product))
                                         <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">Added</label>
                                     @else
                                         <button class="btn btn-primary"

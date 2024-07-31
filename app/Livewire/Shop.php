@@ -17,17 +17,15 @@ class Shop extends Component
 {
     use WithPagination;
 
-//    public $products;
-    public $basketProducts;
-
     #[Url]
     public $searchText;
 
-    #[Url]
     public $dir;
 
-    public SortProductEnum $selectedSort;
-    public $sortOptions;
+    public $sortColumn;
+
+    #[Url]
+    public ?SortProductEnum $selectedSort;
 
     public $page;
 
@@ -40,26 +38,9 @@ class Shop extends Component
     public $shopSizes = [];
     public $shopColors = [];
 
-//    public $openSortPopup = false;
-
     public function mount()
     {
         $this->page = page()->getPage('shop');
-
-//        $this->products = Product::with('photo')
-//            ->whereColumn('product_id', 'group_id')
-//            ->orWhereNull('group_id')
-//            ->where('available', true)
-//            ->get();
-
-        $this->basketProducts = basket()->get();
-
-        $this->sortOptions = [
-            ['value' => SortProductEnum::POPULARITY, 'name' => 'За популярністю'],
-            ['value' => SortProductEnum::CHEAP, 'name' => 'Від дешевих до дорогих'],
-            ['value' => SortProductEnum::EXPENSIVE, 'name' => 'Від дорогих до дешевих'],
-        ];
-
 
         $this->sizes = Clothing::SIZES;
         $this->colors = Clothing::COLORS;
@@ -79,34 +60,8 @@ class Shop extends Component
 
     public function updatedSelectedSort()
     {
-        switch ($this->selectedSort) {
-            case SortProductEnum::POPULARITY:
-                unset($this->dir);
-                break;
-            case SortProductEnum::EXPENSIVE:
-                $this->dir = 'desc';
-                break;
-            case SortProductEnum::CHEAP:
-                $this->dir = 'asc';
-                break;
-            default:
-                $this->dir = null;
-                break;
-        }
-    }
-
-    public function updatedShopSizes()
-    {
-    }
-
-//    public function toggleSortPopup()
-//    {
-//        $this->openSortPopup = !$this->openSortPopup;
-//    }
-
-    protected function getPageIdentifier()
-    {
-        return 'shop';
+        $this->dir = $this->selectedSort?->sortDirection();
+        $this->sortColumn = $this->selectedSort?->sortColumn();
     }
 
     public function redirectToProduct(Product $product)
@@ -125,19 +80,6 @@ class Shop extends Component
     {
         basket()->set($product);
 
-        $this->basketProducts = basket()->get();
-        $this->dispatch('basketUpdated');
-    }
-
-    public function removeFromBasket($productId)
-    {
-        $basketProduct = basket()->get()->where('product_id', $productId)->first();
-
-        if($basketProduct == null)
-            return false;
-
-        basket()->remove($basketProduct);
-
         $this->dispatch('basketUpdated');
     }
 
@@ -153,85 +95,57 @@ class Shop extends Component
 
         if(!$minPrice)
             $minPrice = 0;
+
         if(!$maxPrice)
             $maxPrice = Product::max('price');
 
-        $builder->where('price', '>', ($minPrice * 100))
-                ->where('price', '<', ($maxPrice * 100));
+        $builder->priceBetween((int)($minPrice * 100), (int)($maxPrice * 100));
     }
 
     public function sizeQuery(Builder $builder)
     {
         if (!empty($this->shopSizes)) {
-            $builder->whereHas('clothing', function($query) {
-                $query->whereIn('size', $this->shopSizes);
-            })->with('clothing');
+            $builder->bySizes($this->shopSizes);
         }
     }
 
     public function colorQuery(Builder $builder)
     {
         if (!empty($this->shopColors)) {
-            $builder->whereHas('clothing', function($query) {
-                $query->whereIn('color', $this->shopColors);
-            })->with('clothing');
+            $builder->byColors($this->shopColors);
         }
+    }
+
+    public function sortQuery(Builder $builder)
+    {
+        if(!isset($this->dir) || !isset($this->sortColumn))
+            return;
+
+        $builder->sort($this->sortColumn, $this->dir);
+    }
+
+    public function loadRelations(Builder $builder)
+    {
+        $builder->with('availableSizes', 'firstPhoto', 'clothing');
     }
 
     public function products()
     {
-//        $builder = Product::whereColumn('product_id', 'group_id')
-//            ->where('available', true)
-//            ->orWhereNull('group_id')
-//            ->with('firstPhoto');
-
-//        $builder = Product::where(function ($query) {
-//            $query->where('available', true);
-//        })->where(function ($query) {
-//            $query->whereColumn('product_id', 'group_id')
-//                ->orWhereNull('group_id');
-//        });
-
         $builder = Product::query();
-        $builder->where('available', true);
 
-//        if(empty($this->shopSizes))
-//        {
-//            $builder->orderBy('id')
-//                    ->groupBy('name');
-//        }
+        $builder->available();
 
         $this->searchQuery($builder);
         $this->priceQuery($builder);
         $this->sizeQuery($builder);
         $this->colorQuery($builder);
+        $this->sortQuery($builder);
 
-//        $builder->whereIn('id', function ($query) {
-//            $query->select(DB::raw('MIN(id)'))
-//                ->from('products')
-//                ->groupBy('name');
-//        });
-
-//        $builder->orderBy('id');
-
-        if(isset($this->dir) && $this->dir == 'asc')
-            $builder->orderBy('price', $this->dir);
-        else if(isset($this->dir) && $this->dir == 'desc')
-            $builder->orderBy('price', $this->dir);
-        else
-            $builder->orderBy('id');
+        $this->loadRelations($builder);
 
         $builder->groupBy('name');
 
-        $products = $builder->paginate(25);
-
-        foreach($products as $product)
-        {
-            $product->sizes = $product->availableSizes();
-        }
-
-        return $products;
-
+        return $builder->paginate(25);
     }
 
     public function render()
