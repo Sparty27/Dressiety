@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Http\Middleware\Admin;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
@@ -16,15 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
 //        Category::factory(10)->create();
-//
+
 //        Product::factory(30)->create();
 
 //        Tag::factory(10)->create();
@@ -40,5 +34,9 @@ class DatabaseSeeder extends Seeder
 //        $this->call([
 //            SmsTemplateSeeder::class,
 //        ]);
+
+        $this->call([
+            AdminSeeder::class,
+        ]);
     }
 }

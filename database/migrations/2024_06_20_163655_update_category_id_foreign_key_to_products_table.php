@@ -60,7 +60,7 @@ return new class extends Migration
         });
 
         Schema::table('products', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('Cascade');
         });
     }
 };

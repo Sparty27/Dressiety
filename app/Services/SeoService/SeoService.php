@@ -10,6 +10,9 @@ class SeoService
 {
     public function getMeta($model)
     {
+        if(!$model)
+            return false;
+
         $seo = $model->seo;
 
         $seoTemplate = SeoTemplate::where('seoble_type', $model->getTable())->first();
