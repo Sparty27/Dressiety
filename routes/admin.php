@@ -9,6 +9,7 @@ use App\Livewire\Admin\Categories\EditCategory;
 use App\Livewire\Admin\Categories\ShowCategory;
 use App\Livewire\Admin\Email\EmailTemplates;
 use App\Livewire\Admin\Home;
+use App\Livewire\Admin\Orders\OrderForm;
 use App\Livewire\Admin\Orders\Orders;
 use App\Livewire\Admin\Pages\PageForm;
 use App\Livewire\Admin\Pages\Pages;
@@ -71,12 +72,11 @@ Route::prefix('/pages')->name('pages.')->group(function() {
     Route::get('/create', PageForm::class)->name('create');
     Route::get('/{page}/edit', PageForm::class)->name('edit');
     Route::get('/{page}/seo', SeoPage::class)->name('seo');
-
 });
-
 
 Route::prefix('/orders')->name('orders.')->group(function() {
     Route::get('/', Orders::class)->name('index');
+    Route::get('/{order}/edit', OrderForm::class)->name('edit');
 });
 
 Route::prefix('/seo')->name('seo.')->group(function() {

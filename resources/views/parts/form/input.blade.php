@@ -34,6 +34,10 @@
             @if(isset($mask))
                 x-mask="{{ $mask }}"
             @endif
+
+            @if(isset($disabled) && $disabled === true)
+                disabled
+            @endif
         />
         @if(isset($type) && $type == 'money')
             <span class="absolute right-3 text-2xl">₴</span>

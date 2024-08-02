@@ -42,6 +42,9 @@ return [
         ],
         'sms' => [
             'index' => 'SMS',
+        ],
+        'modal' => [
+            'delete' => 'Delete'
         ]
     ]
 ];

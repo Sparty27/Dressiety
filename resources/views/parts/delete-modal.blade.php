@@ -14,7 +14,11 @@
                 </div>
                 <div class="mt-3 text-center text-lg">
                     Are you sure you want to delete
-                    <span class="font-bold">{{ $model->name }}</span>
+                    @if(isset($name))
+                        <span class="font-bold">{{ $model->$name }}</span>
+                    @else
+                        <span class="font-bold">{{ $model->name }}</span>
+                    @endif
                     ?
                 </div>
                 <div class="flex gap-3 justify-center mt-6">

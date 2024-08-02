@@ -17,7 +17,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    @component('parts.layouts.card', [ 'class' => 'max-w-xl mx-auto mt-12'])
+    @component('parts.layouts.card', [ 'class' => 'max-w-md mx-auto mt-12'])
         @yield('content')
     @endcomponent
 </body>

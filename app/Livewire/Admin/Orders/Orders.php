@@ -13,6 +13,8 @@ class Orders extends Component
     use WithPagination;
 
     public $open = false;
+    public $openDeleteModal = false;
+    public $deleteOrder;
 
     #[Validate('string|regex:/^[0-9]{2} [0-9]{4} [0-9]{4} [0-9]{4}$/')]
     public $ttn;
@@ -34,6 +36,20 @@ class Orders extends Component
 
     public function updatedSelectedOrderStatus()
     {
+    }
+
+    public function delete()
+    {
+        $this->deleteOrder->delete();
+
+        return redirect()->route('admin.orders.index');
+    }
+
+    public function toggleDeleteModal(Order $order)
+    {
+        $this->deleteOrder = $order;
+
+        $this->openDeleteModal = !$this->openDeleteModal;
     }
 
     public function toggleModal(Order $order)

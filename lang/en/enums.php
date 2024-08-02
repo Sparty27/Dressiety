@@ -23,5 +23,14 @@ return [
             'done' => 'Завершено',
             'failed' => 'Відхилено'
         ]
+    ],
+    'delivery_status' => [
+        'editable' => [
+            'not_sent' => 'true',
+            'in_process' => '',
+            'deliveried' => '',
+            'canceled' => '',
+            'returned' => '',
+        ]
     ]
 ];

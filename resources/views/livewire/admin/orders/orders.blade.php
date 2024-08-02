@@ -155,11 +155,11 @@
                                 <a class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="#">
                                     <i class="ri-eye-line"></i>
                                 </a>
-                                <a class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="#">
+                                <a class="btn btn-sm border-2 border-gray-200 hover:shadow-neutral-600 hover:shadow-sm" href="{{ route('admin.orders.edit', compact('order')) }}">
                                     <i class="ri-pencil-line"></i>
                                 </a>
 
-                                <button type="button" class="btn btn-sm btn-danger bg-red-600 hover:bg-red-700 text-white">
+                                <button type="button" class="btn btn-sm btn-danger bg-red-600 hover:bg-red-700 text-white" wire:click="toggleDeleteModal('{{ $order->id }}')">
                                     <i class="ri-delete-bin-line"></i>
                                 </button>
                             </div>
@@ -223,6 +223,14 @@
             </dialog>
         </div>
 
+        @include('parts.delete-modal', [
+            'model' => $deleteOrder,
+            'open' => $openDeleteModal,
+            'deleteMethod' => 'delete',
+            'toggleMethod' => 'toggleDeleteModal',
+            'transPath' => 'pages.admin.modal.delete',
+            'name' => 'id'
+        ])
 
         {{--        @include('parts.delete-modal', [--}}
 {{--            'model' => $deleteTag,--}}

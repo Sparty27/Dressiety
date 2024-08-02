@@ -23,4 +23,14 @@ class OrderProduct extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        return (float)($this->price / 100);
+    }
+
+    public function getMoneyPriceAttribute()
+    {
+        return number_format($this->formatted_price, 2, '.', ' ');
+    }
 }

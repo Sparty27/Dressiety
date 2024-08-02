@@ -9,4 +9,9 @@ enum DeliveryStatusEnum: string
     case DELIVERIED = 'deliveried';
     case CANCELED = 'canceled';
     case RETURNED = 'returned';
+
+    public function editable()
+    {
+        return (bool)trans("enums.delivery_status.editable.$this->value");
+    }
 }
