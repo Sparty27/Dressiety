@@ -1,12 +1,11 @@
-<div x-data="{ visible: @entangle('visible').live, duration: $wire.entangle('duration') }"
+<div x-data="{ visible: @entangle('visible').live }"
      x-show="visible"
      x-on:show-popup.window="
          visible = true;
          setTimeout(() => {
              visible = false;
              $wire.hidePopup();
-         }, {{ $duration }});
-         console.log({{ $duration }});
+         }, $wire.duration);
      "
      class="fixed top-[50px] right-[25px] flex items-center justify-center z-50 transition-opacity duration-300 max-w-[300px]"
      x-transition:enter="ease-out duration-300"

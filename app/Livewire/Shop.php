@@ -44,6 +44,9 @@ class Shop extends Component
 
         $this->sizes = Clothing::SIZES;
         $this->colors = Clothing::COLORS;
+
+        $this->dispatch('showPopup', 'Hello', 'bg-green-500', 300);
+
     }
 
     public function updatedMinPrice()
@@ -79,7 +82,7 @@ class Shop extends Component
     public function addToBasket(Product $product)
     {
         basket()->set($product);
-        $this->dispatch('showPopup', 'Добавлено в корзину', 'bg-green-500', 3000);
+        $this->dispatch('showPopup', 'Добавлено в корзину', 'bg-green-500', 2000);
 
         $this->dispatch('basketUpdated');
     }
