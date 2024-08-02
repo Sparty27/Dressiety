@@ -16,6 +16,7 @@ class BasketProduct extends Component
             return false;
 
         basket()->remove($this->basketProduct);
+        $this->dispatch('showPopup', 'Видалено з корзини', 'bg-red-500', 3000);
 
         $this->dispatch('basketUpdated');
         $this->dispatch('basketProductRemoved');

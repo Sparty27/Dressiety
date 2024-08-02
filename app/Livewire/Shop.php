@@ -79,6 +79,7 @@ class Shop extends Component
     public function addToBasket(Product $product)
     {
         basket()->set($product);
+        $this->dispatch('showPopup', 'Добавлено в корзину', 'bg-green-500', 3000);
 
         $this->dispatch('basketUpdated');
     }

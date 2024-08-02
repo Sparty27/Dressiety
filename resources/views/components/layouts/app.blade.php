@@ -23,6 +23,7 @@
     </head>
     <body>
         @livewire('header')
+        <livewire:popup />
         <div class="drawer drawer-end">
             <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
             <div class="mx-auto container">
