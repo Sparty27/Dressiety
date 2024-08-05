@@ -39,7 +39,7 @@ class Clothing extends Model
         return $this->product()->available();
     }
 
-    public function getInfo()
+    public function getInfoAttribute()
     {
         $info = '';
 

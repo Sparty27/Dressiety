@@ -28,15 +28,21 @@ class BasketProduct extends Model
 
     public function getTotalAttribute()
     {
-        if($this->product == null)
-            return null;
         return $this->count * $this->product->price;
     }
 
     public function getFormattedTotalAttribute()
     {
-        if($this->product == null)
-            return null;
         return $this->count * $this->product->formatted_price;
+    }
+
+    public function getFormattedMoneyTotalAttribute()
+    {
+        return number_format($this->formatted_total ?? 0, 2, '.', ' ').' ₴';
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->product?->name.' '.$this->product?->clothing->info ?? '';
     }
 }

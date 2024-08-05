@@ -145,6 +145,11 @@ class BasketService
         return $this->get()->sum('count');
     }
 
+    public function isEmpty()
+    {
+        return $this->count() == 0;
+    }
+
     public function increment(BasketProduct $basketProduct)
     {
         $this->update($basketProduct, 1);
@@ -163,6 +168,11 @@ class BasketService
     public function formattedTotal()
     {
         return $this->get()->sum('total') / 100;
+    }
+
+    public function moneyTotal()
+    {
+        return number_format($this->formattedTotal(), 2, '.', ' ').' ₴';
     }
 
     public function clear()
