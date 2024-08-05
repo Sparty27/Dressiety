@@ -28,6 +28,12 @@ class Popup extends Component
             'duration' => $duration,
         ];
 
+        if(count($this->queue) > 5)
+        {
+            $deleteNumber = count($this->queue) - 5;
+            $this->queue = array_slice($this->queue, $deleteNumber);
+        }
+
         if (!$this->visible) {
             $this->displayNextPopup();
         }
@@ -35,6 +41,10 @@ class Popup extends Component
 
     public function displayNextPopup()
     {
+        if(count($this->queue) >= 3)
+            foreach($this->queue as $popup)
+                $popup['duration'] = 100;
+
         if (!empty($this->queue)) {
             $nextPopup = array_shift($this->queue);
             $this->message = $nextPopup['message'];

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Orders;
 
+use App\Enums\MessageTypeEnum;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use Livewire\Attributes\Validate;
@@ -41,7 +42,7 @@ class Orders extends Component
     public function copy($elementId)
     {
         $this->dispatch('copyToClipboard', $elementId);
-        $this->dispatch('showPopup', 'Скопійовано', duration: 3000);
+        $this->dispatch('showPopup', 'Скопійовано', MessageTypeEnum::INFORMATION, 2000);
     }
 
     public function delete()

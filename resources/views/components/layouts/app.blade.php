@@ -8,18 +8,19 @@
 
 {{--        {{ seo()->getMeta($model) }}--}}
 
-
         @stack('meta-data')
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
         <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.tailwindcss.com"></script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+{{--        <link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
+
+{{--        <script src="{{ asset('js/app.js') }}" defer></script>--}}
     </head>
     <body>
         @livewire('header')

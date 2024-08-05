@@ -112,8 +112,14 @@
                                     </div>
                                 </div>
                                 @if($order->orderDelivery?->ttn != null)
-                                    <div class="mt-3 font-bold text-[14px] text-gray-800 hover:cursor-pointer hover:opacity-75" wire:click="copy('toCopyTTN{{ $order->orderDelivery->id }}')">
-                                        ТТН: <span id="toCopyTTN{{ $order->orderDelivery->id }}">{{ $order->orderDelivery?->ttn }}</span>
+                                    <div x-data="{ hover: false, clicked: false }" @mouseenter="hover = true" @mouseleave="hover = false" @click="clicked = true; setTimeout(() => clicked = false, 200)" :class="clicked ? 'text-green-500' : 'text-black'"  class="relative mt-3 font-bold text-[14px] text-gray-800 hover:cursor-pointer hover:opacity-75 duration-100" wire:click="copy('toCopyTTN{{ $order->orderDelivery->id }}')">
+                                        ТТН:
+                                        <span id="toCopyTTN{{ $order->orderDelivery->id }}">
+                                            {{ $order->orderDelivery?->ttn }}
+                                        </span>
+                                        <span x-cloak x-show="hover" class="absolute -right-[10px]" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0 transform scale-50" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-50">
+                                            <i class="ri-clipboard-line"></i>
+                                        </span>
                                     </div>
                                 @endif
                                 <div class="mt-3">
