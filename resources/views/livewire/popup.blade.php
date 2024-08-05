@@ -18,9 +18,13 @@
     <div :class="`{{ $color }} p-4 rounded shadow-lg`">
         <p title="{{ $message }}" class="line-clamp-3 text-white flex items-center gap-3">
             @if(str_contains($color, 'blue'))
-                <span>
-                    <i class="ri-information-line"></i>
-                </span>
+                <i class="ri-information-line"></i>
+            @elseif(str_contains($color, 'green'))
+                <i class="ri-checkbox-circle-line"></i>
+            @elseif(str_contains($color, 'red'))
+                <i class="ri-alarm-warning-line"></i>
+            @elseif(str_contains($color, 'yellow'))
+                <i class="ri-error-warning-line"></i>
             @endif
             <span>
                 {{ $message }}

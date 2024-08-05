@@ -32,5 +32,11 @@ return [
             'canceled' => '',
             'returned' => '',
         ]
+    ],
+    'popup_colors' => [
+        'success' => 'bg-green-500',
+        'danger' => 'bg-red-500',
+        'information' => 'bg-blue-500',
+        'warning' => 'bg-yellow-500'
     ]
 ];

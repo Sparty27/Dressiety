@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\MessageTypeEnum;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -14,8 +15,13 @@ class Popup extends Component
     public $queue = [];
 
     #[On('showPopup')]
-    public function showPopup($message, $color = 'bg-blue-500', $duration = 7000)
+    public function showPopup($message, string $color, $duration = 7000)
     {
+        $messageColorType = MessageTypeEnum::tryFrom($color);
+
+        if($messageColorType)
+            $color = $messageColorType->getPopupColor();
+
         $this->queue[] = [
             'message' => $message,
             'color' => $color,

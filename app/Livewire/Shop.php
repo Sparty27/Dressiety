@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\MessageTypeEnum;
 use App\Enums\SortProductEnum;
 use App\Models\BasketProduct;
 use App\Models\Clothing;
@@ -79,7 +80,7 @@ class Shop extends Component
     public function addToBasket(Product $product)
     {
         basket()->set($product);
-        $this->dispatch('showPopup', 'Добавлено в корзину', 'bg-green-500', 2000);
+        $this->dispatch('showPopup', 'Добавлено в корзину', MessageTypeEnum::INFORMATION, 2000);
 
         $this->dispatch('basketUpdated');
     }

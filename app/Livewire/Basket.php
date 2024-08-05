@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\MessageTypeEnum;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -31,7 +32,7 @@ class Basket extends Component
         basket()->remove($basketProduct);
         $this->basketProducts = basket()->get();
 
-        $this->dispatch('showPopup', 'Товар видалено з корзини', 'bg-blue-500', 1000);
+        $this->dispatch('showPopup', 'Товар видалено з корзини', MessageTypeEnum::INFORMATION, 1000);
         $this->dispatch('basketUpdated');
         $this->dispatch('basketProductRemoved');
     }
