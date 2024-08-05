@@ -17,6 +17,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+    <livewire:popup />
     <div>
         <div class="bg-base-100 drawer lg:drawer-open">
             <input id="drawer" type="checkbox" class="drawer-toggle">

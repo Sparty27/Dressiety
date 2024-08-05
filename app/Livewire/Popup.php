@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Popup extends Component
@@ -12,8 +13,7 @@ class Popup extends Component
     public $visible = false;
     public $queue = [];
 
-    protected $listeners = ['showPopup'];
-
+    #[On('showPopup')]
     public function showPopup($message, $color = 'bg-blue-500', $duration = 7000)
     {
         $this->queue[] = [

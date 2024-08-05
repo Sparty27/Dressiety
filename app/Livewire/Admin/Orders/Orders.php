@@ -38,6 +38,12 @@ class Orders extends Component
     {
     }
 
+    public function copy($elementId)
+    {
+        $this->dispatch('copyToClipboard', $elementId);
+        $this->dispatch('showPopup', 'Скопійовано', duration: 3000);
+    }
+
     public function delete()
     {
         $this->deleteOrder->delete();

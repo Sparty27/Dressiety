@@ -44,9 +44,6 @@ class Shop extends Component
 
         $this->sizes = Clothing::SIZES;
         $this->colors = Clothing::COLORS;
-
-        $this->dispatch('showPopup', 'Hello', 'bg-green-500', 300);
-
     }
 
     public function updatedMinPrice()

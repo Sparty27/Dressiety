@@ -112,8 +112,8 @@
                                     </div>
                                 </div>
                                 @if($order->orderDelivery?->ttn != null)
-                                    <div class="mt-3 font-bold text-[14px] text-gray-800">
-                                        ТТН: {{ $order->orderDelivery?->ttn }}
+                                    <div class="mt-3 font-bold text-[14px] text-gray-800 hover:cursor-pointer hover:opacity-75" wire:click="copy('toCopyTTN{{ $order->orderDelivery->id }}')">
+                                        ТТН: <span id="toCopyTTN{{ $order->orderDelivery->id }}">{{ $order->orderDelivery?->ttn }}</span>
                                     </div>
                                 @endif
                                 <div class="mt-3">

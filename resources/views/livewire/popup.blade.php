@@ -1,5 +1,6 @@
 <div x-data="{ visible: @entangle('visible').live }"
      x-show="visible"
+     x-cloak
      x-on:show-popup.window="
          visible = true;
          setTimeout(() => {
@@ -15,6 +16,15 @@
      x-transition:leave-start="opacity-100"
      x-transition:leave-end="opacity-0">
     <div :class="`{{ $color }} p-4 rounded shadow-lg`">
-        <p title="{{ $message }}" class="line-clamp-3 text-white">{{ $message }}</p>
+        <p title="{{ $message }}" class="line-clamp-3 text-white flex items-center gap-3">
+            @if(str_contains($color, 'blue'))
+                <span>
+                    <i class="ri-information-line"></i>
+                </span>
+            @endif
+            <span>
+                {{ $message }}
+            </span>
+        </p>
     </div>
 </div>
