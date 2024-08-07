@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Site\Pages;
 
 use App\Enums\MessageTypeEnum;
 use App\Enums\SortProductEnum;
@@ -79,8 +79,12 @@ class Shop extends Component
 
     public function addToBasket(Product $product)
     {
-        basket()->set($product);
-        $this->dispatch('showPopup', 'Добавлено в корзину', MessageTypeEnum::INFORMATION, 2000);
+        if(basket()->set($product))
+        {
+            $this->dispatch('showPopup', 'Добавлено в корзину', MessageTypeEnum::INFORMATION, 2000);
+        } else {
+            $this->dispatch('showPopup', 'Товар закінчився', MessageTypeEnum::INFORMATION, 2000);
+        }
 
         $this->dispatch('basketUpdated');
     }
@@ -152,7 +156,7 @@ class Shop extends Component
 
     public function render()
     {
-        return view('livewire.shop', [ 'products' => $this->products()])
+        return view('livewire.site.pages.shop', [ 'products' => $this->products()])
             ->layout('components.layouts.app');
     }
 }

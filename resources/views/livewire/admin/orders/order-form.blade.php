@@ -62,7 +62,7 @@
     ])
         <p class="card-title">Delivery</p>
             <div class="mt-4">
-                <div class="flex items-center gap-3">
+                <div class="flex justify-between items-center gap-3">
                     <div class="font-bold text">
                         Місто:
                     </div>
@@ -78,7 +78,7 @@
 //                        'disabled' => (!$orderClass->orderDelivery->status->editable())
                     ])
                 </div>
-                <div class="flex items-center gap-3 mt-5">
+                <div class="flex justify-between items-center gap-3 mt-5">
                     <div class="font-bold text">
                         Відділення:
                     </div>
@@ -95,7 +95,7 @@
                     ])
                 </div>
             </div>
-            <div class="text-center text flex items-center font-bold gap-3 mt-5">
+            <div class="text-center text flex justify-between items-center font-bold gap-3 mt-5">
                 <div class="">
                     ТТН:
                 </div>

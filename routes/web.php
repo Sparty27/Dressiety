@@ -2,9 +2,9 @@
 
 use App\Http\Middleware\BasketEmpty;
 use App\Livewire\Home;
-use App\Livewire\MakeOrder;
-use App\Livewire\Shop;
-use App\Livewire\ShowProduct;
+use App\Livewire\Site\Pages\MakeOrder;
+use App\Livewire\Site\Pages\Shop;
+use App\Livewire\Site\Pages\ShowProduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Site\Pages;
 
 use App\Models\Product;
 use App\Services\SeoService\SeoService;
@@ -26,6 +26,6 @@ class ShowProduct extends Component
     #[On('basketUpdated')]
     public function render()
     {
-        return view('livewire.show-product');
+        return view('livewire.site.pages.show-product');
     }
 }

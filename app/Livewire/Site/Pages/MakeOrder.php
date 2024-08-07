@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Site\Pages;
 
+use App\Enums\MessageTypeEnum;
 use App\Enums\PaymentMethodEnum;
 use App\Models\City;
 use App\Models\Warehouse;
@@ -29,13 +30,13 @@ class MakeOrder extends Component
     #[Validate('required|string|min:5|max:190')]
     public $lastName = '';
 
-    #[Validate('required')]
+    #[Validate('required', message: 'Потрібно вибрати спосіб оплати')]
     public PaymentMethodEnum $selectedPaymentMethod;
 
-    #[Validate('required')]
+    #[Validate('required', message: 'Потрібно вибрати місто')]
     public City $selectedCity;
 
-    #[Validate('required')]
+    #[Validate('required', message: 'Потрібно вибрати відділення')]
     public Warehouse $selectedWarehouse;
 
     public $searchCity;
@@ -104,7 +105,16 @@ class MakeOrder extends Component
 
     public function makeOrder(MakeOrderService $service, MonobankService $monobankService, FondyService $fondyService)
     {
-        $this->validate();
+        try {
+            $this->validate();
+        } catch(\Exception $e) {
+            foreach($e->validator->errors()->all() as $errorMessage)
+            {
+                $this->dispatch('showPopup', $errorMessage, MessageTypeEnum::DANGER, 2000);
+            }
+
+            throw $e;
+        }
 
         $customer = new Customer($this->name, $this->email, $this->phone);
 
@@ -136,6 +146,6 @@ class MakeOrder extends Component
     #[On('basketUpdated')]
     public function render()
     {
-        return view('livewire.make-order');
+        return view('livewire.site.pages.make-order');
     }
 }
