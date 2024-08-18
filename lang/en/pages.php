@@ -31,6 +31,7 @@ return [
         ],
         'orders' => [
             'index' => 'Orders',
+            'edit' => 'Edit Order',
             'save_ttn' => 'Зберегти ТТН'
         ],
         'seo' => [
