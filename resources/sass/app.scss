@@ -35,3 +35,7 @@ html:has(.drawer-toggle:checked) {
         padding-right: 3px;
     }
 }
+
+.active {
+    background-color: #5A72A0 !important;
+}

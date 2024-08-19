@@ -1,8 +1,25 @@
+@section('breadcrumbs')
+    @include('parts.breadcrumbs', ['links' => [
+                                    [
+                                        'url' => route('admin.home'),
+                                        'name' => 'Home'
+                                    ],
+                                    [
+                                        'url' => route('admin.products.index'),
+                                        'name' => 'Products',
+                                    ],
+                                    [
+                                        'url' => url()->current(),
+                                        'name' => 'SEO Product',
+                                    ],
+                                    ]])
+@endsection
+
 <form wire:submit.prevent="save">
     @component('parts.layouts.card', [
         'class' => 'mb-6 border-[1px] border-gray-100'
     ])
-        <p class="card-title">SEO Product <br> {{ $product->name }}</p>
+        <p class="card-title">{{ $product->name }}</p>
         @include('parts.form.input', [
             'model' => 'title',
             'title' => 'Title'

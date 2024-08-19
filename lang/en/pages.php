@@ -16,7 +16,8 @@ return [
             'create' => 'Create Product',
             'edit' => 'Edit Product',
             'show' => 'Product',
-            'delete' => 'Delete Product'
+            'delete' => 'Delete Product',
+            'seo' => 'SEO Product'
         ],
         'tags' => [
             'index' => 'Tags',

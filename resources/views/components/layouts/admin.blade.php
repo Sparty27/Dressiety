@@ -6,7 +6,7 @@
 
     @include('parts.layouts.favicon')
 
-    <title>Laravel</title>
+    <title>Dressiety</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -24,8 +24,8 @@
             <div class="drawer-content bg-gray-200">
                 @livewire('admin.parts.header')
 
-                <div class="px-6">
-{{--                    @yield('breadcrumbs')--}}
+                <div class="">
+                    @yield('breadcrumbs')
                 </div>
 
                 <div class="p-4 grid gap-5 pt-5">

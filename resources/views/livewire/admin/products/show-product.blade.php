@@ -1,3 +1,21 @@
+@section('breadcrumbs')
+    @include('parts.breadcrumbs', ['links' => [
+                                    [
+                                        'url' => route('admin.home'),
+                                        'name' => 'Home'
+                                    ],
+                                    [
+                                        'url' => route('admin.products.index'),
+                                        'name' => 'Products',
+                                    ],
+                                    [
+                                        'url' => url()->current(),
+                                        'name' => 'Product',
+                                    ],
+                                    ]])
+@endsection
+
+
 <div class="relative">
     <a class="btn absolute top-0 right-0" href="{{route('admin.products.index')}}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

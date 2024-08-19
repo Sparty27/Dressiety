@@ -1,3 +1,20 @@
+@section('breadcrumbs')
+    @include('parts.breadcrumbs', ['links' => [
+                                    [
+                                        'url' => route('admin.home'),
+                                        'name' => 'Home'
+                                    ],
+                                    [
+                                        'url' => route('admin.products.index'),
+                                        'name' => 'Products',
+                                    ],
+                                    [
+                                        'url' => url()->current(),
+                                        'name' => str_contains(url()->current(), 'create') ? 'Create Product' : 'Edit Product',
+                                    ],
+                                    ]])
+@endsection
+
 <form wire:submit.prevent="save">
     @component('parts.layouts.card', [
         'class' => 'mb-6 border-[1px] border-gray-100'

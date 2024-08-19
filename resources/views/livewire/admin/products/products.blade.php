@@ -1,3 +1,15 @@
+@section('breadcrumbs')
+    @include('parts.breadcrumbs', ['links' => [
+                                    [
+                                        'url' => route('admin.home'),
+                                        'name' => 'Home'
+                                    ],
+                                    [
+                                        'url' => route('admin.products.index'),
+                                        'name' => 'Products',
+                                    ]]])
+@endsection
+
 <div>
     <div class="flex justify-between items-end mb-8">
         <div class="flex gap-8 w-full">

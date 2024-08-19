@@ -3,10 +3,13 @@
     <aside class="bg-base-100 w-80 h-full">
         <div
             class="bg-base-100 sticky top-0 z-20 hidden items-center gap-2 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex ">
-            <a href="/admin/" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2">
+            <a href="{{ route('admin.home') }}" aria-current="page" aria-label="Homepage" class="flex-0 btn btn-ghost px-2">
                 <div
                     class="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-                    <span class="uppercase">ABOBA</span>
+{{--                    <span class="uppercase">Dressiety</span>--}}
+                    <a href="{{ route('index') }}" class="cursor-pointer">
+                        <img src="{{ asset('images/logo.svg') }}" alt="logo" width="200">
+                    </a>
                 </div>
             </a>
         </div>
