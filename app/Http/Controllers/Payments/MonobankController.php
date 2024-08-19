@@ -18,10 +18,10 @@ class MonobankController extends Controller
         try {
             $service->check($orderTransaction);
 
-            return view('payments.success', compact('orderTransaction'));
         } catch(Exception $ex) {
             Log::channel('daily')->error($ex->getMessage());
 
+        } finally {
             return view('payments.success', compact('orderTransaction'));
         }
     }

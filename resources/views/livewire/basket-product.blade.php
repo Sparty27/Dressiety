@@ -10,7 +10,7 @@
         </div>
     </td>
     <td class="max-w-[200px] whitespace-normal break-words">
-        <span class="font-medium" title="{{ $basketProduct->product?->name }}">
+        <span class="font-medium text-[10px] line-clamp-5 sm:text-base" title="{{ $basketProduct->product?->name }}">
             {{ $basketProduct->description }}
         </span>
     </td>
