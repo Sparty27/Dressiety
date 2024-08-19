@@ -134,7 +134,7 @@
                                     @if(basket()->contains($product))
                                         <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">Added</label>
                                     @elseif($product->count == 0)
-                                        <label class="font-semibold text-lg mr-5">Out</label>
+                                        <label class="font-semibold mr-5">Out of stock</label>
                                     @else
                                         <button class="btn btn-primary"
                                                 wire:click="addToBasket('{{ $product->id }}')"

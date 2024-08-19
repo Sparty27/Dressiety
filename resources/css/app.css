@@ -1,28 +1,28 @@
-@import url('https://fonts.bunny.net/css?family=figtree:400,600&display=swap');
-@import url('https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css');
+/*@import url('https://fonts.bunny.net/css?family=figtree:400,600&display=swap');*/
+/*@import url('https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css');*/
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
 
-[x-cloak] {
-    display: none !important;
-}
+/*[x-cloak] {*/
+/*    display: none !important;*/
+/*}*/
 
-html:has(.drawer-toggle:checked) {
-    scrollbar-gutter: unset;
-}
+/*html:has(.drawer-toggle:checked) {*/
+/*    scrollbar-gutter: unset;*/
+/*}*/
 
-@media screen and (max-width: 460px) {
-    .table :where(th,td) {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-}
+/*@media screen and (max-width: 460px) {*/
+/*    .table :where(th,td) {*/
+/*        padding-left: 5px;*/
+/*        padding-right: 5px;*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width: 360px) {
-    .table :where(th,td) {
-        padding-left: 3px;
-        padding-right: 3px;
-    }
-}
+/*@media screen and (max-width: 360px) {*/
+/*    .table :where(th,td) {*/
+/*        padding-left: 3px;*/
+/*        padding-right: 3px;*/
+/*    }*/
+/*}*/

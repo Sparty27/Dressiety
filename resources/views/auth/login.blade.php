@@ -10,7 +10,7 @@
                     <input id="email" type="email" class="input  input-bordered w-full @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                     @error('email')
-                    <span class="invalid-feedback text-error mt-1" role="alert">
+                    <span class="invalid-feedback text-error mt-1 font-light" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror

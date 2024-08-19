@@ -17,23 +17,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        Category::factory(10)->create();
+        $this->call([
+            SeoTemplateSeeder::class,
+        ]);
 
-//        Product::factory(30)->create();
+        $this->call([
+            EmailTemplateSeeder::class,
+        ]);
 
-//        Tag::factory(10)->create();
-//
-//        $this->call([
-//            SeoTemplateSeeder::class,
-//        ]);
-//
-//        $this->call([
-//            EmailTemplateSeeder::class,
-//        ]);
-//
-//        $this->call([
-//            SmsTemplateSeeder::class,
-//        ]);
+        $this->call([
+            SmsTemplateSeeder::class,
+        ]);
 
         $this->call([
             AdminSeeder::class,
