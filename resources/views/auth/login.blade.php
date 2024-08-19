@@ -1,7 +1,8 @@
 @extends('components.layouts.auth')
 
 @section('content')
-    <div class="py-24 px-10"><h2 class="text-2xl font-semibold mb-2 text-center">Login</h2>
+    <div class="py-24 px-10 relative">
+        <h2 class="text-2xl font-semibold mb-2 text-center">Login</h2>
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-4">
@@ -36,5 +37,8 @@
             </div>
             <button type="submit" class="btn mt-2 w-full btn-primary">{{ __('Login') }}</button>
         </form>
+        <div class="absolute bottom-[10px] right-[40px] text-blue-500 cursor-pointer">
+            <a href="/">back to site</a>
+        </div>
     </div>
 @endsection
