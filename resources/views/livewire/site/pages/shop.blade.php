@@ -2,14 +2,14 @@
     {{ seo()->getMeta($page) }}
 @endpush
 
-<div class="flex w-full">
+<div class="flex flex-col sm:flex-row w-full">
     <div wire:loading wire:target="addToBasket"
         class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
         <div class="flex justify-center items-center mt-[50vh]">
             <span class="loading loading-spinner w-[75px] text-neutral"></span>
         </div>
     </div>
-    <div class="max-w-60 w-full">
+    <div class="max-w-60 w-full mx-auto">
         <div class="join join-vertical w-full">
             <div class="collapse collapse-arrow join-item border-base-300 border">
                 <input type="checkbox" name="my-accordion-1" checked="checked" />
@@ -80,11 +80,11 @@
 {{--            </div>--}}
         </div>
     </div>
-    <div class="ml-6 w-full">
-        <div class="flex gap-8 w-full justify-between">
+    <div class="sm:ml-6 lg:w-full">
+        <div class="flex flex-col md:flex-row gap-3 md:gap-8 w-full items-center sm:items-start">
             @include('parts.form.input', [
                 'model' => 'searchText',
-                'class' => '!w-[500px]',
+                'class' => '!w-[238px] lg:!w-[400px] mt-3 sm:mt-0 mx-auto sm:mx-0',
                 'placeholder' => 'Search'
             ])
             @include('parts.form.select-enum', [
@@ -94,7 +94,8 @@
                 'name' => 'name',
                 'placeholder' => 'Оберіть сортування',
                 'showPlaceholder' => true,
-                'class' => 'font-mono font-bold tracking-wider'
+                'class' => 'font-mono font-bold tracking-wider',
+                'classLabel' => '!max-w-[238px]'
             ])
         </div>
         <div class="">
@@ -108,9 +109,9 @@
                     <h2 class="text-2xl font-bold font-mono">Not Found</h2>
                 </div>
             @endif
-            <div wire:loading.remove wire:target.except="addToBasket" class="mx-auto container mt-5
-{{--             gap-4 flex flex-wrap justify-between --}}
-             grid gap-4 grid-cols-5
+            <div wire:loading.remove wire:target.except="addToBasket" class="mx-auto lg:container mt-5
+             gap-4 flex flex-wrap justify-center sm:justify-between
+{{--             grid gap-4 grid-cols-5--}}
              relative">
                 @foreach($products as $product)
                     <div class="card w-[220px] bg-base-100 shadow-xl">
@@ -151,7 +152,7 @@
             </div>
         </div>
         <div class="mt-12">
-            {{ $products->links() }}
+            {{ $products->links('pagination::tailwind') }}
         </div>
     </div>
 </div>

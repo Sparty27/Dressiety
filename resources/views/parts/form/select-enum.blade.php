@@ -1,4 +1,7 @@
-<label class="form-control w-full max-w-xs">
+<label class="form-control w-full max-w-xs
+@if(isset($classLabel))
+    {{ $classLabel ?? '' }}
+@endif">
     @if(isset($title))
     <div class="label">
         <span class="label-text">{{ $title }}</span>
