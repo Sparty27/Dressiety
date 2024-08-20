@@ -152,7 +152,7 @@
             </div>
         </div>
         <div class="mt-12">
-            {{ $products->links('pagination::tailwind') }}
+            {{ $products->links() }}
         </div>
     </div>
 </div>
