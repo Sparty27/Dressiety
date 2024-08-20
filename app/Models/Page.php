@@ -12,6 +12,11 @@ class Page extends Model implements Seoble
     use HasFactory;
     use SeobleTrait;
 
+    const titles = [
+        'shop' => 'Dressiety | SHOP',
+        '/' => 'Dressiety',
+    ];
+
     protected $fillable = [
         'title',
         'description'

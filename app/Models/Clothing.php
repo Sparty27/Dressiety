@@ -17,8 +17,8 @@ class Clothing extends Model
     ];
 
     const COLORS = [
-        'Чорний',
-        'Білий',
+        'Чорний' => 'чорн',
+        'Білий' => 'біл',
     ];
 
     const SIZES = [

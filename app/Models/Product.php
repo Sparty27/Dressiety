@@ -31,6 +31,11 @@ class Product extends Model implements Imaginable, Seoble
         'available'
     ];
 
+    public static function getMaxAvailablePrice()
+    {
+        return number_format(Product::where('available', true)->max('price') / 100, thousands_separator: ' ');
+    }
+
     public function clothing()
     {
         return $this->hasOne(Clothing::class);
@@ -107,8 +112,14 @@ class Product extends Model implements Imaginable, Seoble
 
     public function scopeByColors($query, $shopColors)
     {
-        $query->whereHas('clothing', function($query) use ($shopColors) {
-            $query->whereIn('color', $shopColors);
+//        $query->whereHas('clothing', function($query) use ($shopColors) {
+//            $query->whereIn('color', $shopColors);
+//        });
+
+        $query->where(function ($query) use ($shopColors) {
+            foreach ($shopColors as $color) {
+                $query->orWhere('name', 'LIKE', '%' . $color . '%');
+            }
         });
     }
 

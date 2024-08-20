@@ -29,7 +29,7 @@
                         </span>
                         @include('parts.form.input', [
                             'model' => 'maxPrice',
-                            'placeholder' => '3 000',
+                            'placeholder' => App\Models\Product::getMaxAvailablePrice(),
                             'class' => '!w-[70px] h-8 text-sm',
                             'range' => 'true',
                             'static' => 'true',
@@ -61,10 +61,10 @@
                 <div class="collapse-content">
                     <div>
                         <div class="form-control">
-                            @foreach($colors as $color)
+                            @foreach($colors as $color => $colorValue)
                                 <label class="label cursor-pointer">
                                     <span class="label-text">{{ $color }}</span>
-                                    <input type="checkbox" class="checkbox" value="{{ $color }}" wire:model.live="shopColors"/>
+                                    <input type="checkbox" class="checkbox" value="{{ $colorValue }}" wire:model.live="shopColors"/>
                                 </label>
                             @endforeach
                         </div>
