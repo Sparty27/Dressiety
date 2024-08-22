@@ -11,7 +11,7 @@ class NovaPoshtaWarehouseService
 {
     public function get($page)
     {
-        $response = Http::post('https://api.novaposhta.ua/v2.0/json/',[
+        $response = Http::retry(3, 10)->post('https://api.novaposhta.ua/v2.0/json/',[
             'modelName' => 'Address',
             'calledMethod' => 'getWarehouses',
             'methodProperties' => [
@@ -53,6 +53,7 @@ class NovaPoshtaWarehouseService
                 );
             } catch (Exception $ex){
                 Log::error($ex->getMessage());
+                Log::channel('daily')->error($ex->getMessage());
             }
 
         }
@@ -60,23 +61,27 @@ class NovaPoshtaWarehouseService
 
     public function update()
     {
-        try
+        $page = 1;
+        while(true)
         {
-            $page = 1;
-            while(true)
+            try
             {
                 $warehouses = $this->get($page);
-
-                if ($warehouses === false) break;
-
-                $this->set($warehouses);
+            } catch (Exception $e)
+            {
+                Log::error($e->getMessage());
+                Log::channel('daily')->error($e->getMessage());
 
                 $page++;
+                continue;
             }
 
-        } catch (Exception $e)
-        {
-            Log::error($e->getMessage());
+            if ($warehouses === false)
+                break;
+
+            $this->set($warehouses);
+
+            $page++;
         }
     }
 }

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Mockery\Exception;
-use Orchestra\Parser\Xml\Facade as XmlParser;
 
 class MyDropProductService
 {
@@ -25,7 +24,7 @@ class MyDropProductService
         ]);
     }
 
-    public function get()
+    public function loadProductData()
     {
         $res = $this->client->get('/vendor/api/export/products/prom/yml',
         [
@@ -42,14 +41,28 @@ class MyDropProductService
         Storage::put('xml/products.xml', $xmlString);
     }
 
-    public function parse()
+    public function getProductData()
     {
-        $this->get();
+        $this->loadProductData();
 
         $fullPath = storage_path('app/xml/products.xml');
 
-        $xml = simplexml_load_file($fullPath);
+        return simplexml_load_file($fullPath);
+    }
 
+    public function parse()
+    {
+        $xml = $this->getProductData();
+
+        $this->updateCategories($xml);
+
+        $this->updateProducts($xml);
+
+        $this->updateProductPhotos($xml);
+    }
+
+    function updateCategories($xml)
+    {
         foreach($xml->shop->categories->category as $category)
         {
             $parentId = (int)$category['parentId'] ? (int)$category['parentId'] : null;
@@ -61,72 +74,61 @@ class MyDropProductService
                 'parent_id' => $parentId
             ]);
         }
+    }
 
-//        foreach($xml->shop->offers->offer as $offer)
-//        {
-//            try {
-//                $params = [];
-//                foreach ($offer->param as $param) {
-//                    $name = (string) $param['name'];
-//                    $value = (string) $param;
-//                    $params[$name] = $value;
-//                }
-//
-//                $product = Product::updateOrCreate([
-//                    'product_id' => (string)$offer['id']
-//                ], [
-//                    'group_id' => (string) $offer['group_id'] === '' ? null : (string) $offer['group_id'],
-//                    'category_id' => (int)$offer->categoryId,
-//                    'name' => (string)$offer->name,
-//                    'description' => (string)$offer->description,
-//                    'currency' => (string)$offer->currencyId,
-//                    'count' => (int)$offer->quantity_in_stock,
-//                    'vendor_code' => (string)$offer->vendorCode,
-//                    'available' => (bool)$offer->available,
-//                    'price' => ((int)$offer->price * 100)
-//                ]);
-//
-////                for($i = 0; $i < count($offer->picture);$i++)
-////                {
-////                    $url = (string)$offer->picture[$i];
-////
-////                    $newUrl = $this->saveImage($url);
-////
-////                    $product->photos()->updateOrCreate([
-////                        'url' => $newUrl
-////                    ],[
-////                        'priority' => ($i + 1)
-////                    ]);
-////
-////                    Log::channel('daily')->info('image '.($i + 1));
-////                }
-//
-//                $product->clothing()->updateOrCreate([
-//                    'product_id' => $product->id,
-//                    'group_id' => $product->group_id,
-//                ],[
-//                    'size' => $params['Размер'] ?? null,
-//                    'color' => $params['Колір'] ?? null,
-//                    'material' => $params['Матеріал'] ?? null,
-//                ]);
-//
-//                Log::channel('daily')->info((string)$offer['id']);
-//
-//            } catch(Exception $ex) {
-//                Log::channel('daily')->error($ex->getMessage());
-//            }
-//        }
-
+    function updateProducts($xml)
+    {
         foreach($xml->shop->offers->offer as $offer)
         {
-            Log::channel('daily')->info('Offer: '.$offer['id']);
+            try {
+                $params = [];
+                foreach ($offer->param as $param) {
+                    $name = (string) $param['name'];
+                    $value = (string) $param;
+                    $params[$name] = $value;
+                }
+
+                $product = Product::updateOrCreate([
+                    'product_id' => (string)$offer['id']
+                ], [
+                    'group_id' => (string) $offer['group_id'] === '' ? null : (string) $offer['group_id'],
+                    'category_id' => (int)$offer->categoryId,
+                    'name' => (string)$offer->name,
+                    'description' => (string)$offer->description,
+                    'currency' => (string)$offer->currencyId,
+                    'count' => (int)$offer->quantity_in_stock,
+                    'vendor_code' => (string)$offer->vendorCode,
+                    'available' => (bool)$offer->available,
+                    'price' => ((int)$offer->price * 100)
+                ]);
+
+                $product->clothing()->updateOrCreate([
+                    'product_id' => $product->id,
+                    'group_id' => $product->group_id,
+                ],[
+                    'size' => $params['Размер'] ?? null,
+                    'color' => $params['Колір'] ?? null,
+                    'material' => $params['Матеріал'] ?? null,
+
+                ]);
+            } catch(Exception $ex) {
+                Log::error($ex->getMessage());
+            }
+        }
+    }
+
+    function updateProductPhotos($xml)
+    {
+        foreach($xml->shop->offers->offer as $offer)
+        {
+            Log::channel('daily')->info('Updating product with id - '.$offer['id']);
 
             try {
                 $product = Product::where('product_id', (string)$offer['id'])->first();
 
-                for($i = 0; $i < count($offer->picture);$i++)
+                for($i = 0; $i < count($offer->picture); $i++)
                 {
-                    Log::channel('daily')->info($offer['id'].' image '.($i + 1));
+                    Log::channel('daily')->info('Image with id - '. $offer['id']. '. Current product photo iteration - '.($i + 1));
 
                     $url = (string)$offer->picture[$i];
 
@@ -142,44 +144,19 @@ class MyDropProductService
                     ]);
                 }
             } catch(Exception $ex) {
-                Log::channel('daily')->error($ex->getMessage());
+                Log::error($ex->getMessage());
             }
         }
     }
 
-    public function saveImageForced($url)
-    {
-        Log::channel('daily')->info('Method saveImageForced url: '.$url);
-
-        $fileName = pathinfo($url, PATHINFO_BASENAME);
-
-        $filePath = 'public/products/'.$fileName;
-
-        $response = Http::get($url);
-
-        if($response->status() == 200)
-        {
-            Log::channel('daily')->info('Method file_get_contents url: '.$url);
-            $contents = file_get_contents($url);
-        } else {
-            return '';
-        }
-
-        if(Storage::put($filePath, $contents))
-        {
-            return Storage::url($filePath);
-        }
-
-        return '';
-    }
-
-    private function saveImage($url)
+    function saveImage($url)
     {
         $tempFileName = 'temp_' . pathinfo($url, PATHINFO_BASENAME);
         $tempFilePath = 'public/temp/' . $tempFileName;
+        $finalFilePath = 'public/products/' . pathinfo($url, PATHINFO_BASENAME);
 
-        if (Storage::exists($tempFilePath)) {
-            return Storage::url($tempFilePath);
+        if (Storage::exists($finalFilePath)) {
+            return Storage::url($finalFilePath);
         }
 
         try {
@@ -192,25 +169,16 @@ class MyDropProductService
             $contents = $response->body();
 
         } catch (\Exception $ex) {
-            Log::channel('daily')->error('Failed to download image: ' . $ex->getMessage());
+            Log::error('Failed to download image: ' . $ex->getMessage());
             return false;
         }
 
         if (Storage::put($tempFilePath, $contents)) {
-            $finalFilePath = 'public/products/' . $tempFileName;
             Storage::move($tempFilePath, $finalFilePath);
+
             return Storage::url($finalFilePath);
         }
 
         return false;
-    }
-
-    public function test()
-    {
-        $url = 'https://backend.mydrop.com.ua/vendor/products/uploads/4be670d00209876e20e4.jpeg';
-
-        $response = Http::get($url);
-
-        dd($response->status() == 200);
     }
 }

@@ -6,13 +6,14 @@ use Exception;
 use App\Models\City;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Laravel\SerializableClosure\Exceptions\PhpVersionNotSupportedException;
 use SebastianBergmann\Environment\Console;
 
 class NovaPoshtaCityService
 {
     public function get($page)
     {
-        $response = Http::post('https://api.novaposhta.ua/v2.0/json/',[
+        $response = Http::retry(3, 1000)->timeout(60)->post('https://api.novaposhta.ua/v2.0/json/',[
             'modelName' => 'Address',
             'calledMethod' => 'getCities',
             'methodProperties' => [
@@ -42,37 +43,46 @@ class NovaPoshtaCityService
     {
         foreach($cities as $city)
         {
-            City::updateOrCreate(
-                [
-                    'ref' => $city['Ref'],
-                ],
-                [
-                    'name' => $city['Description'],
-                    'area_ref' => $city['Area'],
-                ]
-            );
+            try {
+                City::updateOrCreate(
+                    [
+                        'ref' => $city['Ref'],
+                    ],
+                    [
+                        'name' => $city['Description'],
+                        'area_ref' => $city['Area'],
+                    ]
+                );
+            } catch (Exception $ex) {
+                Log::error($ex->getMessage());
+                Log::channel('daily')->error($ex->getMessage());
+            }
         }
     }
 
     public function update()
     {
-        try
+        $page = 1;
+        while(true)
         {
-            $page = 1;
-            while(true)
+            try
             {
                 $cities = $this->get($page);
-
-                if ($cities === false) break;
-
-                $this->set($cities);
+            } catch (Exception $e)
+            {
+                Log::error($e->getMessage());
+                Log::channel('daily')->error($e->getMessage());
 
                 $page++;
+                continue;
             }
 
-        } catch (Exception $e)
-        {
-            Log::error($e->getMessage());
+            if ($cities === false)
+                break;
+
+            $this->set($cities);
+
+            $page++;
         }
     }
 }

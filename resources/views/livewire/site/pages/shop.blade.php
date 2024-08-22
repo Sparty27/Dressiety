@@ -2,14 +2,14 @@
     {{ seo()->getMeta($page) }}
 @endpush
 
-<div class="flex flex-col sm:flex-row w-full">
+<div class="flex flex-col sm:flex-row w-full max-sm:p-6">
     <div wire:loading wire:target="addToBasket"
         class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
         <div class="flex justify-center items-center mt-[50vh]">
             <span class="loading loading-spinner w-[75px] text-neutral"></span>
         </div>
     </div>
-    <div class="max-w-60 w-full mx-auto">
+    <div class="w-full sm:min-w-[240px] sm:max-w-60 mx-auto">
         <div class="join join-vertical w-full">
             <div class="collapse collapse-arrow join-item border-base-300 border">
                 <input type="checkbox" name="my-accordion-1" checked="checked" />
@@ -84,7 +84,7 @@
         <div class="flex flex-col md:flex-row gap-3 md:gap-8 w-full items-center sm:items-start">
             @include('parts.form.input', [
                 'model' => 'searchText',
-                'class' => '!w-[238px] lg:!w-[400px] mt-3 sm:mt-0 mx-auto sm:mx-0',
+                'class' => 'w-full sm:!w-[238px] lg:!w-[400px] mt-3 sm:mt-0 mx-auto sm:mx-0',
                 'placeholder' => 'Search'
             ])
             @include('parts.form.select-enum', [
@@ -94,12 +94,12 @@
                 'name' => 'name',
                 'placeholder' => 'Оберіть сортування',
                 'showPlaceholder' => true,
-                'class' => 'font-mono font-bold tracking-wider',
-                'classLabel' => '!max-w-[238px]'
+                'class' => 'font-mono font-bold tracking-wider min-w-full sm:min-w-min',
+                'classLabel' => 'min-w-full sm:!max-w-[238px] sm:min-w-min'
             ])
         </div>
         <div class="">
-            <div wire:loading wire:target.except="addToBasket" class="h-screen w-full bg-white">
+            <div wire:loading wire:target.except="addToBasket" class="h-screen w-full bg-opacity-0">
                 <div class="flex justify-center items-center mt-[50vh]">
                     <span class="loading loading-spinner w-[75px] text-neutral"></span>
                 </div>
@@ -114,9 +114,9 @@
 {{--             grid gap-4 grid-cols-5--}}
              relative">
                 @foreach($products as $product)
-                    <div class="card w-[220px] bg-base-100 shadow-xl">
+                    <div class="card w-full sm:w-[220px] bg-base-100 shadow-xl">
                         <figure class="cursor-pointer" wire:click="redirectToProduct('{{ $product->id }}')">
-                            <img src="{{ $product->firstPhoto->url ?? '' }}" alt="Clothes" class="object-cover w-[220px] h-[220px]" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
+                            <img src="{{ $product->firstPhoto->url ?? '' }}" alt="Clothes" class="object-cover w-full sm:w-[220px] h-[220px]" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
                         </figure>
                         <div class="card-body p-4 flex flex-column justify-between">
                             <div>
