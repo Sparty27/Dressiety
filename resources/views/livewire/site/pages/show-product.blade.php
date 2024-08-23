@@ -16,8 +16,8 @@
             </svg>
         </a>
     </div>
-    <div class="flex gap-4">
-        <div class="carousel w-1/2 h-[450px]">
+    <div class="flex flex-col sm:flex-row gap-4">
+        <div class="carousel sm:w-1/2 h-[450px]">
             @foreach($product->orderPhotos as $photo)
                 <div id="slide{{ $photo->priority }}" class="carousel-item relative w-full">
                     <img src="{{ $photo->url }}" class="object-cover h-[400px] mx-auto my-auto" />
@@ -29,7 +29,7 @@
             @endforeach
 
         </div>
-        <div class="w-1/2 border-[1px] shadow-lg px-6">
+        <div class="sm:w-1/2 border-[1px] shadow-lg px-6 pb-6">
             <h2 class="font-bold text-2xl mt-3">{{ $product->name }}</h2>
             <div class="flex justify-end mt-3">
                 Код: {{ $product->vendor_code }}

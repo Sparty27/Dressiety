@@ -13,10 +13,10 @@
     <div class="text-[16px] mt-16 font-medium">
         My Products
     </div>
-    <div class="grid grid-cols-3 gap-6 mt-5">
+    <div class="sm:grid sm:grid-cols-2 md:grid-cols-3 sm:gap-6 mt-5">
         @foreach($basketProducts as $basketProduct)
-            <div class="border-[1px] border-gray-300 rounded-md overflow-hidden">
-                <img src="{{ $basketProduct->product->photo->url ?? ''}}" alt="product image" width="200" class="object-cover w-[200px] h-[200px] border-b-[1px] border-gray-200" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
+            <div class="border-[1px] border-gray-300 rounded-md overflow-hidden max-sm:mb-6">
+                <img src="{{ $basketProduct->product->photo->url ?? ''}}" alt="product image" class="object-cover w-full md:w-[200px] h-[200px] border-b-[1px] border-gray-200" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';"/>
                 <div class="p-3 mt-2">
                     <h2 title="{{ $basketProduct->product->name }}" class="font-medium text-[16px] line-clamp-2">{{ $basketProduct->product->name }}</h2>
                     <div class="font-semibold font-mono text-[16px] text-[#4C71FB] mt-2">{{ number_format($basketProduct->product->formatted_price, 2) }}<span class="ml-1">₴</span></div>
@@ -52,7 +52,7 @@
             <div class="font-medium">
                 Full Name
             </div>
-            <div class="grid grid-cols-2 gap-3 mt-4">
+            <div class="sm:grid sm:grid-cols-2 gap-3 mt-4">
                 <div>
                     @include('parts.form.input', [
                         'model' => 'name',
@@ -60,7 +60,7 @@
                     ])
                     <div class="text-[#57647E] text-[12px] mt-2 ml-0.5">First Name</div>
                 </div>
-                <div>
+                <div class="max-sm:mt-6">
                     @include('parts.form.input', [
                         'model' => 'lastName',
                         'placeholder' => '',
@@ -73,8 +73,8 @@
             <div class="font-medium">
                 E-mail
             </div>
-            <div class="grid grid-cols-2 gap-3 mt-4">
-                <div>
+            <div class="sm:grid sm:grid-cols-2 gap-3 mt-4">
+                <div class="">
                     <label class="input input-bordered flex items-center gap-2 w-full max-sm:mt-3 relative">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" /><path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" /></svg>
                         <input type="email" class="grow" placeholder="Email" wire:model="email"/>
@@ -90,7 +90,7 @@
             <div class="font-medium">
                 Phone
             </div>
-            <div class="grid grid-cols-2 gap-3 mt-4">
+            <div class="sm:grid sm:grid-cols-2 gap-3 mt-4">
                 <label class="input input-bordered flex items-center gap-2 w-full relative">
                     <i class="ri-phone-line"></i>
                     <input type="text" class="grow" placeholder="Phone" x-mask="+389 99 999 99 99" wire:model="phone"/>
@@ -105,7 +105,7 @@
             <div class="font-medium">
                 Delivering
             </div>
-            <div class="grid grid-cols-2 gap-3 mt-4">
+            <div class="sm:grid sm:grid-cols-2 gap-3 mt-4">
                 <div class="flex justify-center">
                     @include('parts.form.search-select', [
                         'value' => 'id',
@@ -119,7 +119,7 @@
                     ])
                 </div>
                 @if($selectedCity)
-                    <div class="flex justify-center">
+                    <div class="flex justify-center max-sm:mt-6">
                         @include('parts.form.search-select', [
                             'value' => 'id',
                             'name' => 'name',

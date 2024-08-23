@@ -153,10 +153,9 @@ class MyDropProductService
     {
         $tempFileName = 'temp_' . pathinfo($url, PATHINFO_BASENAME);
         $tempFilePath = 'public/temp/' . $tempFileName;
-        $finalFilePath = 'public/products/' . pathinfo($url, PATHINFO_BASENAME);
 
-        if (Storage::exists($finalFilePath)) {
-            return Storage::url($finalFilePath);
+        if (Storage::exists($tempFilePath)) {
+            return Storage::url($tempFilePath);
         }
 
         try {
@@ -174,6 +173,8 @@ class MyDropProductService
         }
 
         if (Storage::put($tempFilePath, $contents)) {
+            $finalFilePath = 'public/products/' . pathinfo($url, PATHINFO_BASENAME);
+
             Storage::move($tempFilePath, $finalFilePath);
 
             return Storage::url($finalFilePath);
