@@ -21,7 +21,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-<div class="min-h-screen bg-[#faf9f0] flex items-center justify-center">
+<div class="min-h-screen bg-[#faf9f0] flex items-center justify-center max-sm:px-5">
         @component('parts.layouts.card', [ 'class' => 'w-[450px]'])
             @yield('content')
         @endcomponent

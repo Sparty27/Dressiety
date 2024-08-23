@@ -1,7 +1,7 @@
 @extends('components.layouts.auth')
 
 @section('content')
-    <div class="py-24 px-10 relative">
+    <div class="max-sm:px-5 max-sm:py-12 py-24 px-10 relative">
         <h2 class="text-2xl font-semibold mb-2 text-center">Login</h2>
         <form method="POST" action="{{ route('login') }}">
             @csrf

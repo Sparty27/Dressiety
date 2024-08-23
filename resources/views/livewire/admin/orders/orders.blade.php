@@ -1,4 +1,4 @@
-<div>
+<div x-cloak>
 {{--    <div class="flex justify-between items-end mb-8">--}}
 {{--        <div class="flex gap-8 w-full">--}}
 {{--            @include('parts.form.input', [--}}
@@ -13,9 +13,22 @@
 {{--        </a>--}}
 {{--    </div>--}}
 
+{{--    <div x-data="{ expanded: false }" class="relative max-w-sm mx-auto">--}}
+{{--        <div class="overflow-hidden" :class="{ 'max-h-52': !expanded }">--}}
+{{--        </div>--}}
+
+{{--        <button--}}
+{{--            @click="expanded = !expanded"--}}
+{{--            class="mt-2 text-blue-500 hover:text-blue-700 focus:outline-none w-full text-center">--}}
+{{--            <span x-show="!expanded">Відобразити більше</span>--}}
+{{--            <span x-show="expanded" x-cloak>Згорнути</span>--}}
+{{--        </button>--}}
+{{--    </div>--}}
+
+
 
     <div class="overflow-x-auto">
-        <table class="table">
+        <table class="table min-w-[1000px]">
             <!-- head -->
             <thead>
             <tr>
@@ -43,19 +56,52 @@
                         </td>
                         <td class="max-w-[200px]">
                             <div>
-                                @foreach($order->orderProducts as $orderProduct)
-                                    <div class="flex mt-1 gap-2 items-center">
-                                        <div class="avatar">
+                                <div x-data="{
+                                    expanded: false,
+                                    showButton: false,
+                                    init() {
+                                    // Отримуємо фактичну висоту елемента після завантаження
+                                    this.$nextTick(() => {
+                                    const contentHeight = this.$refs.content.scrollHeight;
+                                    this.showButton = contentHeight > 200; // Порівнюємо з порогом (200px)
+                                    });
+                                    }
+                                    }"
+                                    class="relative max-w-sm mx-auto">
+                                    <div class="overflow-hidden transition-all duration-300"
+                                        :class="{ 'max-h-52': !expanded }"
+                                        x-ref="content">
+                                        @foreach($order->orderProducts as $orderProduct)
+                                            <div class="flex mt-1 gap-2 items-center">
+                                                <div class="avatar">
 
-                                            <div class="rounded overflow-hidden w-[40px] min-w-[40px]">
-                                                <img src="{{ $orderProduct->product->firstPhoto->url ?? '' }}" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';" width="40" height="40"/>
+                                                    <div class="rounded overflow-hidden w-[40px] min-w-[40px]">
+                                                        <img src="{{ $orderProduct->product->firstPhoto->url ?? '' }}" onerror="this.src='{{ App\Models\Photo::IMAGE_NOT_FOUND }}';" width="40" height="40"/>
+                                                    </div>
+                                                </div>
+                                                <div class="text-xs text-wrap break-words">
+                                                    {{ $orderProduct->product == null ? $orderProduct->name : $orderProduct?->product?->name.' '.$orderProduct->product?->clothing->size }} x {{ $orderProduct->count }}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="text-xs text-wrap break-words">
-                                            {{ $orderProduct->product == null ? $orderProduct->name : $orderProduct?->product?->name.' '.$orderProduct->product?->clothing->size }} x {{ $orderProduct->count }}
-                                        </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
+
+                                    <div
+                                        x-show="!expanded && showButton"
+                                        x-cloak
+                                        class="absolute bottom-[25px] left-0 w-full h-20 bg-gradient-to-t from-white via-white/50 to-white/0">
+                                    </div>
+
+                                    <button
+                                        x-show="showButton"
+                                        @click="expanded = !expanded"
+                                        class="mt-2 text-[#5A72A0] font-semibold hover:text-[#4f648c] focus:outline-none w-full text-center font-mono">
+                                        <span x-show="!expanded">Відобразити більше</span>
+                                        <span x-show="expanded" x-cloak>Згорнути</span>
+                                    </button>
+                                </div>
+
+
                                 <div class="font-mono font-semibold tracking-tight mt-3 border-t-[1px] border-t-gray-200">
                                     {{ number_format($order->formattedTotal(), 2, '.', ' ') }}₴
                                 </div>
@@ -103,12 +149,12 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="font-normal text-[10px] text-gray-500" title="{{ $order->orderDelivery?->warehouse->city->name.', '.$order->orderDelivery?->warehouse->name }}">
+                                <div class="font-normal text-[10px] text-gray-500" title="{{ $order->orderDelivery?->warehouse?->city?->name.', '.$order->orderDelivery?->warehouse?->name }}">
                                     <div>
-                                        {{ $order->orderDelivery?->warehouse->city->name }}
+                                        {{ $order->orderDelivery?->warehouse?->city?->name }}
                                     </div>
                                     <div>
-                                        {{ $order->orderDelivery?->warehouse->name }}
+                                        {{ $order->orderDelivery?->warehouse?->name }}
                                     </div>
                                 </div>
                                 @if($order->orderDelivery?->ttn != null)

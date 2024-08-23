@@ -17,7 +17,7 @@
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body>
+<body class="min-h-screen bg-gray-200">
     <livewire:popup />
     <div>
         <div class="bg-base-100 drawer lg:drawer-open">
@@ -29,7 +29,7 @@
                     @yield('breadcrumbs')
                 </div>
 
-                <div class="p-4 grid gap-5 pt-5">
+                <div class="p-4 pt-5 max-md:pb-12 sm:grid sm:gap-5 max-md:overflow-x-auto">
                     @component('parts.layouts.card')
                         {{ $slot }}
                     @endcomponent
