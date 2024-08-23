@@ -45,6 +45,8 @@ class Shop extends Component
 
         $this->sizes = Clothing::SIZES;
         $this->colors = Clothing::COLORS;
+
+        $this->updatedSelectedSort();
     }
 
     public function updatedMinPrice()
@@ -63,6 +65,11 @@ class Shop extends Component
     {
         $this->dir = $this->selectedSort?->sortDirection();
         $this->sortColumn = $this->selectedSort?->sortColumn();
+    }
+
+    public function updatedSearchText($value)
+    {
+        $this->resetPage();
     }
 
     public function redirectToProduct(Product $product)
