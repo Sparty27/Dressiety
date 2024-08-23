@@ -1,12 +1,12 @@
-<div class="max-w-[750px] mx-auto rounded p-12 shadow-2xl border-[1px] border-gray-100 mb-12">
+<div class="max-w-[750px] mx-auto rounded max-sm:p-6 p-12 shadow-2xl border-[1px] border-gray-100 mb-12">
     <div wire:loading
          class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
         <div class="flex justify-center items-center mt-[50vh]">
             <span class="loading loading-spinner w-[75px] text-neutral"></span>
         </div>
     </div>
-    <h2 class="font-semibold text-[2rem]">Product Order Form</h2>
-    <div class="text-[#57647e] text-[1em]">
+    <h2 class="font-semibold max-sm:text-2xl text-[2rem]">Product Order Form</h2>
+    <div class="text-[#57647e] max-sm:text-base text-[1em]">
         Please make sure to fill in the required fields and submit this form to complete your order.
     </div>
 

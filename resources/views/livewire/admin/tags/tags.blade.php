@@ -1,5 +1,5 @@
 <div>
-    <div class="flex justify-between items-end mb-8">
+    <div class="flex max-sm:gap-4 justify-between items-end mb-8">
         <div class="flex gap-8 w-full">
             @include('parts.form.input', [
                 'title' => 'Search',

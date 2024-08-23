@@ -11,13 +11,19 @@
                 <img src="{{ asset('images/logo.svg') }}" alt="logo" width="200">
             </a>
         </div>
-        <div class="flex-none lg:block">
-            <ul class="menu menu-horizontal">
-                <!-- Navbar menu content here -->
-                <li>
-                    @livewire('basket-widget')
-                </li>
-            </ul>
+        <div>
+            <a href="/admin" class="cursor-pointer max-sm:px-2 px-4 py-2 max-sm:mr-1 mr-3 rounded-lg hover:bg-[#546A96]">
+                <i class="ri-admin-line cursor-pointer text-2xl text-white"></i>
+            </a>
+
+            <div class="flex-none lg:block">
+                <ul class="menu menu-horizontal">
+                    <!-- Navbar menu content here -->
+                    <li>
+                        @livewire('basket-widget')
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
