@@ -13,6 +13,7 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Ramsey\Collection\Sort;
 
 class Shop extends Component
 {
@@ -26,7 +27,7 @@ class Shop extends Component
     public $sortColumn;
 
     #[Url]
-    public ?SortProductEnum $selectedSort;
+    public $selectedSort;
 
     public $page;
 
@@ -63,8 +64,10 @@ class Shop extends Component
 
     public function updatedSelectedSort()
     {
-        $this->dir = $this->selectedSort?->sortDirection();
-        $this->sortColumn = $this->selectedSort?->sortColumn();
+        $selectedSort = SortProductEnum::tryFrom($this->selectedSort);
+
+        $this->dir = $selectedSort?->sortDirection();
+        $this->sortColumn = $selectedSort?->sortColumn();
     }
 
     public function updatedSearchText($value)
