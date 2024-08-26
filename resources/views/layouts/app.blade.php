@@ -8,10 +8,6 @@
 
     @include('parts.layouts.favicon')
 
-    {{--        <title>{{ $title ?? 'Page Title' }}</title>--}}
-
-    {{--        {{ seo()->getMeta($model) }}--}}
-
     @stack('meta-data')
 
     <!-- Fonts -->
@@ -21,12 +17,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-    {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
-
-    {{--        <link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
-
-    {{--        <script src="{{ asset('js/app.js') }}" defer></script>--}}
 </head>
 <body>
 @livewire('site.components.header')

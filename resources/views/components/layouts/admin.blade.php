@@ -8,7 +8,6 @@
 
     @include('parts.layouts.favicon')
 
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
 
@@ -25,7 +24,7 @@
             <div class="drawer-content bg-gray-200">
                 @livewire('admin.parts.header')
 
-                <div class="">
+                <div>
                     @yield('breadcrumbs')
                 </div>
 
