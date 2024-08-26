@@ -21,7 +21,7 @@ class CheckTransactions extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Check all transactions in DB';
 
     /**
      * Execute the console command.
@@ -30,17 +30,13 @@ class CheckTransactions extends Command
     {
         $orderTransactions = OrderTransaction::shouldCheck()->get();
 
-        dump($orderTransactions);
-
         foreach($orderTransactions as $orderTransaction)
         {
             switch($orderTransaction->type) {
                 case OrderTransaction::MONOBANK:
-                    dump('monobank type. Type: '.$orderTransaction->type);
                     $monobankService->check($orderTransaction);
                     break;
                 case OrderTransaction::FONDY:
-                    dump('fondy type. Type: '.$orderTransaction->type);
                     $fondyService->check($orderTransaction);
                     break;
             }

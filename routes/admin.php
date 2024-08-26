@@ -9,6 +9,7 @@ use App\Livewire\Admin\Categories\EditCategory;
 use App\Livewire\Admin\Categories\ShowCategory;
 use App\Livewire\Admin\Email\EmailTemplates;
 use App\Livewire\Admin\Home;
+use App\Livewire\Admin\Logs\Logs;
 use App\Livewire\Admin\Orders\OrderForm;
 use App\Livewire\Admin\Orders\Orders;
 use App\Livewire\Admin\Pages\PageForm;
@@ -29,19 +30,6 @@ use App\Livewire\Admin\Tags\ShowTag;
 use App\Livewire\Admin\Tags\TagForm;
 use App\Livewire\Admin\Tags\Tags;
 use Illuminate\Support\Facades\Route;
-
-//Route::prefix('/categories')->controller(CategoryController::class)->name('categories.')->group(function () {
-//    Route::get('/', 'index')->name('index');
-//    Route::get('/create', 'create')->name('create');
-//    Route::get('/{category}', 'show')->name('show');
-//    Route::post('/', 'store')->name('store');
-//    Route::get('/{category}/edit', 'edit')->name('edit');
-//    Route::post('/{category}', 'update')->name('update');
-//    Route::delete('/{category}', 'destroy')->name('destroy');
-//});
-
-//Route::resource('products', ProductController::class);
-//Route::resource('tags', TagController::class);
 
 Route::get('/', Home::class)->name('home');
 
@@ -90,4 +78,8 @@ Route::prefix('/email')->name('email.')->group(function() {
 
 Route::prefix('/sms')->name('sms.')->group(function() {
     Route::get('/', SmsTemplates::class)->name('index');
+});
+
+Route::prefix('/logs')->name('logs.')->group(function() {
+    Route::get('/', Logs::class)->name('index');
 });

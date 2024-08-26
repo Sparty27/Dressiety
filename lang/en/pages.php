@@ -45,6 +45,9 @@ return [
         'sms' => [
             'index' => 'SMS',
         ],
+        'logs' => [
+            'index' => 'Logs',
+        ],
         'modal' => [
             'delete' => 'Delete'
         ]

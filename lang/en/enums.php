@@ -38,5 +38,15 @@ return [
         'danger' => 'bg-red-500',
         'information' => 'bg-blue-500',
         'warning' => 'bg-yellow-500'
+    ],
+    'debug_colors' => [
+        'DEBUG' => 'green-500',
+        'INFO' => 'blue-500',
+        'NOTICE' => 'purple-500',
+        'WARNING' => 'yellow-500',
+        'ERROR' => 'red-500',
+        'CRITICAL' => 'pink-500',
+        'ALERT' => 'black-500',
+        'EMERGENCY' => 'white-500',
     ]
 ];

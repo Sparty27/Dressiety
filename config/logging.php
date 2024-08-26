@@ -54,8 +54,13 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily','single'],
+            'channels' => ['daily','single','database'],
             'ignore_exceptions' => false,
+        ],
+        'database' => [
+            'driver' => 'custom',
+            'via' => App\Services\LoggingServices\DatabaseLogger::class,
+            'level' => 'debug',
         ],
 
         'single' => [

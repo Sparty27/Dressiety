@@ -86,22 +86,14 @@
                     <span class="flex-1">{{ trans('pages.admin.sms.index') }}</span>
                 </a>
             </li>
-            {{--            <li>--}}
-            {{--                <a href="https://remixicon.com/" target="_blank" class="flex gap-4">--}}
-            {{--                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">--}}
-            {{--                        <i class="ri-remixicon-line"></i>--}}
-            {{--                    </span>--}}
-            {{--                    <span class="flex-1">Icons site</span>--}}
-            {{--                </a>--}}
-            {{--            </li>--}}
-            {{--            <li>--}}
-            {{--                <a href="https://daisyui.com/components/tab/" target="_blank" class="flex gap-4">--}}
-            {{--                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">--}}
-            {{--                        <i class="ri-brush-4-fill"></i>--}}
-            {{--                    </span>--}}
-            {{--                    <span class="flex-1">Component</span>--}}
-            {{--                </a>--}}
-            {{--            </li>--}}
+            <li class="mt-3">
+                <a href="{{ route('admin.logs.index') }}" class="flex gap-4 {{request()->routeIs('admin.logs.*') ? 'active':''}}">
+                    <span class="bg-base-100 text-base-content shadow-lg w-8 h-8 p-2.5 rounded-lg flex items-center">
+                        <i class="ri-file-list-line"></i>
+                    </span>
+                    <span class="flex-1">{{ trans('pages.admin.logs.index') }}</span>
+                </a>
+            </li>
         </ul>
     </aside>
 </div>
