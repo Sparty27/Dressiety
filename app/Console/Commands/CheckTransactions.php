@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\MonobankService;
+namespace App\Console\Commands;
 
 use App\Models\OrderTransaction;
 use App\Services\PaymentServices\FondyService\FondyService;

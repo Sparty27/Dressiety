@@ -14,8 +14,6 @@ class FondyController extends Controller
 {
     public function check(Order $order, FondyService $service)
     {
-        return redirect()->route('shop');
-
         $orderTransaction = $order->orderTransaction;
 
         try {
@@ -23,7 +21,7 @@ class FondyController extends Controller
 
             return view('payments.success', compact('orderTransaction'));
         } catch(Exception $ex) {
-            Log::channel('daily')->error($ex->getMessage());
+            Log::error($ex->getMessage());
 
             return view('payments.success', compact('orderTransaction'));
         }

@@ -19,7 +19,7 @@ class MonobankController extends Controller
             $service->check($orderTransaction);
 
         } catch(Exception $ex) {
-            Log::channel('daily')->error($ex->getMessage());
+            Log::error($ex->getMessage());
 
         } finally {
             return view('payments.success', compact('orderTransaction'));

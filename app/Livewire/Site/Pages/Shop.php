@@ -91,7 +91,7 @@ class Shop extends Component
     {
         if(basket()->set($product))
         {
-            $this->dispatch('showPopup', 'Добавлено в корзину', MessageTypeEnum::INFORMATION, 2000);
+            $this->dispatch('showPopup', 'Додано до корзини', MessageTypeEnum::INFORMATION, 2000);
         } else {
             $this->dispatch('showPopup', 'Товар закінчився', MessageTypeEnum::INFORMATION, 2000);
         }

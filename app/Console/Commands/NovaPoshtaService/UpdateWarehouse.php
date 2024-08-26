@@ -20,7 +20,7 @@ class UpdateWarehouse extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Update warehouses that NovaPoshta has in the city';
 
     /**
      * Execute the console command.

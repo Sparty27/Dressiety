@@ -21,7 +21,7 @@ class Update extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Update products and their categories from MyDrop';
 
     /**
      * Execute the console command.

@@ -21,7 +21,7 @@ class Update extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Update areas, cities and warehouses where there is NovaPoshta';
 
     /**
      * Execute the console command.

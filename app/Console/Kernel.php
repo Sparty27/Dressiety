@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
 
         $schedule->command('np:update')->monthly();
+        $schedule->command('mydrop:update')->monthly();
         $schedule->command('app:check-transactions')->everyFiveMinutes();
     }
 
