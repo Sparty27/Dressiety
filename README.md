@@ -18,4 +18,5 @@ I'm Nazar Nyshchyi (20 years old), i'm a developer from Kivertsi, Volyn Oblast, 
 ## Pet projects
 
 Dressiety — https://nyshchyi-nazar.pp.ua
+<br>
 Coursework (WEB developing) — https://sparty27.github.io/Nyshchyi_Nazar_IPZ-32_Coursework/
