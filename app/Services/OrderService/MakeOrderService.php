@@ -54,7 +54,7 @@ class MakeOrderService
             ]
         );
 
-        Log::channel('daily')->info('ProductOrdered event called');
+        Log::info('ProductOrdered event called', ['orderId' => $order->id]);
         ProductOrdered::dispatch($order);
 
         return $order;

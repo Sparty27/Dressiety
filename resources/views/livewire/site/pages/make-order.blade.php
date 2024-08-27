@@ -1,5 +1,5 @@
 <div class="max-w-[750px] mx-auto rounded max-sm:p-6 p-12 shadow-2xl border-[1px] border-gray-100 mb-12">
-    <div wire:loading
+    <div wire:loading wire:target.except="name, lastName"
          class="w-full h-full fixed top-0 left-0 bg-white opacity-75 z-50">
         <div class="flex justify-center items-center mt-[50vh]">
             <span class="loading loading-spinner w-[75px] text-neutral"></span>

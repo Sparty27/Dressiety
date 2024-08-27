@@ -54,15 +54,6 @@ class MakeOrder extends Component
         $this->warehouses = Warehouse::take(10)->get();
 
         $this->basketProducts = basket()->get();
-
-        //TODO: clear this template
-        $this->email = 'nazarzadrot8@gmail.com';
-        $this->phone = '380500243492';
-        $this->name = 'Nazar';
-        $this->lastName = 'Nyshchyi';
-//        $this->selectedWarehouse = Warehouse::first();
-
-//        dd($this->selectedWarehouse);
     }
 
     public function setPaymentMethod(PaymentMethodEnum $method)

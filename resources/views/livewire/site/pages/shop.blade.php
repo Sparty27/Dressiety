@@ -123,7 +123,7 @@
                                 <h2 title="{{ $product->full_title }}" class="card-title cursor-pointer text-base line-clamp-2" wire:click="redirectToProduct('{{ $product->id }}')">{{ $product->full_title }}</h2>
                                 <div class="mt-2">
                                     @foreach($product->availableSizes as $availableSize)
-                                        <a href="/products/{{ $availableSize->product_id }}" class="badge badge-primary badge-outline text-xs hover:bg-[#4A00FF] hover:text-[#D1DBFF] transition duration-200">
+                                        <a href="/products/{{ $availableSize->product_id }}" class="pb-[3px] badge badge-primary badge-outline text-xs hover:bg-[#4A00FF] hover:text-[#D1DBFF] transition duration-200">
                                             {{ $availableSize->size }}
                                         </a>
                                     @endforeach
