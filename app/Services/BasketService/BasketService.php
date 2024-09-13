@@ -8,19 +8,17 @@ use App\Models\Product;
 
 class BasketService
 {
-    public $instance;
+    public $instance = null;
 
     private function getToken()
     {
-        if(isset($this->instance))
+        if($this->instance != null)
         {
             return $this->instance;
         }
-        $session = session()->get('session_id');
 
-        if (!$session) {
+        if(!session()->has('session_id'))
             session()->put('session_id', str()->uuid());
-        }
 
         $session = session()->get('session_id');
 
@@ -34,9 +32,7 @@ class BasketService
                 ]
             );
 
-            $this->instance = $this->instance->load('basketProducts');
-
-            return $this->instance;
+            return $this->instance->load('basketProducts', 'basketProducts.product', 'basketProducts.product.photo');
         }
 
         $this->instance = Basket::firstOrCreate(
@@ -44,17 +40,15 @@ class BasketService
         );
 
 
-        $this->instance = $this->instance->load('basketProducts', 'basketProducts.product', 'basketProducts.product.photo');
-
-        return $this->instance;
+        return $this->instance->load('basketProducts', 'basketProducts.product', 'basketProducts.product.photo');
     }
 
     private function clearInstance()
     {
-        unset($this->instance);
+        $this->instance = null;
     }
 
-    public function get()
+    public function getBasketProducts()
     {
         $basket = $this->getToken();
 
@@ -137,12 +131,12 @@ class BasketService
 
     public function contains(Product $product)
     {
-        return $this->get()->contains('product_id', $product->id);
+        return $this->getBasketProducts()->contains('product_id', $product->id);
     }
 
     public function count()
     {
-        return $this->get()->sum('count');
+        return $this->getBasketProducts()->sum('count');
     }
 
     public function isEmpty()
@@ -162,12 +156,12 @@ class BasketService
 
     public function total()
     {
-        return $this->get()->sum('total');
+        return $this->getBasketProducts()->sum('total');
     }
 
     public function formattedTotal()
     {
-        return $this->get()->sum('total') / 100;
+        return $this->getBasketProducts()->sum('total') / 100;
     }
 
     public function moneyTotal()
@@ -177,7 +171,7 @@ class BasketService
 
     public function clear()
     {
-        $basketProducts = $this->get();
+        $basketProducts = $this->getBasketProducts();
 
         foreach($basketProducts as $basketProduct)
         {

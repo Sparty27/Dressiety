@@ -83,7 +83,7 @@ class Shop extends Component
     #[On('basketProductRemoved')]
     public function updateBasketProducts()
     {
-        $this->basketProducts = basket()->get();
+        $this->basketProducts = basket()->getBasketProducts();
     }
 
 

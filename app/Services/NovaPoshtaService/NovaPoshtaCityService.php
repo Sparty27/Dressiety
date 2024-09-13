@@ -11,39 +11,55 @@ use SebastianBergmann\Environment\Console;
 
 class NovaPoshtaCityService
 {
-    public function get($page)
+    public function update(int $page, int $limit)
     {
-        $response = Http::retry(3, 1000)->timeout(60)->post('https://api.novaposhta.ua/v2.0/json/',[
-            'modelName' => 'Address',
-            'calledMethod' => 'getCities',
-            'methodProperties' => [
-                'Page' => $page,
-                'Limit' => 300
-            ]
-        ]);
+        $cities = $this->get($page, $limit);
 
-        $response = $response->json();
-
-        if ($response['success'] === false)
+        if(!empty($cities))
         {
-            throw new Exception(implode(',', $response['warnings']));
+            $this->set($cities);
         }
 
-        if (empty($response['data']))
-        {
-            return false;
-        }
-
-        $response = $response['data'];
-
-        return $response;
     }
 
-    public function set($cities)
+    private function get(int $page, int $limit)
     {
-        foreach($cities as $city)
-        {
-            try {
+        try {
+            $response = Http::retry(3,1000)->timeout(60)->post('https://api.novaposhta.ua/v2.0/json/',[
+                'modelName' => 'Address',
+                'calledMethod' => 'getCities',
+                'methodProperties' => [
+                    'Page' => $page,
+                    'Limit' => $limit
+                ]
+            ]);
+
+            $jsonData = $response->json();
+
+            if ($jsonData['success'] === false)
+            {
+                throw new Exception(implode(',', $jsonData['warnings']));
+            }
+
+            if (empty($jsonData['data']))
+            {
+                return false;
+            }
+
+            return $jsonData['data'];
+
+        } catch(Exception $e) {
+            Log::error($e->getMessage());
+        }
+
+        return false;
+    }
+
+    private function set($cities)
+    {
+        try {
+            foreach($cities as $city)
+            {
                 City::updateOrCreate(
                     [
                         'ref' => $city['Ref'],
@@ -53,36 +69,9 @@ class NovaPoshtaCityService
                         'area_ref' => $city['Area'],
                     ]
                 );
-            } catch (Exception $ex) {
-                Log::error($ex->getMessage());
-                Log::channel('daily')->error($ex->getMessage());
             }
-        }
-    }
-
-    public function update()
-    {
-        $page = 1;
-        while(true)
-        {
-            try
-            {
-                $cities = $this->get($page);
-            } catch (Exception $e)
-            {
-                Log::error($e->getMessage());
-                Log::channel('daily')->error($e->getMessage());
-
-                $page++;
-                continue;
-            }
-
-            if ($cities === false)
-                break;
-
-            $this->set($cities);
-
-            $page++;
+        } catch (Exception $ex) {
+            Log::error($ex->getMessage());
         }
     }
 }

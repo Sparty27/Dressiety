@@ -3,6 +3,7 @@
 namespace App\Console\Commands\NovaPoshtaService;
 
 use App\Jobs\NovaPoshta\UpdateWarehouseJob;
+use App\Services\NovaPoshtaService\NovaPoshtaService;
 use App\Services\NovaPoshtaService\NovaPoshtaWarehouseService;
 use Illuminate\Console\Command;
 
@@ -27,6 +28,12 @@ class UpdateWarehouse extends Command
      */
     public function handle()
     {
-        UpdateWarehouseJob::dispatch();
+        $limit = 100;
+
+        $warehousesJobsNeeded = (int) ceil(NovaPoshtaService::getTotalCount(NovaPoshtaService::WAREHOUSES) / $limit);
+
+        for ($page = 1; $page <= $warehousesJobsNeeded; $page++) {
+            UpdateWarehouseJob::dispatch($page, $limit);
+        }
     }
 }

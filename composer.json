@@ -10,7 +10,7 @@
         "barryvdh/laravel-debugbar": "^3.12",
         "cloudipsp/php-sdk-v2": "^1.0",
         "guzzlehttp/guzzle": "^7.8",
-        "laravel/framework": "^10.10",
+        "laravel/framework": "^v10.48.20",
         "laravel/sanctum": "^3.3",
         "laravel/telescope": "^5.0",
         "laravel/tinker": "^2.8",

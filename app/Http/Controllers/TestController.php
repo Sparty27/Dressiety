@@ -13,6 +13,9 @@ use App\Models\Product;
 use App\Models\SmsTemplate;
 use App\Services\EmailServices\EmailService;
 use App\Services\MyDropServices\MyDropProductService;
+use App\Services\NovaPoshtaService\NovaPoshtaCityService;
+use App\Services\NovaPoshtaService\NovaPoshtaService;
+use App\Services\NovaPoshtaService\NovaPoshtaWarehouseService;
 use App\Services\PaymentServices\FondyService\FondyService;
 use App\Services\SmsServices\SmsService;
 use Cloudipsp\HttpClient\HttpGuzzle;
@@ -27,9 +30,9 @@ class TestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(MyDropProductService $service)
+    public function index(NovaPoshtaWarehouseService $service)
     {
-
+        $service->update(1, 5);
     }
 
     /**

@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="mt-3">
-                @if(basket()->get()->contains('product_id', $product->id))
+                @if(basket()->getBasketProducts()->contains('product_id', $product->id))
                     <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay btn">
                         Remove from Basket
                     </label>

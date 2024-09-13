@@ -3,11 +3,13 @@
 namespace App\Jobs\NovaPoshta;
 
 use App\Services\NovaPoshtaService\NovaPoshtaAreaService;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UpdateAreaJob implements ShouldQueue
 {
@@ -26,7 +28,10 @@ class UpdateAreaJob implements ShouldQueue
      */
     public function handle(NovaPoshtaAreaService $service): void
     {
-        ini_set('memory_limit', '-1');
-        $service->update();
+        try {
+            $service->update();
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+        }
     }
 }

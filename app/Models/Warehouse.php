@@ -13,6 +13,7 @@ class Warehouse extends Model
         'ref',
         'name',
         'city_ref',
+        'updated_at',
     ];
 
     public function city()

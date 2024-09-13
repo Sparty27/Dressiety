@@ -5,6 +5,7 @@ namespace App\Console\Commands\NovaPoshtaService;
 use App\Jobs\NovaPoshta\UpdateAreaJob;
 use App\Jobs\NovaPoshta\UpdateCityJob;
 use App\Jobs\NovaPoshta\UpdateWarehouseJob;
+use App\Services\NovaPoshtaService\NovaPoshtaService;
 use Illuminate\Console\Command;
 
 class Update extends Command
@@ -29,7 +30,19 @@ class Update extends Command
     public function handle()
     {
         UpdateAreaJob::dispatch();
-        UpdateCityJob::dispatch();
-        UpdateWarehouseJob::dispatch();
+
+        $limit = 100;
+
+        $cityJobsNeeded = (int) ceil(NovaPoshtaService::getTotalCount(NovaPoshtaService::CITIES) / $limit);
+
+        $warehousesJobsNeeded = (int) ceil(NovaPoshtaService::getTotalCount(NovaPoshtaService::WAREHOUSES) / $limit);
+
+        for ($page = 1; $page <= $cityJobsNeeded; $page++) {
+            UpdateCityJob::dispatch($page, $limit);
+        }
+
+        for ($page = 1; $page <= $warehousesJobsNeeded; $page++) {
+            UpdateWarehouseJob::dispatch($page, $limit);
+        }
     }
 }

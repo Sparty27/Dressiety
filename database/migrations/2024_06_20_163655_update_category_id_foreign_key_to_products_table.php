@@ -11,21 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-//        Schema::table('products', function (Blueprint $table) {
-////            $table->foreign('category_id')->references('id')->on('categories')->onDelete('Cascade');
-//
-//
-//            $table->dropForeign(['category_id']);
-//            $table->dropColumn('category_id');
-//
-//            $table->integer('category_id')->nullable();
-//            $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('Cascade');
-//        });
-
-//        Schema::table('products', function (Blueprint $table) {
-//            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('Cascade');
-//        });
-
         Schema::table('products', function (Blueprint $table) {
             $table->dropForeign(['category_id']);
 

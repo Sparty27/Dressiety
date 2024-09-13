@@ -19,7 +19,7 @@ class Basket extends Component
     #[On('basketUpdated')]
     public function updateProducts()
     {
-        $this->basketProducts = basket()->get();
+        $this->basketProducts = basket()->getBasketProducts();
     }
 
     public function remove($basketProductId)
@@ -30,7 +30,7 @@ class Basket extends Component
             return false;
 
         basket()->remove($basketProduct);
-        $this->basketProducts = basket()->get();
+        $this->basketProducts = basket()->getBasketProducts();
 
         $this->dispatch('showPopup', 'Товар видалено з корзини', MessageTypeEnum::INFORMATION, 1000);
         $this->dispatch('basketUpdated');
@@ -45,7 +45,7 @@ class Basket extends Component
             return false;
 
         basket()->increment($basketProduct);
-        $this->basketProducts = basket()->get();
+        $this->basketProducts = basket()->getBasketProducts();
 
         $this->dispatch('basketUpdated');
         $this->dispatch('basketProductRemoved');
@@ -59,7 +59,7 @@ class Basket extends Component
             return false;
 
         basket()->decrement($basketProduct);
-        $this->basketProducts = basket()->get();
+        $this->basketProducts = basket()->getBasketProducts();
 
         $this->dispatch('basketUpdated');
         $this->dispatch('basketProductRemoved');

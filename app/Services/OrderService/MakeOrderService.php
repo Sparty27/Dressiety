@@ -28,7 +28,7 @@ class MakeOrderService
         ));
 
 
-        foreach (basket()->get() as $basketProduct)
+        foreach (basket()->getBasketProducts() as $basketProduct)
         {
             $order->orderProducts()->create([
                 'product_id' => $basketProduct->product_id,

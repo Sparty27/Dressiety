@@ -151,34 +151,55 @@ class MyDropProductService
 
     function saveImage($url)
     {
-        $tempFileName = 'temp_' . pathinfo($url, PATHINFO_BASENAME);
-        $tempFilePath = 'public/temp/' . $tempFileName;
+        $fileName = pathinfo($url, PATHINFO_BASENAME);
+        $filePath = 'public/products/'.$fileName;
 
-        if (Storage::exists($tempFilePath)) {
-            return Storage::url($tempFilePath);
-        }
+        if (Storage::exists($filePath))
+            return Storage::url($filePath);
 
         try {
             $response = Http::get($url);
 
-            if ($response->failed()) {
+            if ($response->failed())
                 return false;
-            }
 
             $contents = $response->body();
-
-        } catch (\Exception $ex) {
-            Log::error('Failed to download image: ' . $ex->getMessage());
+        } catch (Exception $e) {
+            Log::error('Failed to download image: '.$e->getMessage());
             return false;
         }
 
-        if (Storage::put($tempFilePath, $contents)) {
-            $finalFilePath = 'public/products/' . pathinfo($url, PATHINFO_BASENAME);
+        if(Storage::put($filePath, $contents))
+            return Storage::url($filePath);
 
-            Storage::move($tempFilePath, $finalFilePath);
-
-            return Storage::url($finalFilePath);
-        }
+//        $tempFileName = 'temp_' . pathinfo($url, PATHINFO_BASENAME);
+//        $tempFilePath = 'public/temp/' . $tempFileName;
+//
+//        if (Storage::exists($tempFilePath)) {
+//            return Storage::url($tempFilePath);
+//        }
+//
+//        try {
+//            $response = Http::get($url);
+//
+//            if ($response->failed()) {
+//                return false;
+//            }
+//
+//            $contents = $response->body();
+//
+//        } catch (\Exception $ex) {
+//            Log::error('Failed to download image: ' . $ex->getMessage());
+//            return false;
+//        }
+//
+//        if (Storage::put($tempFilePath, $contents)) {
+//            $finalFilePath = 'public/products/' . pathinfo($url, PATHINFO_BASENAME);
+//
+//            Storage::move($tempFilePath, $finalFilePath);
+//
+//            return Storage::url($finalFilePath);
+//        }
 
         return false;
     }

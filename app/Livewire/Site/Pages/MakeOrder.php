@@ -53,7 +53,7 @@ class MakeOrder extends Component
         $this->cities = City::take(10)->get();
         $this->warehouses = Warehouse::take(10)->get();
 
-        $this->basketProducts = basket()->get();
+        $this->basketProducts = basket()->getBasketProducts();
     }
 
     public function setPaymentMethod(PaymentMethodEnum $method)
